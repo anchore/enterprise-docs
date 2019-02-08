@@ -1,0 +1,5 @@
+[submodule "docsy"]
+	active = true
+	path = themes/docsy
+	url = https://github.com/google/docsy
+	commit = 9fb4d1b77807f8d733579139adcf03062c47105b

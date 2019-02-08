@@ -1,7 +1,7 @@
 ---
-title: "Enterprise Overview"
-date: 2018-11-16T12:38:02-08:00
-draft: false
+title: "Overview"
+linkTitle: "System Overview"
+weight: 2
 ---
 
 # Anchore Enterprise
@@ -22,7 +22,7 @@ RBAC Management API
 
 RBAC Authorization Plugin (used with the Anchore Engine)
 
-![Enterprise Overview](../../static/EnterpriseOverview.svg)
+![Enterprise Overview](EnterpriseOverview.svg)
 
 
 

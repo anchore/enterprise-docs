@@ -1,7 +1,7 @@
 ---
-title: "Enterprise Quickstart"
-date: 2018-11-16T12:38:02-08:00
-draft: false
+title: "Quickstart"
+linkTitle: "Quickstart"
+weight: 2
 ---
 
 # Getting Started
