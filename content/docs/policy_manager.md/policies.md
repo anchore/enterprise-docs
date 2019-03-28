@@ -26,9 +26,9 @@ Each rule is configured with a check to perform, for example ‘check if blackli
 
 | Action        | Meaning           |
 | ------------- | ------------- |
-| ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096076/original/miF-aDHX0BvpikIyCXK7KOzPIT-toPiKiA?1525636485) | Critical error that should stop the deployment by failing the policy evaluation. |
-| ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096073/original/VdVP1g_VGbyo9M3kR59nN-7gOB9MgL9XPA?1525636446) | OK to proceed |
-| ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096069/original/hjMvsjOrgz3A9y88mRDhBujTAIJygv3P1w?1525636390) | Issue a warning |
+| ![alt text](/Stop.jpeg) | Critical error that should stop the deployment by failing the policy evaluation. |
+| ![alt text](/Go.jpeg) | OK to proceed |
+| ![alt text](/Warn.jpeg) | Issue a warning |
 
 Policy rules are made up of Gates and Triggers.
 A Gate is a set of policy checks such as vulnerabilities, secret scans, licenses. 
@@ -36,17 +36,17 @@ Gates may include one or more individual checks known as triggers.
 
 ### Listing Policies
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096101/original/AiBnxZ_mUdO_lrAhFu447USwQQmYSPhe2w?1525636762)
+![alt text](/PoliciesList.jpeg)
 
-The Policies tab shows a list of the policies defined within the selected Policy Bundle. The indicator ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096134/original/NIE5YWR9mis3yfboLibExVC1mPjEj4_L6A?1525636857) show the number of policies defined. 
+The Policies tab shows a list of the policies defined within the selected Policy Bundle. The indicator ![alt text](/PolicyIndicator.jpeg) show the number of policies defined. 
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096175/original/_q57AbcrhnBB1k4i2HCcjIgt1qGyz43s2A?1525636960)
+![alt text](/UIPolicies.jpeg)
 
-Within the Policy Name field a counter ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096186/original/lSogNhFl5Ug_G8WA1yWDDp2AewMMmxqVxg?1525637043) indicates the number of rules within the policy.
+Within the Policy Name field a counter ![alt text](/PoliciesCounter.jpeg) indicates the number of rules within the policy.
 
 The icon indicates that the policy cannot be deleted. Policies that are included in mappings (indicated in the next field) cannot be deleted until they are removed from policy mappings.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096206/original/eAuYfBlTOMzwgw4X_wke5RjTbPc39YDp3A?1525637198)
+![alt text](/UIPolicyTools.jpeg)
 
 The Tools drop down menu provides options to:
 
@@ -56,57 +56,57 @@ The Tools drop down menu provides options to:
 
 ### Adding a New Policy
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096233/original/rCre_BGRNANF2LmCIoOv1LGNYccCA6bc2Q?1525637358) The Add New Policy button is used to add a new, empty policy.
+![alt text](/AddNewPolicy.jpeg) The Add New Policy button is used to add a new, empty policy.
 
 A unique name must be entered along with an optional, but recommended, description.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886024/original/vKxrJ3ExZw5FMVagBSqwRTBt-SHwmSACdw.png?1525313268)
+![alt text](/UIAddPolicy.png)
 
 ### Editing Policies
 
-Policies may be modified by pressing the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096202/original/39GNwqTGa0k5v8I2DSmrQzWaxfxVbgRi5Q?1525637166) button or selecting Edit the Policy from the Tools drop down menu.
+Policies may be modified by pressing the ![alt text](/EditButton.jpeg) button or selecting Edit the Policy from the Tools drop down menu.
 
 The Edit Policy Rules dialog will be displayed.
 
-The Policy Name and Description can be updated by pressing the corresponding ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096266/original/mJKW_AYhQDI3C_HoNH481TTI1b4lqtpvKw?1525637558) button.
+The Policy Name and Description can be updated by pressing the corresponding ![alt text](/EditButton.jpeg) button.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886018/original/ZQQLEzBIjrtQH1QCI62bqNjO6G1cMZPVrA.png?1525313233)
+![alt text](/UIEditPolicy.png)
 
 To add a policy rule you must first select a Gate from the dropdown list.
 
 Each Gate represents a set of policy checks.
 
-After selecting a gate an information indicator ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096341/original/2RaDTaW6R_vxE4ijb2plXgp_GVkWn4KNqQ?1525637999) will appear next to the Gate drop down. Hovering over the indicator will show help text.
+After selecting a gate an information indicator ![alt text](/Indicator.jpeg) will appear next to the Gate drop down. Hovering over the indicator will show help text.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886028/original/_OcrBJDuQ9_12Ri_DRl10P2HgKz1kYmZ3w.png?1525313295)
+![alt text](/GateDropdown.png)
 
 Once a Gate has been selected the Triggers drop down will be populated with relevant checks
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886029/original/o2ongoMB36F7m1qvxfPzOCoAl4kOhDlFOw.png?1525313321)
+![alt text](/TriggersDropdown.png)
 
 Triggers may have parameters some of which may be optional.
 
 In the example below the stale feed data trigger has a single mandatory parameter: max days since sync.
-After the number of days has been entered into the parameter field then you need to select the action to perform is this condition is met: ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886044/original/WRoAsA_Y2klLCqmOaQMXJgvsS48qY7HScw.png?1525313357)
+After the number of days has been entered into the parameter field then you need to select the action to perform is this condition is met: ![alt text](/StopWarnGo.png)
 
 Once the mandatory parameters and action has been specified the rule can be saved.
 
 **Note:** The save button will not be enabled until all mandatory parameters have been entered.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886035/original/zqiMeC7exw3DRvgh1oMgQww_QXSLDfLR4A.png?1525313345)
+![alt text](/PolicyEditorButtonsDisabled.png)
 
 The following example includes a more sophisticated policy check
 
 The metadata gate has a single trigger that allows checks to be performed against select attributes of an image including image size, architecture and operating system distribution.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886048/original/wom5hiP9d_59pVtgsDalrLLXSm2U_R1ZdQ.png?1525313383)
+![alt text](/UIPolicyCheck.png)
 
 
 The attribute field shown is a drop down that includes a number of attributes taken from image metadata. 
 
 Including the operating system distribution, number of layers in the image and architecture of the image (AMD64, ARM, etc)
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096449/original/Fu3gokA3gExFGXLwYKMuEWgA7WnQtwQzmw?1525638712)
+![alt text](/AttributeDropdown.jpeg)
 
 Once an attribute has been selected the **_check_** drop down is used to select the type of comparison.
 
@@ -114,11 +114,11 @@ The type of comparison varies based on the attribute. For example the numeric co
 
 While other operators such as not in may be useful for querying data field such as distro
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096473/original/E29ujJGZQVJzTLxDa8FEm5TF7r8NDEMozA?1525638855)
+![alt text](/checkdropdown.jpeg)
 
 In this example we are checking if the (operating system) distro is not rhel, centos or Oracle.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096522/original/4mv5rXln4BssmMk2f_n13F0qguCLBGu1-g?1525639042)
+![alt text](/AttributeExample.jpeg)
 
 ### Optional Parameters
 
@@ -130,13 +130,13 @@ Unneeded optional parameters can be removed in one of two ways:
 
 By pressing the x button on the optional parameters list.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886051/original/_RybKdsVwLdf7s7mdtyR4GF3F8aeAIHqfA.png?1525313396)
+![alt text](/OptionalButtons.png)
 
 Or by pressing the x button within the parameter block.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096542/original/M_eSf5D5k9ll8cboj4EwAd5W2N3mKmVaYw?1525639308)
+![alt text](/vendoronly.jpeg)
 
-If an optional parameter needs to be re added to the rule then clicking the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096588/original/CB2AgPrXvNlaaugy7B2e5WaNTBBSbn2MDg?1525639387) button on the Optional Parameters down button will allow selection of any optional parameters to be added.
+If an optional parameter needs to be re added to the rule then clicking the button on the Optional Parameters down button will allow selection of any optional parameters to be added.
 
 ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886052/original/pVvQu1e7pKClixbpOVmPD2L07obueOQGCg.png?1525313404)
 
@@ -144,9 +144,9 @@ If an optional parameter needs to be re added to the rule then clicking the ![al
 
 After the first rule has been added to the policy, edit policy list page will display a list of rules defined.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886076/original/GnExpp8ZishSfCfVwRWrv_Pu194jcPId5A.png?1525313474)
+![alt text](/EditPolicyRules.png)
 
-Unwanted rules may be deleted using the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096727/original/slcSO056DkNcbSj1oyUC-HNFvAW5GB5Ifg?1525639561) button and rules may be edited by selecting the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006096730/original/AYEKU6gTbG-i6UcDCbmSMuuVIkZeOeoF4g?1525639586) button.
+Unwanted rules may be deleted using the ![alt text](/remove.jpeg) button and rules may be edited by selecting the ![alt text](/edit.jpeg) button.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886077/original/s7aGSwR5Pk-RZXvNl8kQYZ_pc0Ad9ZCNow.png?1525313480)
+![alt text](/UnwantedRules.png)
 

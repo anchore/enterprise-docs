@@ -23,7 +23,7 @@ The Anchore Engine uses security vulnerability and package data froma number of 
 - Feed **nvd** - NIST National Vulnerability Database (NVD)
 - Third party feeds - additional data feeds are available for Anchore Enterprise Customers, see On Premise Feeds Overview for more information.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36001117531/original/tvlqwhSlW0iZTgvQXeBooxXV7kN6gY6BGA?1518788919)
+![alt text](/FeedsOverview.png)
 
 The Anchore Feed Service collects vulnerability and package data from the upstream sources and normalizes this data to be published as feeds that the Anchore Engine can subscribe to.
 
