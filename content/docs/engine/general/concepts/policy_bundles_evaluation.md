@@ -262,4 +262,4 @@ A *pass* status means the image evaluated against the bundle and only *go* or *w
 
 The flow chart for policy bundle evaluation:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36012595595/original/BlYs2aiafzVdBHIpvtM8zk_K6Fso9osRpA.jpg?1533078051)
+![alt text](/AnchoreFlowchart.jpg)

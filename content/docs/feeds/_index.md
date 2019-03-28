@@ -15,7 +15,7 @@ Anchore maintains a public and free feed service at https://ancho.re/v1/service/
 
 ### Design Overview
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021226949/original/i_32B3dL__Bb4-eDH8arbxvL2-8-PzAyiA.png?1541896163)
+![alt text](/EnterpriseFeeds.png)
 
 Anchore Enterprise Feeds has three high level components - drivers, database and API
 

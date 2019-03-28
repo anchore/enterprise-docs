@@ -95,7 +95,7 @@ Password: <your_dockerhub_password>
 
 You can point your browser at the Anchore Enterprise UI by directing it to http://<your_ui_hostname>:3000/ (e.g. http://localhost:3000/), and logging in with any valid anchore-engine username and password.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36012163806/original/w33QY2tQaGM_aaGOANOlfGOXw9d9XYTUgg.jpg?1532547051)
+![alt text](/ui-login-screen.jpg)
 
 To stop the Anchore Enterprise UI container, you can always do so with docker-compose:
 

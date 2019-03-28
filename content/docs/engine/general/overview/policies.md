@@ -20,7 +20,7 @@ For a full listing of gate, triggers, and their parameters see: Anchore Policy C
 
 These policies can applied globally or customized for specific images or categories of applications.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36001121381/original/lJZfzF3GXY3GB1j-JXPutxwuqIOSu3-HWw?1518794634)
+![alt text](/AnchorePolicyEval.png)
 
 A policy can return one of two results:
 

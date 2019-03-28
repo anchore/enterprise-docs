@@ -41,7 +41,7 @@ The above example defines a stop action to be produced for all package vulnerabi
 
 Policy evaluation is the execution of all defined triggers in the policy against the image analysis result and feed data and results in a set of output trigger matches, each of which contains the *defined* action from the rule definition. The final recommendation value for the policy evaluation is called the *final action*, and is computed from the set of output matches: *stop*, *go*, or *warn*.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36012596064/original/E4HToorzZF1NzgOoNNPadMBqq9PrSbOU7w.jpg?1533079239)
+![alt text](/AnchorePolicyOutcome.jpg)
 
 ### Policy Rules
 

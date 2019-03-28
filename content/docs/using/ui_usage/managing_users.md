@@ -16,7 +16,7 @@ For more information on accounts, users, roles, and permissions see: Role Based 
 
 - After a successful login, navigate to the configuration tab on the main menu.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36020986867/original/89nY_5xR-tYS0wJ90G7oFCOhaocwrhIojA.png?1541633938)
+![alt text](/UIMenuConfigTab.png)
 
 ### Creating Accounts
 
@@ -28,7 +28,7 @@ Upon selection, a popup window will display asking for two items:
 - Email
 In the following example I've created a 'security' account:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36020987288/original/TogwRJ8AQD6jGv7F8TvS6Fm2MZmZh6elZg.png?1541634700)
+![alt text](/UIAccountsTab.png)
 
 Now that a group has been created, I can begin to add users to it.
 
@@ -36,7 +36,7 @@ Now that a group has been created, I can begin to add users to it.
 
 To view the permissions associated with a specific role using the UI, select an account, and navigate to the roles tab: 
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021481074/original/8yNokm_YvULBC16DFlmsMx51Rtrsc_vrtQ.png?1542136257)
+![alt text](/UIRolePermissionsTab.png)
 
 To view the members in the account assigned to a specific role, select the 'View' button on the right-hand side. 
 
@@ -53,7 +53,7 @@ Upon selection, a popup window will display asking for three items:
 
 In this case I've assigned three roles to the user: 
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021481498/original/hE1YyadlLWjvfYeSWAiO-Ol8Gf-RNbVxsg.png?1542136468)
+![alt text](/UIAddNewUser.png)
 
 Once 'OK' is selected, the user will be created and you will be able to edit or remove the user as needed.
 
@@ -76,4 +76,4 @@ A couple notes on disabling accounts:
 
 System administrator users are able to view another account's data context using the dropdown located at the top-right:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021492712/original/1SVNUeLLIqyQTb4eHxDmscLAhFoMeMkpuA.png?1542146009)
+![alt text](/UISwitchContext.png)

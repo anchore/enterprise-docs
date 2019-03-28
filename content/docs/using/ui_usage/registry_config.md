@@ -12,7 +12,7 @@ The UI will attempt to download images from any registry without requiring furth
 
 First off, after a successful login, navigate to the Configuration tab in the main menu.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021617971/original/Nrh7S9L0Y7_TGPhmMBXFNHMVzVlmTnN4-A.png?1542235278)
+![alt text](/UIMenuConfigTab.png)
 
 ### Add a New Registry
 
@@ -20,7 +20,7 @@ In order to define a registry and its credentials, navigate to the **Registries*
 
 Upon selection, a modal will appear:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021618016/original/eH9p_KH_GhZ7EFgbEh8fMWusYAXwgujy7Q.png?1542235348)
+![alt text](/UIAddNewRegistry.png)
 
 A few items will be required:
 
@@ -39,7 +39,7 @@ As the required field values may vary depending on the type of registry and cred
 
 Once a registry has been successfully configured, its credentials as well as the options mentioned above can be updated by clicking Edit under the Actions column. For more information on analyzing images with your newly defined registry, refer to: UI - Analyzing Images.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021622844/original/sDaWRUJC3rKWL1AqbWSkoYdk_ut0xa7z_g.png?1542243092)
+![alt text](/UIRegistriesTab.png)
 
 The instructions provided below for setting up the various registry types can also be seen inline by clicking *'Need some help setting up your registry?'* near the bottom of the modal.
 
