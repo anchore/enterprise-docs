@@ -138,7 +138,7 @@ Or by pressing the x button within the parameter block.
 
 If an optional parameter needs to be re added to the rule then clicking the button on the Optional Parameters down button will allow selection of any optional parameters to be added.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886052/original/pVvQu1e7pKClixbpOVmPD2L07obueOQGCg.png?1525313404)
+![alt text](/OptionalParametersSelect.png)
 
 ### Editing Rules
 
