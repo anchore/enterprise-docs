@@ -5,17 +5,17 @@ weight: 1
 
 After a successful login, navigate to the Image Analysis tab on the main menu.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36020986867/original/89nY_5xR-tYS0wJ90G7oFCOhaocwrhIojA.png?1541633938)
+![alt text](/UIMenuImageAnalysisTab.png)
 
 On the right-hand side of the page, you will see two analyze options.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021499281/original/nQDOG939oyD_VEuieQdE7XL_XUdVLKKh-g.png?1542154043)
+![alt text](/AnalyzeRepoTagButtons.png)
 
 ### Analyze a Repository
 
 Upon selecting **Analyze Repository**, a modal will appear:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021499529/original/ZvUXPqFu4jQmVY08kKtZ6NmVokNhU7XSFQ.png?1542154321)
+![alt text](/AnalyzeRepoModal.png)
 
 A couple items will be required:
 
@@ -30,7 +30,7 @@ Once you click ‘OK’, the repository will be flagged for analysis and a cycle
 
 Upon selecting **Analyze Tag**, a modal will appear:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36021499604/original/U8woB10jW1b-_JIZT6mmqgeFyyFDXa1_SA.png?1542154509)
+![alt text](/AnalyzeTagModal.png)
 
 A few items will be required:
 

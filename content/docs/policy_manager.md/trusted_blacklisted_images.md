@@ -3,7 +3,7 @@ title: "Trusted and Blacklisted Images"
 weight: 1
 ---
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094217/original/wt2cjvwZk4crP4kAvOZCcr2UthgiQhCepA?1525627974)
+![alt text](/TrustedBlacklistedLogo.jpeg)
 
 The *Trusted / Blacklisted Images* tab is split into two sub tabs for:
 
@@ -43,25 +43,25 @@ The Trusted Images list will show a list of any Trusted Images defined by the sy
 - **Image**
   The specification used to define the image
 
-  The ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094747/original/CoIhZSfXVAmW9shhdqSKpKVn-OXSlFDe1Q?1525630095) button can be used to copy the image specification into the clipboard. 
+  The ![alt text](/clipboard.jpeg) button can be used to copy the image specification into the clipboard. 
 
-  An existing image may be deleted using the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094767/original/uPDjQjg9Qvb2KGPRLqulfEBk3L6dS3aGJg?1525630161) or edited by pressed the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094770/original/5LXOK8IYyQzOg6tvabTrghSBC8kF6lIUIg?1525630202) button.
+  An existing image may be deleted using the ![alt text](/TrashButton.png) or edited by pressed the ![alt text](/EditButtonLong.jpeg) button.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886323/original/AOLOlqn6NHiXKvADnajLL2jEX9XDIRASxA.png?1525314097)
+![alt text](/TrustedImageTab.png)
 
 ### Adding New Trusted or Blacklisted Images.
 
-New Images can by added by pressing the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094857/original/xRlErqYUNOPZ81bwRlXEGYMJF0kCX_r34Q?1525630716) or ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006094862/original/Zjw7CjGfLed7izhHveqdyHcpdq7VOQs2sg?1525630774) buttons.
+New Images can by added by pressing the ![alt text](/AddTrustedImageButton.jpeg) or ![alt text](/AddBlacklistedImage.jpeg) buttons.
 
 The workflow for adding Trusted or Blacklisted images is identical. In the example below we will add new Trusted images.
 
 The user will be prompted for a name to reference this image. The name does not have to be unique but it is recommended to that the identifier is descriptive.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886347/original/iRGPTMWfGo7SqkH5wKX3iFYu3W3KZmJUcQ.png?1525314185)
+![alt text](/AddTrustedImageItem.png)
 
 Once the image item has been named clicking on the Identify Image will bring up drop down to select how the image is identified: by Name, Image ID or Image Digest.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886348/original/RDJCRVho47fh2VA7k8IKkJk_Nh0HvWA2QQ.png?1525314192)
+![alt text](/IdentifyImageDropdown.png)
 
 The Add Image dialog will present a different set of input fields depending on the Identify Image selection.
 
@@ -69,14 +69,14 @@ The Add Image dialog will present a different set of input fields depending on t
 
 The full Image ID should be entered. This will be a 64 hex characters. There are a variety of ways to retrieve the ID of an image including using the anchore-cli, Anchore UI and Docker command.
 
-![alt text](http://static1.squarespace.com/static/53ce4d58e4b09f1cf081aa96/t/53eda86ce4b03190fb1eda4b/1423470352399/?format=1500w) Using Anchore CLI
+![alt text](/Command.png) Using Anchore CLI
 
 ```
 $ anchore-cli image get library/debian:latest | grep Image\ ID
 Image ID: 8626492fecd368469e92258dfcafe055f636cb9cbc321a5865a98a0a6c99b8dd
 ```
 
-![alt text](http://static1.squarespace.com/static/53ce4d58e4b09f1cf081aa96/t/53eda86ce4b03190fb1eda4b/1423470352399/?format=1500w) Using Docker CLI
+![alt text](/Command.png) Using Docker CLI
 
 ```
 $ docker images --no-trunc debian:latest
@@ -89,7 +89,7 @@ By default the docker CLI displays a short ID, the long ID is required and it ca
 
 **Note:** The algorithm (sha256:) should not be entered into the Image ID field.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886349/original/zR2O5ApOjQZ9HTbMCz-IGRM1OVnmHg0Bbg.png?1525314201)
+![alt text](/AddTrustedImageId.png)
 
 ### Adding an Image by Digest
 
@@ -109,14 +109,14 @@ The full identifier for this image is: docker.io/library/debian@sha256:de3eac83c
 
 There are a variety of ways to retrieve the digest of an image including using the anchore-cli, Anchore UI and Docker command.
 
-![alt text](http://static1.squarespace.com/static/53ce4d58e4b09f1cf081aa96/t/53eda86ce4b03190fb1eda4b/1423470352399/?format=1500w) Using Anchore CLI
+![alt text](/Command.png) Using Anchore CLI
 
 ```
 $ anchore-cli image get library/debian:latest | grep Digest
 Image Digest: sha256:7df746b3af67bbe182a8082a230dbe1483ea1e005c24c19471a6c42a4af6fa82
 ```
 
-![alt text](http://static1.squarespace.com/static/53ce4d58e4b09f1cf081aa96/t/53eda86ce4b03190fb1eda4b/1423470352399/?format=1500w) Using Docker CLI
+![alt text](/Command.png) Using Docker CLI
 
 ```
 $ docker images --digests debian
@@ -126,7 +126,7 @@ docker.io/debian    latest              sha256:de3eac83cd481c04c5d6c7344cd732762
 
 **Note:** Unlike the Image ID entry, the algorithm (sha256:) is required.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886350/original/WzrxT87HDQbiMyoD1KxzGCaoSFBYK7OzMw.png?1525314206)
+![alt text](/AddTrustedImageDigest.png)
 
 
 ### Adding an Image by Name
@@ -144,4 +144,4 @@ When adding an image by Name the following fields are required:
 
 **Note:** Wild cards are supported, so to trust all images from docker.io you would enter docker.io in the Registry field, and * in the repository and Tag fields.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886353/original/DkyL07ZSn_sucSEj_n0rajXO403O15sS4Q.png?1525314213)
+![alt text](/AddTrustedImageName.png)

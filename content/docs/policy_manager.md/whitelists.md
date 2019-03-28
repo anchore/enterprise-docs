@@ -7,26 +7,26 @@ A whitelist contains one or more exceptions that can be used during policy evalu
 
 The Whitelists tab shows a list of whitelists present in the policy bundle. Whitelists are an optional element of the bundle and a policy bundle may contain multiple whitelists.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886174/original/QcIMlYGZ38WVgXZsWs4IIUOCsJB9hXkYvA?1525313680)
+![alt text](/WhitelistsTab.jpeg)
 
 ### Adding a New Whitelist
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886181/original/4rW65Xi4nbuhL235nfl3idv6c9kEFdqsfQ.png?1525313704) The Add New Whitelist button launches a dialog to create a new, empty whitelist.
+![alt text](/WhitelistsButton.png) The Add New Whitelist button launches a dialog to create a new, empty whitelist.
 
 The Whitelist name is required and should be unique. 
 
 The description is optional but recommended. Often the description is updated as new entries are added to the whitelist to explain any background.
 For example "Updated to account for false positive in glibc library"
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005968241/original/kFEH1SoOJD1mwyVlgWZdwksE_WNmzNdR6w?1525383531)
+![alt text](/AddNewWhitelist.jpeg)
 
 ### Uploading a Whitelist 
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005968389/original/w99jICp3DrpvO9WeS0HBRU1_7E1GNdD92w?1525383679) If you have a JSON document containing an existing whitelist then this may be uploaded into the Anchore Engine.
+![alt text](/UploadWhitelistButton.jpeg) If you have a JSON document containing an existing whitelist then this may be uploaded into the Anchore Engine.
 
 Selecting the Upload whitelist button will present a dialog allowing for a whitelist file to be uploaded or manually edited in the native JSON format.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886199/original/8hjW9RcMpLlQGGAwx6WqyWdIWbCPQq4DlA.png?1525313728)
+![alt text](/UploadWhitelist.png)
 
 Whitelist files can be dragged into the dropzone, indicated by a blue plus sign, or clicking in the dropzone will open a file selector dialog allowing a file to be loaded from the local filesystem.
 
@@ -40,7 +40,7 @@ A new dialog will be presented in which a unique name for the Whitelist should b
 
 The description is optional but recommended. Often the description is updated as new entries are added to the whitelist to explain any background.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006092975/original/0OuMd-rA0QNO4JRGYuXlqoUfRND9ppU7Lw?1525622682)
+![alt text](/CopyWhitelist.jpeg)
 
 ### Downloading Whitelists
 
@@ -54,14 +54,14 @@ The Anchore Engine supports whitelisting any policy trigger however the whitelis
 
 A vulnerabilities whitelist entry includes two elements:
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006092383/original/pxrKWhMCTRM3U3i4h75c9mJxBlgPQSewIg?1525620892)
+![alt text](/WhitelistCVEInput.jpeg)
 
 The CVE/Vulnerability field contains the vulnerability that should be matched by the whitelist. This can include wildcards.
 
 For example: CVE-2017-7246. This format should match the format of the CVEs shown in the image vulnerabilities report.
 Wildcards are supported however car should be taken with using wildcards to prevent whitelisting too many vulnerabilities.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006092394/original/w7vE01yxTKMVAgImhg4VAeWUS5UcgGOxqw?1525620914)
+![alt text](/WhitelistPackageInput.jpeg)
 
 The package name field contains the package that should be matched with a vulnerability.
 For example libc-bin.
@@ -82,13 +82,13 @@ A good example of a valid use case for a wildcard in the CVE / Vulnerability Ide
 
 
 
-Whitelist entries can be edited be pressing the ![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006092875/original/ok6sCHZxlOnuHPchG42gjvySLV0EnnKQcw?1525622326) button and can be removed using the Remove button.
+Whitelist entries can be edited be pressing the ![alt text](/describe.jpeg) button and can be removed using the Remove button.
 
 Ensure that all changes are saved before exiting out of the Edit Whitelist Items Page. At that point the edits will be sent to the Anchore Engine.
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36006092809/original/6M9u8mXr1Ue_aehYuSkEuA4wmUSJcbvFmA?1525622139)
+![alt text](/UIEditWhitelistItems.jpeg)
 
-![alt text](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/36005886174/original/QcIMlYGZ38WVgXZsWs4IIUOCsJB9hXkYvA?1525313680)
+![alt text](/WhitelistsTab.jpeg)
 
 
 
