@@ -1,6 +1,7 @@
 ---
 title: "Managing Policy Bundles"
-weight: 1
+linktTitle: "Managing Policy Bundles"
+weight: 4
 ---
 
 ### What is a Policy Bundle
@@ -47,7 +48,7 @@ If multiple users are accessing the Policy Manager or if policy bundles are bein
 
 ![alt text](/RefreshBundle.png)
 
-![alt text](/Command.png) The following command can be run to list policy bundles using the Anchore CLI
+The following command can be run to list policy bundles using the Anchore CLI
 
 `anchore cli policy list`
 
@@ -73,7 +74,7 @@ Policy Bundle files can be dragged into the dropzone, indicated by a blue plus s
 
 Selecting OK will perform validation on a bundle. Only validated bundles may be stored by the Anchore Engine.
 
-![alt text](http://static1.squarespace.com/static/53ce4d58e4b09f1cf081aa96/t/53eda86ce4b03190fb1eda4b/1423470352399/?format=1500w) The following command can be run to add policy bundles using the Anchore CLI
+The following command can be run to add policy bundles using the Anchore CLI
 
 `anchore-cli policy add /path/to/my/policy/bundle.json`
 
@@ -82,8 +83,6 @@ Selecting OK will perform validation on a bundle. Only validated bundles may be 
 Selecting the Edit Policy button will open the policy bundled viewer which is described in the following page.
 
 ### Copying a Policy Bundle
-
-![alt text](/Command.png)
 
 The user will be prompted to enter a unique name. The description can be updated.
 
@@ -99,7 +98,7 @@ From the Tools menu the Delete Bundle menu option will bring up a dialog to conf
 
 ![alt text](/UIDeleteBundle.png)
 
-![alt text](/Command.png) The following command can be run to list delete a bundle using the Anchore CLI. The policy must be referenced by its UUID
+The following command can be run to list delete a bundle using the Anchore CLI. The policy must be referenced by its UUID
 
 `$ anchore-cli policy del 2c53a13c-1765-11e8-82ef-23527761d060`
 
@@ -108,6 +107,6 @@ From the Tools menu the Delete Bundle menu option will bring up a dialog to conf
 ![alt text](/UIBundleTools.png) 
 From the Tools menu the Download to JSON menu option will bring up a file dialog to chose a location and name to save the downloaded JSON file.
 
-![alt text](/Command.png) The following command can be run to download a bundle using the Anchore CLI. The policy must be referenced by its UUID
+The following command can be run to download a bundle using the Anchore CLI. The policy must be referenced by its UUID
 
 `$ anchore-cli policy get 2c53a13c-1765-11e8-82ef-23527761d060  --detail > bundle.json`

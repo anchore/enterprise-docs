@@ -1,7 +1,14 @@
 ---
 title: "Analyzing Images"
+linkTitle: "Images"
 weight: 1
 ---
+
+## Introduction
+
+In this section you will learn how to conduct analysis on images in the Anchore Enterprise UI.
+
+### Getting Started
 
 After a successful login, navigate to the Image Analysis tab on the main menu.
 

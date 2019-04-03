@@ -1,7 +1,10 @@
 ---
 title: "Testing Policies"
-weight: 1
+linkTitle: "Testing Policies"
+weight: 8
 ---
+
+## Introduction
 
 ![alt text](/TestBundleLogo.jpeg)
 

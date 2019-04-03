@@ -1,7 +1,10 @@
 ---
 title: "Enterprise UI and Anchore Engine co-located"
-weight: 1
+linkTitle: "Co-Located Install"
+weight: 2
 ---
+
+## Introduction
 
 Before installation please verify that all necessary requirements have been fulfilled including installation and configuration of the Open Source Anchore Engine.  
 

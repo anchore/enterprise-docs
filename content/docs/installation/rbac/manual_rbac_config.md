@@ -1,11 +1,14 @@
 ---
 title: "Manual Configuration of RBAC Mode for Upgrading Anchore Engine to Enterprise"
-weight: 1
+linkTitle: "RBAC Configuration"
+weight: 2
 ---
+
+## Introduction
 
 The process to upgrade from Anchore Engine to RBAC-enabled Anchore Enterprise involves a few steps. The following steps are general guidelines and may need to be modified for your specific installation requirements and environment.
 
-For these steps, the assumption is that all containers and services are running on the same local host, extending this config to support distributed deployment or orchestration systems is an exercise left to the reader. For kubernetes deployments, we recommend using the Anchore Engine Helm chart which has support built-in for upgrading a deployment from open-source to enterprise features.
+For these steps, the assumption is that all containers and services are running on the same local host, extending this config to support distributed deployment or orchestration systems is an exercise left to the reader. For Kubernetes deployments, we recommend using the Anchore Engine Helm chart which has support built-in for upgrading a deployment from open-source to enterprise features.
 
 ### Assumptions for this guide:
 

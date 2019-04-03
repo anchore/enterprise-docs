@@ -1,9 +1,12 @@
 ---
 title: "User Management"
+linkTitle: "User Management"
 weight: 3
 ---
 
-This document will walkthrough how to create accounts, users, and role assignment through the Anchore Enterprise UI. 
+## Introduction
+
+In this section you will learn how to create accounts, users, and role assignment with the Anchore Enterprise UI. 
 
 ### Assumptions
 

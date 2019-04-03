@@ -1,7 +1,7 @@
 ---
 title: "Using the Anchore CLI"
 linkTitle: "Using the CLI"
-weight: 2
+weight: 3
 ---
 
 The Anchore CLI provides a command line interface on top of the Anchore Engine REST API. THe Anchore CLI is published as a Python Package that can be installed from source from the Python PyPI package repository on any platform supporting PyPi. Using the Anchore CLI users can manage and inspect images, policies, subscriptions, and registries.

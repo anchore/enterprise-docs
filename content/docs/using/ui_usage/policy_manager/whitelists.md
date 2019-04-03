@@ -1,7 +1,10 @@
 ---
 title: "Whitelists"
-weight: 1
+linkTitle: "Whitelists"
+weight: 7
 ---
+
+## Introduction
 
 A whitelist contains one or more exceptions that can be used during policy evaluation. For example allowing a CVE to be excluded from policy evaluation.
 

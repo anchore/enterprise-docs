@@ -1,7 +1,10 @@
 ---
 title: "Policy Bundle"
-weight: 1
+linkTitle: "Policy Bundle"
+weight: 2
 ---
+
+## Introduction
 
 The Policy Bundle page presents an overview of the policy bundle along with tabs to navigate to the components of the policy bundle including the policies, whitelists, mappings, trusted images, blacklisted images and policy test UI.
 

@@ -1,11 +1,12 @@
 ---
 title: "Policies"
+linkTitle: "Policies"
 weight: 1
 ---
 
 ## What is a policy?
 
-A policy is made up from a set of rules that are used to perform an evaluate a container image. These rules can include checks on security vulnerabilities, package whitelists, blacklists, configuration file contents, presence of credentials in image, manifest changes, exposed ports or any user defined checks. These policies can be deployed site wide or customized for specific images or categories of applications.
+A policy is made up from a set of rules that are used to perform an evaluate a container image. These rules can include checks on security vulnerabilities, package whitelists, blacklists, configuration file contents, presence of credentials in image, manifest changes, exposed ports or any user defined checks. These policies can be deployed site wide or customized for specific images or categories of applications. For more conceptual information, refer to the [Policies](/docs/overview/concepts/policy) section of the concepts section.
 
 A policy can return one of two results:
 

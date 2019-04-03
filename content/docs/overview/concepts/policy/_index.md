@@ -4,6 +4,8 @@ linkTitle: "Policy Bundles"
 weight: 4
 ---
 
+## Introduction
+
 Policy bundles are the unit of policy definition and evaluation in Anchore Engine. A user may have multiple bundles, but for a policy evaluation, the user must specify a bundle to be evaluated or default to the bundle currently marked 'active'. See Working with Policies for more detail on manipulating and configuring policies using the Engine CLI.
 
 ### Components of a Policy Bundle
@@ -87,7 +89,7 @@ Example of a simple whitelist as a JSON object from a bundle:
 }
 ```
 
-For more information, see: Whitelists
+For more information, see: [Whitelists](/docs/overview/concepts/policy/whitelists)
 
 ### Mappings
 

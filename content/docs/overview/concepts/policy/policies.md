@@ -86,7 +86,7 @@ Trigger parameters are passed as name, value pairs in the rule JSON:
 }
 ```
 
-For a complete listing of gates, triggers, and the parameters, see: Anchore Policy Checks
+For a complete listing of gates, triggers, and the parameters, see: [Anchore Policy Checks](/docs/overview/concepts/policy/policy_checks)
 
 ### Policy Evaluation
 

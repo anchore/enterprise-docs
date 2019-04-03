@@ -1,7 +1,12 @@
 ---
 title: "Configuring Registries"
+linkTitle: "Registries"
 weight: 2
 ---
+
+## Introduction
+
+In this section you will learn how to configure access to registies within the Anchore Enterprise UI.
 
 ### Assumptions
 
@@ -98,7 +103,7 @@ For **Username** and **Password**, there are three different modes that require 
     - **Password**
       The desired role's ARN
 
-For more information, see: Working with Amazon ECR Registry Credentials
+For more information, see: [Working with Amazon ECR Registry Credentials](/docs/using/cli_usage/registries/ecr_configuration)
 
 
 ### Google Container Registry (GCR)
@@ -118,7 +123,7 @@ When working with Google Container Registry, it is recommended that you use serv
 - **Password**
   Full JSON string of your JSOn key (the content of the key.json file you got from GCR)
 
-For more information, see: Working with Google Container Registry (GCR) Credentials
+For more information, see: [Working with Google Container Registry (GCR) Credentials](/docs/using/cli_usage/registries/gcr_configuration)
 
 ### Microsoft Azure Registry
 
@@ -145,4 +150,4 @@ To use an Azure Registry, you can configure Anchore to use either the admin cred
     **Password**
         The service principal password
 
-For more information, see: Working with Azure Registry Credentials
+For more information, see: [Working with Azure Registry Credentials](/docs/using/cli_usage/registries/acr_configuration)

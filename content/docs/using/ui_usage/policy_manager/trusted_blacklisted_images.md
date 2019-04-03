@@ -1,7 +1,10 @@
 ---
 title: "Trusted and Blacklisted Images"
-weight: 1
+linkTitle: "Trusted and Blacklisted Images"
+weight: 6
 ---
+
+## Introduction
 
 ![alt text](/TrustedBlacklistedLogo.jpeg)
 
@@ -69,14 +72,14 @@ The Add Image dialog will present a different set of input fields depending on t
 
 The full Image ID should be entered. This will be a 64 hex characters. There are a variety of ways to retrieve the ID of an image including using the anchore-cli, Anchore UI and Docker command.
 
-![alt text](/Command.png) Using Anchore CLI
+Using Anchore CLI
 
 ```
 $ anchore-cli image get library/debian:latest | grep Image\ ID
 Image ID: 8626492fecd368469e92258dfcafe055f636cb9cbc321a5865a98a0a6c99b8dd
 ```
 
-![alt text](/Command.png) Using Docker CLI
+Using Docker CLI
 
 ```
 $ docker images --no-trunc debian:latest
@@ -109,14 +112,14 @@ The full identifier for this image is: docker.io/library/debian@sha256:de3eac83c
 
 There are a variety of ways to retrieve the digest of an image including using the anchore-cli, Anchore UI and Docker command.
 
-![alt text](/Command.png) Using Anchore CLI
+Using Anchore CLI
 
 ```
 $ anchore-cli image get library/debian:latest | grep Digest
 Image Digest: sha256:7df746b3af67bbe182a8082a230dbe1483ea1e005c24c19471a6c42a4af6fa82
 ```
 
-![alt text](/Command.png) Using Docker CLI
+Using Docker CLI
 
 ```
 $ docker images --digests debian

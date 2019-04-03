@@ -3,7 +3,11 @@ title: "Inspecting Image Content"
 weight: 3
 ---
 
+## Introduction
+
 During the analysis of container images the Anchore Engine performs deep inspection, collecting data on all artifacts in the image including files, operating system packages and software artifacts such as Ruby GEMs and Node.JS NPM modules.
+
+### Inspecting images
 
 The `image content` command can be used to return detailed information about the content of the container image.
 
@@ -32,7 +36,8 @@ For example: `anchore-cli --json content debian:latest files`
 
 ### Next Steps
 
-- [View security vulnerabilities in the image]()
+- [View security vulnerabilities in the image](/docs/using/cli_usage/viewing_security_vulnerabilities)
 - [Evaluate the image]() against policies you create
 - Subscribe to receive [notifications]() when the image is updated, when the policy status changes, or when new vulnerabilites are detected. 
+- [Scan Respositories](/docs/using/cli_usage/scanning_repositories)
 

@@ -1,7 +1,10 @@
 ---
-title: "Configuring RBAC in Anchore Enterprise"
-weight: 1
+title: "Configuring RBAC"
+linkTitle: "RBAC"
+weight: 4
 ---
+
+## Introduction
 
 In the two primary ways to run Anchore Enterprise out-of-the-box, the enterprise quickstart's docker-compose or the anchore-engine helm chart, RBAC is configured and enabled by default if you enable the enterprise features.
 
@@ -15,13 +18,13 @@ The services that need extra configuration in order to enable RBAC are:
 
 1. You have access to the Anchore Enterprise docker image and have a valid license.yaml issue by Anchore Inc. If you don't have one and would like a trial, please contact us.
 2. You have a running Anchore Engine Open Source installation, for example from the Anchore Engine quickstart
-3. You're comfortable on the linux command line and editing yaml documents. Nothing advanced, just some simple moving files around and editing text.
+3. You're comfortable on the Linux command line and editing yaml documents. Nothing advanced, just some simple moving files around and editing text.
 
 #### Option 1: Engine Quickstart & Update docker-compose.yaml
 
-The update process can be accomplished by updating the docker-compose.yaml. If you're using the Helm Chart or another deployment mechanism, the updates to the docker-compose should be instructive of what to add, and where to connect the services.
+The update process can be accomplished by updating the `docker-compose.yaml`. If you're using the Helm Chart or another deployment mechanism, the updates to the docker-compose should be instructive of what to add, and where to connect the services.
 
-If you are using the docker-compose.yaml provided in the Anchore Engine quickstart, then you can simply replace it with the enterprise version:
+If you are using the `docker-compose.yaml` provided in the Anchore Engine quickstart, then you can simply replace it with the enterprise version:
 
 ```
 docker pull anchore/enterprise:1.2

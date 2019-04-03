@@ -1,7 +1,10 @@
 ---
 title: "Policy Mappings"
-weight: 1
+linkTitle: "Policy Mappings"
+weight: 3
 ---
+
+## Introduction
 
 ![alt text](/Mappings.jpeg)
 

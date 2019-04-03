@@ -1,7 +1,10 @@
 ---
 title: "Enterprise UI as client against existing Anchore Engine"
-weight: 1
+linkTitle: "Existing Engine Install"
+weight: 3
 ---
+
+## Introduction
 
 Before installation please verify that all necessary requirements have been fulfilled including installation and configuration of the Open Source Anchore Engine.  
 

@@ -64,3 +64,7 @@ The items in order are:
 Policy Id
 
 **Note:** Whitelists are evaluated only as far as necessary. Once a policy rule match has been whitelisted by one whitelist item, it will not be checked again for whitelist matches. But, whitelist items may be evaluated out-of-order for performance optimization, so if multiple whitelist items match the same policy rule match any one of them may be the item that is actually matched against a given trigger_id.
+
+### Next Steps
+
+Read more about the [Anchore Policy Checks](/docs/overview/concepts/policy/policy_checks) for a complete list of gates and triggers.
