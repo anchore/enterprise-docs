@@ -57,7 +57,7 @@ anchor = "smart"
 [params]
 copyright = "Anchore Inc"
 privacy_policy = "https://anchore.com/privacy"
-github_repo = "https://github.com/anchore/engine-docs"
+github_repo = "https://github.com/anchore/enterprise-docs"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
@@ -76,8 +76,8 @@ breadcrumb_disable = false
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/anchore/engine-docs/issues/new">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/anchore/engine-docs/issues/new">tell us how we can improve</a>.'
+yes = 'Glad to hear it! Please <a href="https://github.com/anchore/enterprise-docs/issues/new">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/anchore/enterprise-docs/issues/new">tell us how we can improve</a>.'
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
