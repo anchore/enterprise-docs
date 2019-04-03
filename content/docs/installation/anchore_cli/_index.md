@@ -1,7 +1,7 @@
 ---
 title: "Anchore CLI"
 linkTitle: "Anchore CLI"
-weight: 4
+weight: 3
 ---
 
 ### Introduction

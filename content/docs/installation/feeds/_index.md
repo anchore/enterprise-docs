@@ -1,7 +1,7 @@
 ---
 title: "Feeds Configuration"
 linkTitle: "Feeds"
-weight: 4
+weight: 6
 ---
 
 ## Introduction

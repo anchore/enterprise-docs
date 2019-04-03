@@ -15,7 +15,6 @@ Anchore Enterprise is the commercial product built on the open-source Anchore En
 - [Architecture Overview](/docs/overview/architecture)
 - [Helm Installation](/docs/installation/helm)
 - [Docker Compose Installation](/docs/installation/docker_compose)
-- Enterprise Configuration
 
 
 

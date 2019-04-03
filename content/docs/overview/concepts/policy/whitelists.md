@@ -1,7 +1,7 @@
 ---
 title: "Whitelists"
 linkTitle: "Whitelists"
-weight: 4
+weight: 5
 ---
 
 Whitelists provide a mechanism within a policy bundle to explicitly override a policy-rule match. A whitelist is a named set of exclusion rules that match trigger outputs.

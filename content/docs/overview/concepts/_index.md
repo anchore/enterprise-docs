@@ -48,4 +48,4 @@ With these two modes of operation, integration into CI/CD with Interative Mode o
 
 ### Next Steps
 
-Now let's get familiar with the [Image Analysis Process](/docs/overview/concepts/image_analysis_process).
+Now let's get familiar with [Images](/docs/overview/concepts/images) in Anchore.

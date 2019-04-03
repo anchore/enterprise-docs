@@ -1,7 +1,7 @@
 ---
 title: "Policies"
 linkTitle: "Policies"
-weight: 2
+weight: 3
 --- 
 
 ### Overview

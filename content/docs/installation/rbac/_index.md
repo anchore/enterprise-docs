@@ -1,7 +1,7 @@
 ---
 title: "Configuring RBAC"
 linkTitle: "RBAC"
-weight: 4
+weight: 5
 ---
 
 ## Introduction

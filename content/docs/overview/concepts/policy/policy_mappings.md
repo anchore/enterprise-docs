@@ -1,7 +1,7 @@
 ---
 title: "Policy Mappings"
 linkTitle: "Mappings"
-weight: 3
+weight: 4
 ---
 
 Mappings in the policy bundle are a set of rules, evaluated in order, that describe matches on an image, id, digest, or tag and the corresponding sets of policies and whitelists to apply to any image that matches the rule's criteria.

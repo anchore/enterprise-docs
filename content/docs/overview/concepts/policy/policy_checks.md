@@ -1,7 +1,7 @@
 ---
 title: "Anchore Policy Checks"
 linkTitle: "Policy Checks"
-weight: 5
+weight: 6
 ---
 
 ## Introduction
@@ -140,3 +140,6 @@ NPM checks
 | blacklisted_name_version | Triggers if the evaluated image has an NPM package installed that matches the name and optionally a version specified in the parameters. | version | NPM package version to blacklist specifically. | 0.2.9 |
 | feed_data_unavailable | Triggers if the engine does not have access to the NPM data feed.	| | | |
 
+### Next Steps
+
+Now that you have a good grasp on the core concepts and architecture, check out the [Requirements](/docs/overview/requirements) section for running Anchore. 

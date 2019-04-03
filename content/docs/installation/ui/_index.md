@@ -1,7 +1,7 @@
 ---
 title: "Anchore Enterprise UI Installation"
-linkTitle: "Installation"
-weight: 1
+linkTitle: "UI"
+weight: 4
 ---
 
 ## Introduction

@@ -1,6 +1,6 @@
 ---
 title: "Anchore Engine Installation"
-linkTitle: "Anchore Engine Installation"
+linkTitle: "Installing"
 weight: 3
 ---
 
