@@ -8,6 +8,8 @@ weight: 2
 
 In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose](https://docs.docker.com/compose/install/).  
 
+**Note:** If your intent is to gain a deeper understanding of Anchore and its concepts, we recommend navigating to the [Overview](/docs/overview) section prior to conducting an [installation](/docs/installation) of Anchore Enterprise. The 
+
 ## Requirements
 
 The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.

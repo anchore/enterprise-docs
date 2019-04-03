@@ -1,7 +1,7 @@
 ---
 title: "Anchore Enterprise Feeds Overview"
 linkTitle: "Feeds"
-weight: 3
+weight: 4
 ---
 
 Anchore Enterprise Feeds is an On-Premise service that supplies os and non-os vulnerability data and package data for consumption by Anchore Engine. Policy Engine, a service component of the Anchore Engine, uses this data for vulnerability listing and policy evaluation. For more information about Anchore Engine's usage of feeds, see feeds overview
@@ -48,5 +48,5 @@ Normalized vulnerability and package data is persisted in the database. In addit
 
 ### API
 
-Anchore Enterprise Feeds exposes a RESTful API for interaction with the service. The API layer serves normalized data from the database based on the client requests. Policy Engine uses this API to sync the feed data down to the Anchore Engine database
+Anchore Enterprise Feeds exposes a RESTful API for interaction with the service. The API layer serves normalized data from the database based on the client requests. Policy Engine uses this API to sync the feed data down to the Anchore database.
 

@@ -163,6 +163,6 @@ Enter the username _admin_ and password _foobar_ to log in.  There, you will be 
 
 Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise Architecture, Anchore Concepts and Anchore Usage.
 
-- To learn more about Anchore Enterprise, go to [Overview](/docs/getting_started/)
-- To learn more about Anchore Concepts, go to [Concepts](/docs/getting_started/)
-- To learn more about using Anchore Usage, go to [Usage](/docs/getting_started/)
+- To learn more about Anchore Enterprise, go to [Overview](/docs/overview/)
+- To learn more about Anchore Concepts, go to [Concepts](/docs/overview/concepts)
+- To learn more about using Anchore Usage, go to [Usage](/docs/using/)
