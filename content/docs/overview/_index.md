@@ -1,66 +1,41 @@
 ---
 title: "Overview"
-linkTitle: "System Overview"
-weight: 2
+linkTitle: "Overview"
+weight: 3
 ---
 
-# Anchore Enterprise
+### What is Anchore Enterprise?
 
-Anchore Enterprise is the commercial product built on the open-source Anchore Engine, with added components and features to enhance the use of Anchore at an organizational level, visualize data, and provide additional installation options to meet enterprise needs. It also adds services and support to both the open-source and proprietary components.
+**_Anchore Enterprise_** is the commercial product built on the open-source Anchore Engine, with added components and features to enhance the use of Anchore at an organizational level, visualize data, and provide additional installation options to meet enterprise needs. It also adds services and support to both the open-source and proprietary components.
 
+### What is Anchore Engine?
+
+**_Anchore Engine_** is an open-source Docker container static analysis and policy-based compliance tool that automates the inspection, analysis, and evaluation of images against user-defined checks to allow high confidence in container deployments by ensuring workload content meets the required criteria. Anchore Engine ultimately provides a policy evaluation result for each image: pass/fail against policies defined by the user. Additionally, the way that policies are defined and evaluated allows the policy evaluation itself to double as an audit mechanism that allows point-in-time evaluations of specific image properties and content attributes.
+
+### Anchore Enterprise vs. Anchore Engine
+
+**_Anchore Enterprise_** provides features and capabilities in addition to those of the open-source **_Anchore Engine_**. 
+
+- On-premise UI for visualization, policy editing, report generation, and user management
+- RBAC support for the APIs
+- Proprietary vulnerability data feeds to significantly enhance vulnerability detection in application packages and libraries (e.g. python, ruby gems, nodejs packages, java jars...)
+- Fully On-Premise Vulnerability Feed Service providing vulnerability and package metadata
+    - Full data provenance from vendor sources (RedHat, Debian, etc) into the analysis engine
+    - Enables Air-Gapped deployments
+- Commercial Support (8/5 or 24/7)
 
 ## Software Components
 
-
-On-Premise Anchore Engine (Open Source)
-
-On-Premise Anchore Enterprise UI
-
-On-Premise Feed Service
-
-RBAC Management API
-
-RBAC Authorization Plugin (used with the Anchore Engine)
+- On-Premise Anchore Engine (Open Source)
+- On-Premise Anchore Enterprise UI
+- On-Premise Feed Service
+- RBAC Management API
+- RBAC Authorization Plugin (used with the Anchore Engine)
 
 ![Enterprise Overview](EnterpriseOverview.svg)
 
+### Next Steps
 
+Now, let's get familiar with the architecture of Anchore Enterprise.
 
-Enterprise and Anchore Engine Open-Source
-Anchore Enterprise provides features and capabilities in addition to those of the open-source Anchore Engine. For example:
-
-On-premise UI for visualization, policy editing, report generation, and user management
-RBAC support for the APIs
-Proprietary vulnerability data feeds to significantly enhance vulnerability detection in application packages and libraries (e.g. python, ruby gems, nodejs packages, java jars...)
-Fully On-Premise Vulnerability Feed Service providing vulnerability and package metadata
-Full data provenance from vendor sources (RedHat, Debian, etc) into the analysis engine
-Enables Air-Gapped deployments
-Commercial Support (8/5 or 24/7)
-
-
-## Licensing
-Anchore Enterprise components require a valid license to run. To get a license, contact support or request a trial.
-
-
-
-## Getting Started
-
-
-Contact support to request a trial license and get access to the containers required to run the full system. See above.
-
-
-
-Then, follow the [Quickstart guide](../quickstart)!
-
-
-
-Or, if you're a kubernetes user:
-
-
-
-## Getting Started with Kubernetes
-The Anchore Engine helm chart for kubernetes now includes all the Enteprise components and can deploy a full system by setting a few simple feature flags in the chart and providing a secret for pulling the images from Docker Hub and the license content.
-
-
-
-See: [Deploying Anchore Enterprise with Helm](linkhere)
+To being, go to [Anchore Enterprise Architecture](/docs/overview/architecture)

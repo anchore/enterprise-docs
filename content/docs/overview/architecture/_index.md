@@ -1,7 +1,7 @@
 ---
 title: "Enterprise Service Overview and Architecture"
 linkTitle: "Architecture"
-weight: 3
+weight: 2
 ---
 
 This document reviews the overall architecture of a full Anchore Enterprise deployment. With Anchore Enterprise, not all services/features are required, but for the purposes of this document, all services and features are enable and installed.
@@ -155,3 +155,9 @@ Redis is a requirement of the Enterprise UI and is used for session state and ca
 As an example of a production deployment topology, the Anchore Engine helm chart deploys the services in following topology:
 
 ![example deploy](../example-deployment.svg)
+
+### Next Steps
+
+Now, let's get familiar with the concepts of Anchore Enterprise.
+
+To begin, go to [Concepts](/docs/overview/concepts)

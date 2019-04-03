@@ -1,7 +1,7 @@
 ---
 title: "Running Anchore Enterprise in an Air-Gapped Environment"
 linkTitle: "Air-Gapped"
-weight: 3
+weight: 4
 ---
 
 Anchore Enterprise can run in an isolated environment with no outside internet connectivity. It does require a network connection to its own components and must be able to reach the Docker image registries (v2 API compatible) where the images to be analyzed are hosted.

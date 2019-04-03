@@ -1,5 +1,13 @@
 ---
-title: "Usage"
+title: "Using Anchore Engine"
 linkTitle: "Usage"
 weight: 3
 ---
+
+## Introduction
+There are a few different ways to interact with Anchore Engine: Through the Anchore CLI or via a RESTful API.
+
+Jump to the guide for your preferred method of access:
+
+- [Anchore CLI](/docs/engine/usage/cli_usage)
+- [Anchore API](/docs/engine/usage/api_usage)

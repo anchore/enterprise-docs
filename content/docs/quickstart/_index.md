@@ -4,16 +4,18 @@ linkTitle: "Quickstart"
 weight: 2
 ---
 
-# Getting Started
-This document is intended to describe a quick process to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration and review.  
+## Introduction
+
+In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose](https://docs.docker.com/compose/install/).  
+
+**Note:** If your intent is to gain a deeper understanding of Anchore and its concepts, we recommend navigating to the [Overview](/docs/overview) section prior to conducting an [installation](/docs/installation) of Anchore Enterprise. The 
 
 ## Requirements
 
-
-The following instructions assume you are using a system running docker v1.12 or higher, and a version of docker-compose that supports at least v2 of the docker-compose configuration format.
+The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.
 
 * A stand-alone installation will requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient.  
-* In order to access the Anchore Enterprise, you will also require a valid license.yaml file that has been issued to you by Anchore.  If you do not have a license yet, visit this page for instructions on how to request one.
+* In order to access the Anchore Enterprise, you will also require a valid `license.yaml` file that has been issued to you by Anchore.  If you do not have a license yet, visit this page for instructions on how to request one.
 
 
 ### Step 1: Setup installation location
@@ -24,7 +26,8 @@ mkdir ~/aevolume
 ```
 
 ### Step 2: Copy configuration files
-Download the latest Anchore Enterprise container image, which contains the necessary docker-compose and configuration files that will be used for the deployment.   In order to be able to download the container, you'll need to login to docker (if you are not logged in already) using the dockerhub account that you provided to Anchore when you requested your license.
+
+Download the latest Anchore Enterprise container image, which contains the necessary `docker-compose.yaml` and configuration files that will be used for the deployment.   In order to be able to download the container, you'll need to login to docker (if you are not logged in already) using the dockerhub account that you provided to Anchore when you requested your license.
 
 ```
 # docker login
@@ -60,7 +63,8 @@ Once these steps are complete, your ~/aevolume/ workspace should now look like t
 ```
 
 ### Step 3: Download and run the containers
-Download the containers listed in the docker-compose.yaml, and run the entire setup using docker-compose.  
+
+Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.  
 NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart 
 
 ```
@@ -111,7 +115,7 @@ Engine DB Version: 0.0.8
 Engine Code Version: 0.3.0-dev
 ```
 
-*Note*: The first time you run Anchore Enterprise, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
+**Note:** The first time you run Anchore Enterprise, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
 
 ```
 # cd ~/aevolume
@@ -150,7 +154,8 @@ vulnerabilities        ubuntu:18.04           None                              
 As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Enterprise it will be ready immediately.
 
 ### Step 5: Start using Anchore
-To get started, you can add a few images to Anchore Engine using the CLI.  Once this is done, you can also run an additional CLI command to monitor the analysis state of the added images, waiting until the images move into an 'analyzed' state.
+
+To get started, you can add a few images to Anchore Engine using the CLI. Once this is done, you can also run an additional CLI command to monitor the analysis state of the added images, waiting until the images move into an 'analyzed' state.
 
 ```
 # cd ~/aevolume
@@ -178,7 +183,13 @@ Now that some images are in place, you can point your browser at the Anchore Ent
 
 Enter the username _admin_ and password _foobar_ to log in.  There, you will be able to navigate your images, inspect image contents, perform security scans, review compliance policy evaluations, edit compliance policies with a complete policy editor UI, manage accounts/users/RBAC assignments, and review system events (and other UI features).
 
+**Note:** This document is intended to serve as a quickstart guide. Before moving further with Anchore Enterprise, it is highly recommended that you enhance your learning by reading the [Overview](/docs/getting_started/) sections to gain a deeper understanding of fundamentals, concepts, and proper usage. 
 
-## Contact Us
+### Next Steps
 
-If you have any questions or comments, we invite you to join our community slack channel, or contact us directly using support@anchore.com.
+Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise Architecture, Anchore Concepts and Anchore Usage.
+
+- To learn more about Anchore Enterprise, go to [Overview](/docs/overview/)
+- To learn more about Anchore Concepts, go to [Concepts](/docs/overview/concepts)
+- To learn more about other installation methods, go to [Installation](/docs/installation)
+- To learn more about using Anchore Usage, go to [Usage](/docs/using/)
