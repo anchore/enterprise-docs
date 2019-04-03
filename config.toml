@@ -10,11 +10,12 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-contentDir = "content"
-#defaultContentLanguage = "en"
+contentDir = "content/en"
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
+
 # Useful when translating.
-enableMissingTranslationPlaceholders = true
+#enableMissingTranslationPlaceholders = true
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
@@ -27,8 +28,8 @@ pygmentsUseClassic = false
 # See https://help.farbox.com/pygments.html
 pygmentsStyle = "tango"
 
- # First one is picked as the Twitter card image if not set on page.
- #images = ["images/project-illustration.png"]
+# First one is picked as the Twitter card image if not set on page.
+#images = ["images/project-illustration.png"]
 
 # Configure how URLs look like per section.
 [permalinks]
