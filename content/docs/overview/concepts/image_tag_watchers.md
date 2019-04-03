@@ -1,11 +1,12 @@
 ---
 title: "Image and Tag Watchers"
-weight: 1
+linkTitle: "Watching Images"
+weight: 2
 ---
 
 ### Overview
 
-Anchore Engine has the capability to monitor external Docker Registries for updates to tags as well as new tags. It also watches for updates to vulnerability databases and package metadata (the "Feeds").
+Anchore has the capability to monitor external Docker Registries for updates to tags as well as new tags. It also watches for updates to vulnerability databases and package metadata (the "Feeds").
 
 ### Repository Updates: New Tags
 
@@ -33,3 +34,7 @@ As new updates are discovered, they are automatically submitted to the analyzers
 The overall process and interaction of these duty cycles works like:
 
 ![alt text](/UpdateFlow.jpg)
+
+### Next Steps
+
+Now let's get familiar with [Policy Bundles](/docs/overview/concepts/policy) in Anchore. 

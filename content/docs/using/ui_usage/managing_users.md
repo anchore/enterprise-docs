@@ -1,6 +1,6 @@
 ---
-title: "UI - Managing Users, Accounts, and Roles with RBAC"
-weight: 1
+title: "User Management"
+weight: 3
 ---
 
 This document will walkthrough how to create accounts, users, and role assignment through the Anchore Enterprise UI. 

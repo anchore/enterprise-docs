@@ -1,5 +1,5 @@
 ---
 title: "Using Anchore Enterprise"
 linkTitle: "Usage"
-weight: 3
+weight: 5
 ---

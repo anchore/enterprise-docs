@@ -1,12 +1,12 @@
 ---
-title: "Quickstart"
-linkTitle: "Quickstart"
+title: "Install with Docker Compose"
+linkTitle: "Docker Compose"
 weight: 2
 ---
 
 ## Introduction
 
-In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose](https://docs.docker.com/compose/install/).  
+In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration and review with [Docker Compose](https://docs.docker.com/compose/install/).  
 
 ## Requirements
 
@@ -151,33 +151,9 @@ vulnerabilities        ubuntu:18.04           None                              
 
 As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Enterprise it will be ready immediately.
 
-### Step 5: Start using Anchore
+### Step 5: Begin using Anchore
 
-To get started, you can add a few images to Anchore Engine using the CLI. Once this is done, you can also run an additional CLI command to monitor the analysis state of the added images, waiting until the images move into an 'analyzed' state.
-
-```
-# cd ~/aevolume
-# docker-compose exec engine-api anchore-cli image add docker.io/library/alpine:latest
-...
-...
-
-# docker-compose exec engine-api anchore-cli image add docker.io/library/nginx:latest
-...
-...
-
-# docker-compose exec engine-api anchore-cli image list
-Full Tag                               Image ID                                                                Analysis Status        
-docker.io/library/alpine:latest        3fd9065eaf02feaf94d68376da52541925650b81698c53c6824d92ff63f98353        analyzed               
-docker.io/library/nginx:latest         5699ececb21caf07b92cbda9daa1e965407e3793a72000ecbf6b8e8595a0824a        analyzing
-
-# docker-compose exec engine-api anchore-cli image list
-Full Tag                               Image ID                                                                Analysis Status        
-docker.io/library/alpine:latest        3fd9065eaf02feaf94d68376da52541925650b81698c53c6824d92ff63f98353        analyzed               
-docker.io/library/nginx:latest         5699ececb21caf07b92cbda9daa1e965407e3793a72000ecbf6b8e8595a0824a        analyzed                       
-```
-
-
-Now that some images are in place, you can point your browser at the Anchore Enterprise UI by directing it to _http://localhost:3000/_.  
+You can point your browser at the Anchore Enterprise UI by directing it to _http://localhost:3000/_.  
 
 Enter the username _admin_ and password _foobar_ to log in.  There, you will be able to navigate your images, inspect image contents, perform security scans, review compliance policy evaluations, edit compliance policies with a complete policy editor UI, manage accounts/users/RBAC assignments, and review system events (and other UI features).
 
@@ -187,7 +163,6 @@ Enter the username _admin_ and password _foobar_ to log in.  There, you will be 
 
 Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise Architecture, Anchore Concepts and Anchore Usage.
 
-- To learn more about Anchore Enterprise, go to [Overview](/docs/overview/)
-- To learn more about Anchore Concepts, go to [Concepts](/docs/overview/concepts)
-- To learn more about other installation methods, go to [Installation](/docs/installation)
-- To learn more about using Anchore Usage, go to [Usage](/docs/using/)
+- To learn more about Anchore Enterprise, go to [Overview](/docs/getting_started/)
+- To learn more about Anchore Concepts, go to [Concepts](/docs/getting_started/)
+- To learn more about using Anchore Usage, go to [Usage](/docs/getting_started/)

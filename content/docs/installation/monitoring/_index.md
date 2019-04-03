@@ -1,7 +1,7 @@
 ---
 title: "Monitoring Anchore Enterprise"
 linkTitle: "Monitoring"
-weight: 3
+weight: 5
 ---
 
 Anchore Enterprise employs the same monitoring mechanisms as Anchore Engine, exposing prometheus metrics in the API of each service if the config.yaml used by that service has the metrics.enabled key set to true. See Anchore Engine > Monitoring > Prometheus for more details.

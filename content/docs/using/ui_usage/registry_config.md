@@ -1,6 +1,6 @@
 ---
-title: "UI - Configuring Private Registries"
-weight: 1
+title: "Configuring Registries"
+weight: 2
 ---
 
 ### Assumptions

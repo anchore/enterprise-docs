@@ -1,6 +1,6 @@
 ---
 title: "Viewing Security Vulnerabilities"
-weight: 1
+weight: 4
 ---
 
 The `image vuln` command can be used to return a list of vulnerabilities found in the container image.

@@ -1,11 +1,16 @@
 ---
-title: "Anchore Enterprise Feeds Installation"
-weight: 1
+title: "Feeds Configuration"
+linkTitle: "Feeds"
+weight: 4
 ---
+
+## Introduction
+
+In this section, you'll learn how what is required for configuring Anchore Engine to use the Anchore Enterprise Feeds.  
 
 ### Requirements
 
-### Network
+#### Network
 
 - Ingress: Anchore Enterprise Feeds exposes a RESTful API by default on port 8228 however this port can be remapped.
 - Egress: Anchore Enterprise Feeds requires access to the upstream data feeds from supported Linux distributions and package registries
@@ -23,15 +28,13 @@ weight: 1
 | launchpad.net/ubuntu-cve-tracker | 443 | Ubuntu Data |
 | data.anchore-enterprise.com | 443 | Snyk data |
 
-### Database
+#### Database
 
 Ruby Gems project publishes package data as a PostgreSQL dump. Enabling the gem driver in Anchore Enterprise Feeds will increase the load on the PostgreSQL database used by the service. We recommend using a different PostgreSQL instance for the gem driver to avoid load spikes and interruptions to the service. The database endpoint for the gem driver can be configured using services->feeds->drivers->gem->db_connect parameter in config.yaml
 
-### Installation
+### Configuration
 
-See quickstart guide for getting started. For deploying on Kubernetes using Helm chart refer to instructions here
-
-### Configuring Anchore Engine to use Anchore Enterprise Feeds
+To configure Anchore Engine to use Anchore Enterprise Feeds, complete the following steps:
 
 1. Update the top level feeds property in Anchore Engine's config.yaml to use the Anchore Enterprise Feeds endpoint:
 

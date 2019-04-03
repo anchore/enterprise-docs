@@ -1,6 +1,6 @@
 ---
 title: "Scanning Repositories"
-weight: 1
+weight: 2
 ---
 
 Individual images can be added to the Anchore Engine engine using the `image add` command. This may be performed by a CI/CD plugin such as Jenkins or manually by a user with the CLI or API.

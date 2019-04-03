@@ -1,5 +1,6 @@
 ---
 title: "Image Analysis Process"
+linkTitle: "Image Analysis"
 weight: 1
 ---
 
@@ -14,3 +15,7 @@ The analysis process is composed of several steps and utilizes several system co
 Adding more detail, the API call trace between services looks approximately like (somewhat simplified for ease of presentation):
 
 ![alt text](/ImageAnalysisAPI.jpg)
+
+### Next Steps
+
+Now let's get familiar with [Watching Images and Tags](/docs/overview/concepts/image_tag_watchers) with Anchore. 

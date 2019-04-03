@@ -1,7 +1,7 @@
 ---
 title: "Role-Based Access Control"
 linkTitle: "RBAC"
-weight: 3
+weight: 4
 ---
 
 ### Overview

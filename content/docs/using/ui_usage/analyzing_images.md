@@ -1,5 +1,5 @@
 ---
-title: "UI - Analyzing Images"
+title: "Analyzing Images"
 weight: 1
 ---
 
