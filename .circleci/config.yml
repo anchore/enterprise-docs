@@ -1,0 +1,52 @@
+# CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/configuration-reference/ for more details
+#
+# Note: YAML anchors allow an object to be re-used, reducing duplication.
+# The ampersand declares an alias for an object, then later the `<<: *name`
+# syntax dereferences it.
+# See http://blog.daemonl.com/2016/02/yaml.html
+# To validate changes, use an online parser, eg.
+# http://yaml-online-parser.appspot.com/
+#
+# Define YAML anchors
+
+#var_2: &attach_workspace
+#  attach_workspace:
+#    at: /home/circleci/workspace/
+
+# Start circleci configuration
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circlecli/golang:1.12
+    working_directory: ~/build
+    steps:
+      - run:
+          name: Install s3deploy
+          command: |
+            mkdir tools
+            curl https://github.com/bep/s3deploy/releases/download/v2.3.0/s3deploy_2.3.0_Linux-64bit.tar.gz > tools/s3deploy.tar.gz
+      - run:
+          name: Install Hugo
+          command: |
+            curl https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_0.53_Linux-64bit.tar.gz > tools/hugo_0.53.tar.gz
+            tar -xf tools/hugo_0.53.tar.gz
+      - checkout
+      - run:
+          name: Build Site
+          command: cd enterprise-docs; hugo
+      - run:
+          name: Deploy built docs to s3
+          command: ./deploy.sh
+workflows:
+  version: 2
+  default_workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
