@@ -21,7 +21,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circlecli/golang:1.12
+      - image: circleci/golang:1.12
     working_directory: ~/build
     steps:
       - run:
