@@ -24,6 +24,7 @@ jobs:
       - image: circleci/golang:1.12
     working_directory: ~/build
     steps:
+      - checkout
       - run:
           name: Install s3deploy
           command: |
@@ -34,7 +35,6 @@ jobs:
           command: |
             curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.2/hugo_0.55.2_Linux-64bit.tar.gz > tools/hugo.tar.gz
             tar -xf tools/hugo.tar.gz
-      - checkout
       - run:
           name: Build Site
           command: cd enterprise-docs; hugo
