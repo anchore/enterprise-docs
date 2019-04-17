@@ -61,7 +61,7 @@ privacy_policy = "https://anchore.com/privacy"
 github_repo = "https://github.com/anchore/enterprise-docs"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+gcs_engine_id = "009716543010626803843:do-cvccub1k"
 
 # User interface configuration
 [params.ui]
