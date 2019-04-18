@@ -30,11 +30,16 @@ jobs:
           command: |
             mkdir tools
             curl -L https://github.com/bep/s3deploy/releases/download/v2.3.0/s3deploy_2.3.0_Linux-64bit.tar.gz > tools/s3deploy.tar.gz
+            tar -xf tools/s3deploy.tar.gz
+            chmod +x tools/s3deploy
+            cp tools/s3deploy /user/local/bin/
       - run:
           name: Install Hugo
           command: |
             curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.2/hugo_0.55.2_Linux-64bit.tar.gz > tools/hugo.tar.gz
             tar -xf tools/hugo.tar.gz
+            chmod +x tools/hugo
+            cp tools/hugo /usr/local/bin/
       - run:
           name: Build and deploy docs to s3
           command: ./deploy.sh ${CIRCLE_BRANCH}
