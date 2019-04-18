@@ -33,7 +33,7 @@ jobs:
             pushd tools
             tar -xf ./s3deploy.tar.gz
             chmod +x ./s3deploy
-            cp s3deploy /user/local/bin/
+            cp s3deploy /usr/local/bin/
             popd
       - run:
           name: Install Hugo
