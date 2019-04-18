@@ -33,7 +33,6 @@ jobs:
             pushd tools
             tar -xf ./s3deploy.tar.gz
             chmod +x ./s3deploy
-            cp s3deploy /usr/local/bin/
             popd
       - run:
           name: Install Hugo
@@ -42,11 +41,12 @@ jobs:
             pushd tools
             tar -xf ./hugo.tar.gz
             chmod +x ./hugo
-            cp ./hugo /usr/local/bin/
             popd
       - run:
           name: Build and deploy docs to s3
-          command: ./deploy.sh ${CIRCLE_BRANCH}
+          command: |
+            export PATH=${PATH}:./tools/
+            ./deploy.sh ${CIRCLE_BRANCH}
 workflows:
   version: 2
   default_workflow:
