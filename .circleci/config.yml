@@ -36,17 +36,11 @@ jobs:
             curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.2/hugo_0.55.2_Linux-64bit.tar.gz > tools/hugo.tar.gz
             tar -xf tools/hugo.tar.gz
       - run:
-          name: Build Site
-          command: cd enterprise-docs; hugo
-      - run:
-          name: Deploy built docs to s3
-          command: ./deploy.sh
+          name: Build and deploy docs to s3
+          command: ./deploy.sh ${CIRCLE_BRANCH}
 workflows:
   version: 2
   default_workflow:
     jobs:
       - build:
-          filters:
-            branches:
-              only:
-                - master
+          context: aws-prod
