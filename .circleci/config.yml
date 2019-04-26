@@ -11,7 +11,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.12-node
-    working_directory: ~/build
+    working_directory: ~/build/enterprise-docs/
     steps:
       - checkout
       - run:
@@ -43,14 +43,18 @@ jobs:
           command: |
             export PATH=${PATH}:./tools/
             ./build_site.sh ${CIRCLE_BRANCH}
-#      - run:
-#          name: Deploy docs to s3
-#          command: |
-#            export PATH=${PATH}:./tools/
-#            ./deploy.sh ${CIRCLE_BRANCH}
+      - run:
+          name: Deploy docs to s3
+          command: |
+            export PATH=${PATH}:./tools/
+            ./deploy.sh ${CIRCLE_BRANCH}
 workflows:
   version: 2
   default_workflow:
     jobs:
       - build:
           context: aws-prod
+          filters:
+            branches:
+              only:
+                - ci
