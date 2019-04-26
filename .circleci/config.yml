@@ -1,14 +1,3 @@
-# CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/configuration-reference/ for more details
-#
-# Note: YAML anchors allow an object to be re-used, reducing duplication.
-# The ampersand declares an alias for an object, then later the `<<: *name`
-# syntax dereferences it.
-# See http://blog.daemonl.com/2016/02/yaml.html
-# To validate changes, use an online parser, eg.
-# http://yaml-online-parser.appspot.com/
-#
 # Define YAML anchors
 
 #var_2: &attach_workspace
@@ -21,10 +10,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.12
-    working_directory: ~/build
+      - image: circleci/golang:1.12-node
+    working_directory: ~/build/enterprise-docs/
     steps:
       - checkout
+      - run:
+          name: Update theme submodule
+          command: git submodule update --init --recursive
       - run:
           name: Install s3deploy
           command: |
@@ -37,13 +29,22 @@ jobs:
       - run:
           name: Install Hugo
           command: |
-            curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.2/hugo_0.55.2_Linux-64bit.tar.gz > tools/hugo.tar.gz
+            curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_extended_0.55.4_Linux-64bit.tar.gz > tools/hugo.tar.gz
             pushd tools
             tar -xf ./hugo.tar.gz
             chmod +x ./hugo
             popd
       - run:
-          name: Build and deploy docs to s3
+          name: Install npms for Docsy Theme
+          command: |
+            npm install -D postcss-cli autoprefixer
+      - run:
+          name: Build docs
+          command: |
+            export PATH=${PATH}:./tools/
+            ./build_site.sh ${CIRCLE_BRANCH}
+      - run:
+          name: Deploy docs to s3
           command: |
             export PATH=${PATH}:./tools/
             ./deploy.sh ${CIRCLE_BRANCH}
@@ -53,3 +54,7 @@ workflows:
     jobs:
       - build:
           context: aws-prod
+          filters:
+            branches:
+              only:
+                - ci

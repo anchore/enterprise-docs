@@ -1,0 +1,30 @@
+/*
+
+# Project specific style overrides.
+
+*/
+
+$primary: #DDDDDD;
+$secondary: #999999;
+
+$primary-light: lighten($primary, 75%) !default;
+$success: #3772FF !default;
+$info: #C0E0DE !default;
+$warning: #ED6A5A !default;
+$danger: #ED6A5A !default;
+$white: #fff !default;
+$light: #D3F3EE !default;
+
+$dark: #403F4C !default;
+$blue: #72A1E5 !default;
+$orange: #BA5A31 !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #eee !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ccc !default;
+$gray-500: #adb5bd !default;
+$gray-600: #888 !default;
+$gray-700: #495057 !default;
+$gray-800: #333 !default;
+$gray-900: #222 !default;
+$black: #000 !default;
