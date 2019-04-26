@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Update theme submodule
-          command: git submodule update --init --recursive --depth 1
+          command: git submodule update --init --recursive
       - run:
           name: Install s3deploy
           command: |
