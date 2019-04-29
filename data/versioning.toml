@@ -1,5 +1,6 @@
 versions = [
-"1.2"
+"1.2",
+"2.0"
 ]
 
-current = "1.2"
+current = "2.0"
