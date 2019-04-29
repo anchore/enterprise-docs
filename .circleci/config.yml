@@ -18,6 +18,7 @@ jobs:
       - run:
           name: Install Hugo
           command: |
+            mkdir tools
             curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_extended_0.55.4_Linux-64bit.tar.gz > tools/hugo.tar.gz
             pushd tools
             tar -xf ./hugo.tar.gz
