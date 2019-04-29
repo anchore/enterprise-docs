@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
-path_prefix=${1}
-HUGO_ENV="production"
+site_prefix=${1}
+input_tag=${2}
 
-
-if [[ "$path_prefix" = "master" ]]
+# Expect a semver: 0.0.0-somesuffix or 0.0 or 0.0.1
+if ! echo ${input_tag} | grep -E -q '^[[:digit:]]+\.[[:digit:]]+(\.[[:digit:]]+)?(-.*)?$'
 then
-  path_prefix=""
-  hugo --gc -b http://anchore-enterprise-docs-test.s3-website.us-west-2.amazonaws.com/${path_prefix}
-  cp versions.json public/
-
-elif [[ -n "$path_prefix" ]]
-then
-  hugo --gc -b http://anchore-enterprise-docs-test.s3-website.us-west-2.amazonaws.com/${path_prefix}
-else
+  echo Unexpected tag format, must use a semver with optional '-' delmited suffix, but expects vX.Y.Z format
   exit 1
 fi
 
+publish_version=$(echo $input_tag | cut -d '-' -f 1 | cut -d '.' -f 1,2,3 )
+echo "Publish version = ${publish_version}"
+
+HUGO_ENV="production"
+
+if [[ -n "${site_prefix}" ]]
+then
+  echo Building with site prefix ${site_prefix}/${publish_version}/
+  hugo --gc -b ${site_prefix}/${publish_version}/
+else
+  hugo --gc
+fi
