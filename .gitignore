@@ -2,3 +2,4 @@
 public
 */_gen/**
 .DS_Store
+node_modules

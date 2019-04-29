@@ -17,6 +17,7 @@ HUGO_ENV="production"
 
 if [[ -n "${site_prefix}" ]]
 then
+  rm -rf public/
   echo Building with site prefix ${site_prefix}/${publish_version}/
   hugo --gc -b ${site_prefix}/${publish_version}/
 else
