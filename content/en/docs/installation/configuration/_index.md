@@ -6,10 +6,24 @@ weight: 9
 
 ## Introduction
 
-A single configuration file config.yaml is required to run the Anchore Engine - this file is typically passed to the Anchore Engine in a volume.  A default [config.yaml](https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/config.yaml) is provided as a way to get started, which is functional when combined with the default [docker-compose.yaml](https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/docker-compose.yaml), but many options are disabled by default and can be tuned to your liking. See [Anchore Engine Configuration](/docs/engine/engine_installation/configuration/config) for more details.
+Configuring Anchore Enterprise starts with configuring the core Anchore Engine deployment, along with specific configurations for each enterprise service.  Enterprise deployments using the trial quickstart (docker-compose) or production (using Helm or other) are designed to run by default with no modifications necessary to get started, though many options are available to tune your production deployment to fit your needs.  To start, please first refer to the Anchore Engine configuration guide, followed with finding enterprise service specific configuration options within their own sections.
 
-Jump to the following configuration guide below:
+- [Anchore Engine Configuration](/docs/engine/engine_installation/configuration/)
+- [Enterprise UI](/docs/installation/ui/)
+- [Enterprise Feeds Service](/docs/installation/feeds/)
+- [Enterprise RBAC Module](/docs/installation/rbac/)
+- [Storage Configuration](/docs/installation/storage/)
 
-- [Network Proxies](/docs/engine/engine_installation/configuration/network_proxies)
-- [Custom Certificates](/docs/engine/engine_installation/configuration/custom_certs)
-- [TLS / SSL](/docs/engine/engine_installation/configuration/tls_ssl_config)
+**NOTE** - The latest default configuration file can always be extracted from the Enterprise container to review the latest options and environment overrides using the following process:
+
+```
+# docker login
+# docker pull docker.io/anchore/enterprise:latest
+# docker create --name ae docker.io/anchore/enterprise:latest
+# docker cp ae:/config/config.yaml /tmp/my-config.yaml
+# docker rm ae
+# cat /tmp/my-config.yaml
+...
+...
+
+```
