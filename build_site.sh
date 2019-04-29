@@ -15,7 +15,7 @@ then
   exit 1
 fi
 
-HUGO_ENV="production"
+export HUGO_ENV="production"
 
 rm -rf public/
 
