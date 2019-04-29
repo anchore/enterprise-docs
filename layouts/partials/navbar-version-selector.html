@@ -1,0 +1,12 @@
+{{/* Link directly to documentation etc., if possible. */}}
+{{ $home := .Site.Home }}
+
+{{ $basepath := path.Dir .Site.BaseURL }}
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	{{ .Site.Data.versioning.current }}
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	{{ range .Site.Data.versioning.versions }}
+	<a class="dropdown-item" href="{{ path.Join "/" . | relURL }}">{{ . }}</a>
+	{{ end }}
+</div>
