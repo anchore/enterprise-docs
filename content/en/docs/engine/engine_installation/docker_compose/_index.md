@@ -4,82 +4,108 @@ linkTitle: "Docker Compose"
 weight: 1
 ---
 
-The Anchore Engine can be run using Docker Compose. A sample Docker Compose file is provided that runs both the Anchore Engine and PostgreSQL database as containers.
+## Introduction
 
-1. Set up a working directory for your configuration and data volumes.
+In this section, you'll learn how to get up and running with a stand-alone Anchore Engine installation for trial, demonstration and review with [Docker Compose](https://docs.docker.com/compose/install/).
+
+## Requirements
+
+The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.
+
+* A stand-alone installation will requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient.  
+
+
+### Step 1: Setup installation location
+
+Create a directory in which to store your configuration files.
+```
+mkdir ~/aevolume
+cd ~/aevolume
+```
+
+### Step 2: Copy configuration files
+
+Download the latest Anchore Engine container image, which contains the necessary `docker-compose.yaml` and configuration files that will be used for the deployment.
+```
+# docker pull docker.io/anchore/anchore-engine:latest
+```
+
+Next, copy the included docker-compose.yaml to the ~/aevolume/ directory.
 
 ```
-# mkdir ~/aevolume
-# mkdir ~/aevolume/config
-# mkdir ~/aevolume/db
-# cd ~/aevolume
+# docker create --name ae docker.io/anchore/anchore-engine:latest
+# docker cp ae:/docker-compose.yaml ~/aevolume/docker-compose.yaml
+# docker rm ae
 ```
 
-2. Download the [docker-compose.yaml](https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/docker-compose.yaml) and [config.yaml](https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/config.yaml) files from the scripts/docker-compose directory of the github project. 
-
-```
-# curl https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/docker-compose.yaml -o ~/aevolume/docker-compose.yaml
-# curl https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/config.yaml -o ~/aevolume/config/config.yaml
-```
-
-3. Your ~/aevolume directory should now look like this: 
+Once these steps are complete, your ~/aevolume/ workspace should now look like this:
 
 ```
 # cd ~/aevolume
 # find .
 .
-./config
-./config/config.yaml
-./db
 ./docker-compose.yaml
 ```
 
-4. (Optional) Review the default docker-compose.yaml and config.yaml files to modify any particular settings for your environment (not necessary for quickstart).
+### Step 3: Download and run the containers
 
-5. Run `docker-compose pull` to instruct Docker to download the required container images from DockerHub.
-    `docker-compose pull`
-
-6. Start Anchore Engine
-    Note: This command should be run from the directory container docker-compose.yaml.
-    `docker-compose up -d`
-
-7. Verify that your DB and service containers are up and then run an anchore-cli command to verify system status: 
+Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.  
+NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart 
 
 ```
+# cd ~/aevolume
+# docker-compose pull
+# docker-compose up -d
+```
+
+### Step 4: Verify service availability
+
+After a few moments (depending on system speed), your Anchore Engine services should be up and running, ready to use.  You can verify the containers are running with docker-compose:
+
+```
+# cd ~/aevolume
 # docker-compose ps
-          Name                         Command               State                       Ports                     
--------------------------------------------------------------------------------------------------------------------
-aevolume_anchore-db_1       docker-entrypoint.sh postgres    Up      5432/tcp                                      
-aevolume_anchore-engine_1   /bin/sh -c /usr/bin/anchor ...   Up      0.0.0.0:8228->8228/tcp, 0.0.0.0:8338->8338/tcp
-
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar system status
-Service simplequeue (dockerhostid-anchore-engine, http://anchore-engine:8083): up
-Service apiext (dockerhostid-anchore-engine, http://anchore-engine:8228): up
-Service kubernetes_webhook (dockerhostid-anchore-engine, http://anchore-engine:8338): up
-Service analyzer (dockerhostid-anchore-engine, http://anchore-engine:8084): up
-Service policy_engine (dockerhostid-anchore-engine, http://anchore-engine:8087): up
-Service catalog (dockerhostid-anchore-engine, http://anchore-engine:8082): up
-
-Engine DB Version: 0.0.8
-Engine Code Version: 0.3.0
+                Name                               Command               State           Ports         
+-------------------------------------------------------------------------------------------------------
+aevolume_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp              
+aevolume_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp              
+aevolume_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
+aevolume_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
+aevolume_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp              
+aevolume_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
 ```
 
-8. The first time you run anchore-engine, it will take some time to perform its initial data feed sync (vulnerability data download).  Subsequently, anchore-engine will only sync data changes and thus you will only have to wait the very first time you start the engine.  You can watch the status of your feed sync with anchore-cli:mmand to verify system status: 
+You can run a command to get the status of the Anchore Engine services:
 
 ```
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar system feeds list
+# cd ~/aevolume
+# docker-compose exec engine-api anchore-cli system status
+Service policy_engine (anchore-quickstart, http://engine-policy-engine:8228): up
+Service simplequeue (anchore-quickstart, http://engine-simpleq:8228): up
+Service catalog (anchore-quickstart, http://engine-catalog:8228): up
+Service analyzer (anchore-quickstart, http://engine-analyzer:8228): up
+Service apiext (anchore-quickstart, http://engine-api:8228): up
+
+Engine DB Version: 0.0.10
+Engine Code Version: 0.4.0
+```
+
+**Note:** The first time you run Anchore Engine, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
+
+```
+# cd ~/aevolume
+# docker-compose exec engine-api anchore-cli system feeds list
 Feed                   Group                  LastSync                           RecordCount        
-vulnerabilities        alpine:3.3             2018-11-06T22:41:32.151772Z        457                
-vulnerabilities        alpine:3.4             2018-11-06T22:41:38.110987Z        594                
-vulnerabilities        alpine:3.5             2018-11-06T22:41:46.316811Z        857                
-vulnerabilities        alpine:3.6             2018-11-06T22:41:55.170845Z        871                
-vulnerabilities        alpine:3.7             2018-11-06T22:42:04.039058Z        889                
-vulnerabilities        alpine:3.8             2018-11-06T22:42:13.644172Z        972                
-vulnerabilities        centos:5               2018-11-06T22:42:43.967110Z        1322               
-vulnerabilities        centos:6               2018-11-06T22:43:15.459474Z        1307               
-vulnerabilities        centos:7               2018-11-06T22:43:43.976151Z        726                
-vulnerabilities        debian:10              None                               0                  
-vulnerabilities        debian:7               None                               0                  
+vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457                
+vulnerabilities        alpine:3.4             2018-06-27T17:13:59.103245Z        594                
+vulnerabilities        alpine:3.5             2018-06-27T17:14:05.000942Z        649                
+vulnerabilities        alpine:3.6             2018-06-27T17:14:10.606606Z        632                
+vulnerabilities        alpine:3.7             2018-06-27T17:14:17.673851Z        767                
+vulnerabilities        centos:5               2018-06-27T17:14:46.616051Z        1270               
+vulnerabilities        centos:6               2018-06-27T17:15:18.600668Z        1266               
+vulnerabilities        centos:7               2018-06-27T17:15:41.468527Z        657                
+vulnerabilities        debian:10              2018-06-27T17:18:16.960078Z        17494              
+vulnerabilities        debian:7               2018-06-27T17:21:20.058941Z        20455              
 vulnerabilities        debian:8               None                               0                  
 vulnerabilities        debian:9               None                               0                  
 vulnerabilities        debian:unstable        None                               0                  
@@ -97,26 +123,52 @@ vulnerabilities        ubuntu:16.04           None                              
 vulnerabilities        ubuntu:16.10           None                               0                  
 vulnerabilities        ubuntu:17.04           None                               0                  
 vulnerabilities        ubuntu:17.10           None                               0                  
-vulnerabilities        ubuntu:18.04           None                               0
+vulnerabilities        ubuntu:18.04           None                               0                  
 ```
 
-As soon as all the feeds show a non-zero RecordCount , then the feeds are all synced and the system is ready to generate vulnerability reports.  You can add images right away, but you will not see any vulnerability scan results until the vulnerability data feeds are synced.
-
-9. Start using the anchore-engine service to analyze images - a short example follows:
+As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Engine it will be ready immediately.  The CLI tool includes a useful utility that will block until the feeds have completed a successful sync:
 
 ```
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar image add 
-docker.io/library/debian:7
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar image get docker.io/library/debian:7 | grep 'Analysis Status'
-Analysis Status: analyzing
+# docker-compose exec engine-api anchore-cli system wait
+Starting checks to wait for anchore-engine to be available timeout=-1.0 interval=5.0
+API availability: Checking anchore-engine URL (http://localhost:8228)...
+API availability: Success.
+Service availability: Checking for service set (catalog,apiext,policy_engine,simplequeue,analyzer)...
+Service availability: Success.
+Feed sync: Checking sync completion for feed set (vulnerabilities)...
+Feed sync: Checking sync completion for feed set (vulnerabilities)...
+...
+...
+Feed sync: Success.
 
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar image get docker.io/library/debian:7 | grep 'Analysis Status'
-Analysis Status: analyzing
+```
 
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar image get docker.io/library/debian:7 | grep 'Analysis Status'
-Analysis Status: analyzed
+### Step 5: Begin using Anchore
 
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar image vuln docker.io/library/debian:7 all
+Start using the anchore-engine service to analyze images - a short example follows which demonstrates a basic workflow of adding a container image for analysis, waiting for the analysis to complete, then running content reports, vulnerability scans and policy evaluations against the analyzed image.
+
+```
+# docker-compose exec engine-api anchore-cli image add docker.io/library/debian:7
+...
+...
+
+# docker-compose exec engine-api anchore-cli image wait docker.io/library/debian:7
+Status: analyzing
+Waiting 5.0 seconds for next retry.
+Status: analyzing
+Waiting 5.0 seconds for next retry.
+...
+...
+
+# docker-compose exec engine-api anchore-cli image content docker.io/library/debian:7 os
+Package                       Version                      License
+apt                           0.9.7.9+deb7u7               GPLv2+
+base-files                    7.1wheezy11                  Unknown
+debconf                       1.5.49                       BSD-2-clause
+...
+...
+
+# docker-compose exec engine-api anchore-cli image vuln docker.io/library/debian:7 all
 Vulnerability ID        Package                                  Severity          Fix         Vulnerability URL                                                 
 CVE-2005-2541           tar-1.26+dfsg-0.1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2005-2541         
 CVE-2007-5686           login-1:4.1.5.1-1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-5686         
@@ -126,7 +178,7 @@ CVE-2007-6755           libssl1.0.0-1.0.1t-1+deb7u4              Negligible     
 ...
 ...
 
-# docker-compose exec anchore-engine anchore-cli --u admin --p foobar evaluate check docker.io/library/debian:7
+# docker-compose exec engine-api anchore-cli evaluate check docker.io/library/debian:7
 Image Digest: sha256:92d507d81bd3b0459b121215f6f9d8249bb154c8b65e041942745dcc6309a7b5
 Full Tag: docker.io/library/debian:7
 Status: pass
@@ -134,7 +186,12 @@ Last Eval: 2018-11-06T22:51:47Z
 Policy ID: 2c53a13c-1765-11e8-82ef-23527761d060
 ```
 
-10. Stopping the Anchore Engine 
-    *Note:* This command should be run from the directory containing docker-compose.yaml
+**Note:** This document is intended to serve as a quickstart guide. Before moving further with Anchore to explore the scanning, policy evaluation, image content reporting, CI/CD integrations and other capabilities, it is highly recommended that you enhance your learning by reading the [Overview](/docs/engine/general/) sections to gain a deeper understanding of fundamentals, concepts, and proper usage. 
 
-    `docker-compose down --volumes`
+### Next Steps
+
+Now that you have Anchore Engine running, you can begin to learning more about Anchore Architecture, Anchore Concepts and Anchore Usage.
+
+- To learn more about Anchore Engine, go to [Overview](/docs/engine/general/)
+- To learn more about Anchore Concepts, go to [Concepts](/docs/engine/general/concepts)
+- To learn more about using Anchore Usage, go to [Usage](/docs/engine/usage/)
