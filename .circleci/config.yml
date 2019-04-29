@@ -52,11 +52,8 @@ jobs:
       - run:
           name: Deploy docs to s3
           command: |
-            ls .
-            ls public/
             export PATH=${PATH}:./tools/
-
-#            ./deploy.sh public/ ${CIRCLE_BRANCH} ${BUCKET_NAME}
+            ./deploy.sh public/ ${CIRCLE_BRANCH} ${BUCKET_NAME}
 workflows:
   version: 2
   default_workflow:
