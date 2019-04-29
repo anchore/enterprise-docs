@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
+set -e
 
+# The url for the base, e.g. http://docs.anchore.com/
 site_prefix=${1}
-input_tag=${2}
 
-# Expect a semver: 0.0.0-somesuffix or 0.0 or 0.0.1
-if ! echo ${input_tag} | grep -E -q '^[[:digit:]]+\.[[:digit:]]+(\.[[:digit:]]+)?(-.*)?$'
+# The version to deploy, if available. If not, use the versions file
+this_version=${2}
+
+publish_version=$(./get_version.sh ${this_version})
+
+if [[ -z ${publish_version} ]]
 then
-  echo Unexpected tag format, must use a semver with optional '-' delmited suffix, but expects vX.Y.Z format
+  echo "No version found"
   exit 1
 fi
-
-publish_version=$(echo $input_tag | cut -d '-' -f 1 | cut -d '.' -f 1,2,3 )
-echo "Publish version = ${publish_version}"
 
 HUGO_ENV="production"
 

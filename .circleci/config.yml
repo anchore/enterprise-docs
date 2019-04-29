@@ -13,18 +13,12 @@ jobs:
       - run:
           name: Update theme submodule
           command: git submodule update --init --recursive
-      - run:
-          name: Install s3deploy
-          command: |
-            mkdir tools
-            curl -L https://github.com/bep/s3deploy/releases/download/v2.3.0/s3deploy_2.3.0_Linux-64bit.tar.gz > tools/s3deploy.tar.gz
-            pushd tools
-            tar -xf ./s3deploy.tar.gz
-            chmod +x ./s3deploy
-            popd
+      - attach_workspace:
+          at: public/
       - run:
           name: Install Hugo
           command: |
+            mkdir tools
             curl -L https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_extended_0.55.4_Linux-64bit.tar.gz > tools/hugo.tar.gz
             pushd tools
             tar -xf ./hugo.tar.gz
@@ -38,21 +32,40 @@ jobs:
           name: Build docs
           command: |
             export PATH=${PATH}:./tools/
-            ./build_site.sh ${SITE_PREFIX_URL} ${CIRCLE_TAG}
+            ./build_site.sh ${SITE_PREFIX_URL}
+  deploy:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: ~/build/enterprise-docs
+    steps:
+      - checkout
+      - attach_workspace:
+          at: public/
+      - run:
+          name: Install s3deploy
+          command: |
+            mkdir tools
+            curl -L https://github.com/bep/s3deploy/releases/download/v2.3.0/s3deploy_2.3.0_Linux-64bit.tar.gz > tools/s3deploy.tar.gz
+            pushd tools
+            tar -xf ./s3deploy.tar.gz
+            chmod +x ./s3deploy
+            popd
       - run:
           name: Deploy docs to s3
           command: |
             export PATH=${PATH}:./tools/
-            ./deploy.sh public/ ${CIRCLE_TAG} ${BUCKET_NAME}
-
+            ./deploy.sh public/ ${BUCKET_NAME}
 workflows:
   version: 2
   default_workflow:
     jobs:
-      - build:
+      - build: {}
+          #context: aws-prod
+      - deploy:
           context: aws-prod
+          requires:
+            - build
           filters:
-            tags:
-              only: /^[0-9]+\.[0-9]+(\.[0-9]+)?(-.*)?$/
             branches:
-              ignore: /.*/
+              only: master
+              #only: /^[0-9]+\.[0-9]+(\.[0-9]+)?$/
