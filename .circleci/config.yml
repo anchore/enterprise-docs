@@ -13,8 +13,6 @@ jobs:
       - run:
           name: Update theme submodule
           command: git submodule update --init --recursive
-      - attach_workspace:
-          at: public/
       - run:
           name: Install Hugo
           command: |
@@ -33,6 +31,10 @@ jobs:
           command: |
             export PATH=${PATH}:./tools/
             ./build_site.sh ${SITE_PREFIX_URL}
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - public
   deploy:
     docker:
       - image: circleci/golang:1.12
