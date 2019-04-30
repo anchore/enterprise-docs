@@ -15,3 +15,4 @@ To jump to a particular guide, select from the following below:
 - [Analyzing Images](/docs/using/ui_usage/analyzing_images)
 - [Configuring Registries](/docs/using/ui_usage/registry_config)
 - [Managing Users](/docs/using/ui_usage/managing_users)
+- [LDAP](/docs/using/ui_usage/ldap)
