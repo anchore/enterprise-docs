@@ -26,7 +26,7 @@ In this section, you'll learn how what is required for configuring Anchore Engin
 | s3-us-west-2.amazonaws.com | 443 | Ruby Gems Data Feed |
 | static.nvd.nist.gov | 443 | NVD Database |
 | launchpad.net/ubuntu-cve-tracker | 443 | Ubuntu Data |
-| data.anchore-enterprise.com | 443 | Snyk data |
+| data.anchore-enterprise.com | 443 | Third Party Data Feeds|
 
 #### Database
 
@@ -46,13 +46,12 @@ feeds:
       vulnerabilities: true
       packages: false
       nvd: false
-      snyk: true
   url: 'http://enterprise-feeds:8228/v1/feeds'
 ```
 
-In this example only operating system vulnerability data and vulnerability data from Snyk is synchronized, however the packages parameter can be set to true to configure Anchore Engine to synchronize NPM and GEM package data.
+In this example only operating system vulnerability data is synchronized, however the packages and NVD (for non-os package vulnerability matches) parameter can be set to true to configure Anchore Engine to synchronize NPM and GEM package data.
 
-NOTE: The nvd parameter must be set to true to configure the Anchore Engine to download NVD vulnerability data, which used for matching vulnerabilities in non-operating system packages (NPM, GEM, Python, Java). While both the Snyk data feed also enables non-operating system package vulnerability scanning, without the NVD feed enabled, some non-os package vulnerabilities may not be reported.
+NOTE: The nvd parameter must be set to true to configure the Anchore Engine to download NVD vulnerability data, which used for matching vulnerabilities in non-operating system packages (NPM, GEM, Python, Java).
 
 2. Restart Anchore Engine (or just the Policy Engine component containers if you have split services out into their own containers) for the config changes to take effect. If the policy engine cannot reach the configured url it will raise an error and terminate during the bootstrap process. You can check the policy engine logs in /var/log/anchore/anchore-policy-engine.log for errors on the url configuration. If the service start successfully then it was able to reach the Anchore Enterprise Feeds endpoint.
 
