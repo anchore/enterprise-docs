@@ -8,7 +8,7 @@ Anchore Enterprise Feeds is an On-Premise service that supplies os and non-os vu
 
 Anchore maintains a public and free feed service at https://ancho.re/v1/service/feeds which is used by the open source Anchore Engine and Anchore Cloud. Anchore Enterprise Feeds offers the following benefits over the free service:
 
-- Vulnerability data from 3rd parties such as Snyk
+- Vulnerability data from 3rd party licensed feeds
 - Run Anchore Enterprise in Air-Gapped mode
 - Examine updates to vulnerability dataset (for audit trail) with advanced APIs
 - Granular control and configuration over feed data due to On-Premise installation. Configure   how often the data from external sources is synced, enable/disable individual drivers         responsible for processing normalized data.
@@ -21,12 +21,12 @@ Anchore Enterprise Feeds has three high level components - drivers, database and
 
 ### Drivers
 
-A driver downloads raw data from an external source and normalizes it. Each driver outputs normalized data for one of the four feed types - (os) vulnerabilities, packages, nvd or snyk
+A driver downloads raw data from an external source and normalizes it. Each driver outputs normalized data for one of the four feed types - (os) vulnerabilities, packages, nvd or third party feeds
 
 - Drivers responsible for operating system package vulnerabilities gather raw data from the respective os resources listed below
 - Package drivers process the official list of packages maintained by NPM and RubyGems organizations 
 - nvd driver processes all the CVEs in the NIST database and the supplies normalized data that can be used for matching non-os packages (such as Java, Python, NPM, GEM)
-- snyk driver sources vulnerability data for non-os packages curated by https://snyk.io/vuln. Policy Engine prioritizes snyk over nvd feed data when its available for matching vulnerabilities in non-os packages. 
+- third party drivers source vulnerability data for software artifacts, curated by the third party. Policy Engine may prioritize third-party data matches over other feed data sources, when availablem for matching vulnerabilities against software artifacts. 
 
 All drivers except for the package drivers are enabled by default. The service has configuration toggles enabling/disabling each driver individually and tuning driver specific settings. 
 
@@ -40,7 +40,7 @@ All drivers except for the package drivers are enabled by default. The service h
 | gem | packages | https://s3-us-west-2.amazonaws.com/rubygems-dumps |
 | npm | packages | https://replicate.npmjs.com |
 | nvd | nvd | https://nvd.nist.gov/vuln/data-feeds |
-| snyk | snyk | https://data.anchore-enterprise.com |
+| <third-party> | <third-party> | https://data.anchore-enterprise.com |
 
 ### Database 
 
