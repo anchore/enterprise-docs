@@ -6,7 +6,7 @@ weight: 6
 
 The anchore-engine is distributed as a [Docker Image](https://hub.docker.com/r/anchore/anchore-engine), which is comprised of smaller micro-services that can be deployed in a single container or scaled out to handle load.
 
-The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example latest and v0.2.4.
+The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example **latest** and **v0.4.0**.
 
 To retrieve the version of a running anchore-engine the system status command can be run.
 
@@ -16,11 +16,11 @@ To retrieve the version of a running anchore-engine the system status command ca
 ...
 ...
 
-Engine DB Version: 0.0.6
-Engine Code Version: 0.2.3
+Engine DB Version: 0.0.9
+Engine Code Version: 0.3.4
 ```
 
-In this example the anchore-engine is version 0.2.3 and the database schema is version 0.0.6.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
+In this example the anchore-engine is version 0.3.4 and the database schema is version 0.0.9.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
 
 ### Pre-upgrade Procedure
 
@@ -38,33 +38,45 @@ For the latest upgrade instructions using the Helm chart, please refer to the of
 ### Upgrade Procedure (example with docker-compose)
 
 1. Stop all running instances of the Anchore Engine
-
-`docker-compose down`
-
-2. Modify your docker-compose.yaml file to reference the desired version of anchore-engine (or if set to 'latest', your can skip this step).
-
-```YAML
-...
-...
-services:
-  anchore-engine:
-    #image: docker.io/anchore/anchore-engine:v0.2.3
-    image: docker.io/anchore/anchore-engine:v0.2.4
-...
-...
+```
+# cd ~/aevolume
+# docker-compose down
 ```
 
-3. Download the new configured version of the anchore-engine
+2. Make a copy of your original docker-compose.yaml file as backup
+```
+# cp docker-compose.yaml docker.compose.yaml.backup
+```
 
-`# docker-compose pull`
+3. Pull the desired version of anchore-engine container image
+```
+# docker pull docker.io/anchore/anchore-engine:v0.4.0
+```
 
-4. Restart the Anchore Engine containers
+4. Extract the latest docker-compose.yaml
+```
+# docker create --name ae docker.io/anchore/anchore-engine:v0.4.0
+# docker cp ae:/docker-compose.yaml ./docker-compose.yaml
+# docker rm ae
+```
 
-`# docker-compose up -d`
+5. Review the latest docker-compose.yaml and merge any edits/changes from your original docker-compose.yaml.backup to the latest docker-compose.yaml
+
+6. Download the new configured version of the anchore-engine
+```
+# docker-compose pull
+```
+
+7. Restart the Anchore Engine containers
+```
+# docker-compose up -d
+```
 
 To monitor the progress of your upgrade, you can watch the docker logs from your anchore-engine container, where you should see some initial output indicating whether or not an upgrade is needed or being performed, followed by the regular anchore-engine log output.
 
-`# docker-compose logs -f anchore-engine`
+```
+# docker-compose logs -f anchore-engine
+```
 
 Once completed, you can review the new state of your engine to verify the new version is running using the regular system status command.
 
@@ -74,8 +86,8 @@ Once completed, you can review the new state of your engine to verify the new ve
 ...
 ...
 
-Engine DB Version: 0.0.7
-Engine Code Version: 0.2.4
+Engine DB Version: 0.0.10
+Engine Code Version: 0.4.0
 ```
 
 ### Advanced / Manual Upgrade Procedure
