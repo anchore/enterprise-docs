@@ -24,18 +24,18 @@ The Swift driver supports compression of archive documents. The archive document
 ### Legacy Authentication
 
 ```YAML
- archive:
-      compression:
-        enabled: True
-        min_size_kbytes: 100
-      storage_driver:
-         name: 'swift'
-         config:
-           user: 'user:password'
-           auth: 'http://swift.example.com:8080/auth/v1.0'
-           key:  'anchore'
-           container: 'anchorearchive'
-           create_container: True
+object_store:
+  compression:
+    enabled: True
+    min_size_kbytes: 100
+  storage_driver:
+    name: 'swift'
+    config:
+      user: 'user:password'
+      auth: 'http://swift.example.com:8080/auth/v1.0'
+      key:  'anchore'
+      container: 'anchorearchive'
+      create_container: True
 ```
 
 - The user configuration option should include the colon delimited username and password. eg. 'admin:secret'
@@ -45,21 +45,21 @@ The Swift driver supports compression of archive documents. The archive document
 ### Keystone V3
 
 ```YAML
-archive:
-      compression:
-        enabled: True
-        min_size_kbytes: 100
-      storage_driver:
-         name: 'swift'
-         config:
-            auth_version: '3'
-            os_username: 'myusername'
-            os_password: 'mypassword'
-            os_project_name: myproject
-            os_project_domain_name: example.com
-            os_auth_url: 'foo.example.com:8000/auth/etc'
-           container: 'anchorearchive'
-           create_container: True
+object_store:
+  compression:
+    enabled: True
+    min_size_kbytes: 100
+  storage_driver:
+     name: 'swift'
+     config:
+        auth_version: '3'
+        os_username: 'myusername'
+        os_password: 'mypassword'
+        os_project_name: myproject
+        os_project_domain_name: example.com
+        os_auth_url: 'foo.example.com:8000/auth/etc'
+       container: 'anchorearchive'
+       create_container: True
 ```
 
 - The auth_version configuration option specified Keystone V3 authentication
@@ -72,14 +72,18 @@ archive:
 ### Keystone V2
 
 ```YAML
-storage_driver:
-         name: 'swift'
-         config:
-             auth_version: '2'
-             os_username: 'myusername'
-             os_password: 'mypassword'
-             os_tenant_name: 'mytenant'
-             os_auth_url: 'foo.example.com:8000/auth/etc'
+object_store:
+  compression:
+    enabled: true
+    min_size_kbyte: 100
+  storage_driver:    
+    name: 'swift'
+    config:
+      auth_version: '2'
+      os_username: 'myusername'
+      os_password: 'mypassword'
+      os_tenant_name: 'mytenant'
+      os_auth_url: 'foo.example.com:8000/auth/etc'
 ```
 
 - The auth_version configuration option specified Keystone V3 authentication
