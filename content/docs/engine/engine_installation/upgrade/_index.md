@@ -28,6 +28,13 @@ Prior to upgrading anchore-engine, we highly recommend performing a database bac
 
 Whether or not you wish to have the ability to downgrade, we recommend backing up your anchore-engine database prior to upgrading the software as a best practice.
 
+### Upgrade Procedure (for deployments using Helm)
+
+For the latest upgrade instructions using the Helm chart, please refer to the official Anchore Helm Chart documentation
+
+- [Anchore Helm Chart](https://github.com/helm/charts/tree/master/stable/anchore-engine)
+
+
 ### Upgrade Procedure (example with docker-compose)
 
 1. Stop all running instances of the Anchore Engine
