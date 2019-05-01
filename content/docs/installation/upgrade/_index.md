@@ -15,8 +15,7 @@ Anchore Enterprise 2.0 includes all of the services of Enterprise 1.2, plus a ne
 See the following links for the latest configuration options available to the new Enterprise 2.0 components:
 
 - [Anchore UI Configuration](/docs/installation/ui/ui_configuration/)
-- [Reporting Service Configuration]()
-- [Archive Subsystem Configuration]()
+- [Reporting Service Configuration](/docs/installation/reporting)
 
 The default upgrade path is fully automated if you have deployed with either Helm or docker-compose using the provided guides and methods described above and there are no additional or manual steps required.  If, however, you are manually deploying anchore services, there are a few new requirements that need to be met for the the 2.0 UI to start up.  
 
