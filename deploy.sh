@@ -32,19 +32,19 @@ if [[ -z ${source_dir} ]]
 then
   echo No content in source dir, aborting deploy
   exit 1
-else
-  echo "Deploying contents of ${source_dir} to ${bucket}/${publish_version}"
-  # Add -public-access to make objects public for public site
-  #s3deploy -bucket ${bucket} -region us-west-2 -source ${source_dir} -path ${publish_version}
 fi
 
 if [[ ${publish_version} = ${latest_version} ]]
 then
-  echo Publish version is the latest version, publishing to the current/ path as well
+  echo Publish version is the latest version, publishing to the current/ path
 
   echo "Deploying contents of ${source_dir} to ${bucket}/${latest_version_path}"
   # Add -public-access to make objects public for public site
-  #s3deploy -bucket ${bucket} -region us-west-2 -source ${source_dir} -path ${latest_version_path}
+  s3deploy -bucket ${bucket} -region us-west-2 -source ${source_dir} -path ${latest_version_path}
+else
+  echo "Deploying contents of ${source_dir} to ${bucket}/${publish_version}"
+  # Add -public-access to make objects public for public site
+  s3deploy -bucket ${bucket} -region us-west-2 -source ${source_dir} -path ${publish_version}
 
 fi
 
