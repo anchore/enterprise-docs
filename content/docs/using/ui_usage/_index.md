@@ -12,8 +12,8 @@ If you have not installed the Anchore Enterprise UI, please refer to the [instal
 
 To jump to a particular guide, select from the following below:
 
-- [Analyzing Images](/docs/using/ui_usage/analyzing_images)
-- [Configuring Registries](/docs/using/ui_usage/registry_config)
-- [Managing Users](/docs/using/ui_usage/managing_users)
+- [Analyzing Images](/docs/using/ui_usage/images)
+- [Configuring Registries](/docs/using/ui_usage/registries)
+- [Managing Users](/docs/using/ui_usage/user_management)
 - [LDAP](/docs/using/ui_usage/ldap)
 - [Dashboard](/docs/using/ui_usage/dashboard)

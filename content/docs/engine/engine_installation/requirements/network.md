@@ -12,7 +12,6 @@ The Anchore Engine requires two categories of network access:
 
 Notes:
 
-- The Anchore Engine can optionally be configured to download policies created on the Anchore Cloud service. If configured this will use the same host/port as the feed service.
 - No data is uploaded to Anchore, the synchronization is one-way.
 - An optional on-premises feed service and policy editor is available to commercial users.
-- A Network Proxy can be used to provide external connectivity to the Anchore Engine. See: Network Proxy documentation.
+- A Network Proxy can be used to provide external connectivity to the Anchore Engine. See: [Network Proxy documentation](/docs/engine/engine_installation/configuration/network_proxies/).
