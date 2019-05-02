@@ -26,7 +26,7 @@ then
   if [[ ${publish_version} = ${latest_version} ]]
   then
     echo Building "current" version
-    pub_path="current"
+    pub_path="current/"
   else
     echo Building non-current version ${publish_version}
     pub_path=${publish_version}
