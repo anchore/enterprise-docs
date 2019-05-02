@@ -10,7 +10,7 @@ The Anchore Engine will attempt to download images from any registry without req
 your registry requires authentication then the registry and corresponding credentials will need to be defined.
 Anchore Engine can analyze images from any Docker V2 compatible registry.
 
-![alt text](/RegistryAccess.png)
+![alt text](RegistryAccess.png)
 
 Jump to the registry configuring guide for your registry:
 

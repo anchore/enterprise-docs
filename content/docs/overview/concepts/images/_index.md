@@ -8,7 +8,7 @@ Once an image is submitted to the Anchore Engine for analysis the Engine will at
 
 The Anchore Engine can run one or more analyzer services to scale out processing of images. The next available analyzer worker will process the image.
 
-![alt text](/AnalyzingImages.png)
+![alt text](AnalyzingImages.png)
 
 During analysis every package, software library and file are inspected and this data is stored in the Anchore Database. 
 

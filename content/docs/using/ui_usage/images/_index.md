@@ -12,17 +12,17 @@ In this section you will learn how to conduct analysis on images in the Anchore 
 
 After a successful login, navigate to the Image Analysis tab on the main menu.
 
-![alt text](/UIMenuImageAnalysisTab.png)
+![alt text](UIMenuImageAnalysisTab.png)
 
 On the right-hand side of the page, you will see two analyze options.
 
-![alt text](/AnalyzeRepoTagButtons.png)
+![alt text](AnalyzeRepoTagButtons.png)
 
 ### Analyze a Repository
 
 Upon selecting **Analyze Repository**, a modal will appear:
 
-![alt text](/AnalyzeRepoModal.png)
+![alt text](AnalyzeRepoModal.png)
 
 A couple items will be required:
 
@@ -37,7 +37,7 @@ Once you click ‘OK’, the repository will be flagged for analysis and a cycle
 
 Upon selecting **Analyze Tag**, a modal will appear:
 
-![alt text](/AnalyzeTagModal.png)
+![alt text](AnalyzeTagModal.png)
 
 A few items will be required:
 

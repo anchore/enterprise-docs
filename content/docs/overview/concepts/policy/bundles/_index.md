@@ -265,7 +265,7 @@ A *pass* status means the image evaluated against the bundle and only *go* or *w
 
 The flow chart for policy bundle evaluation:
 
-![alt text](/AnchoreFlowchart.jpg)
+![alt text](AnchoreFlowchart.jpg)
 
 ### Next Steps
 

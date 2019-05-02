@@ -4,7 +4,7 @@ linkTitle: "CI / CD"
 weight: 2
 ---
 
-![alt text](/ci-cd.png)
+![alt text](ci-cd.png)
 
 The Anchore Engine can be integrated into CI/CD pipelines such as Jenkins to secure the CI/CD pipeline by adding image scanning including not just CVE based security scans but policy based scans that can include checks around security, compliance and operational best practices.
 

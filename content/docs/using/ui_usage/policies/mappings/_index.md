@@ -6,7 +6,7 @@ weight: 3
 
 ## Introduction
 
-![alt text](/Mappings.jpeg)
+![alt text](Mappings.jpeg)
 
 The Policy Mapping editor creates rules that define which policies and whitelists should be used to perform the policy evaluation of an image based on the registry, repository name and tag of the image.
 Using the policy editor organizations can set up multiple different policies that will be used on different images based on use case.
@@ -29,13 +29,13 @@ The mappings are applied in order, from top to bottom and the system will stop a
 
 Note: The trusted images and blacklisted images lists take precedence over the mapping. See this document for details.
 
-The empty policy bundle includes no mappings. Press the ![alt text](/LetsAddOne.jpeg) to add your first mapping.
+The empty policy bundle includes no mappings. Press the ![alt text](LetsAddOne.jpeg) to add your first mapping.
 
-![alt text](/MappingsTab.png)
+![alt text](MappingsTab.png)
 
 The *Add a New Mapping* dialog will be displayed and includes mandatory fields for *name, policy, registry, repository and tag*. The Whitelist(s) field is optional.
 
-![alt text](/AddNewMapping.png)
+![alt text](AddNewMapping.png)
 
 | Field Name | Description |
 | ---------- | ----------- |
@@ -46,17 +46,17 @@ The *Add a New Mapping* dialog will be displayed and includes mandatory fields f
 | Repository | The name of the repository, optionally including namespace eg. webapp/foo Wildcards are supported. A single * would specify any repository. Partial names with wildcards are supported. eg. web*/* |
 | Tag | Tags mapped by this rule. eg. latest Wildcard are supported. A single * would match any tag. Partial names with wildcards are supported. eg 2018* |
 
-Each entry field includes an indicator showing if the current entry is valid ![alt text](/Check.png) or has errors ![alt text](/X.png).
+Each entry field includes an indicator showing if the current entry is valid ![alt text](Check.png) or has errors ![alt text](X.png).
 
 In the screenshot below you can see multiple policy mappings have been defined some of which include one or more whitelists.
 
 **Note:** As of Anchore Engine 0.2.1 only a single policy can be mapped to an image, however a later version of the engine will support mapping multiple policies to an image. This will simplify policy creation allowing smaller 'building blocks' to be assembled together to form a final set of policies rather than require duplication of checks between policies.
 
-![alt text](/MultipleMappings.png)
+![alt text](MultipleMappings.png)
 
 Image evaluation is performed sequentially from top to bottom. The system will stop at the first match so particular care should be paid to the ordering.
 
-Mappings can be reordered using the ![alt text](/UpDownButtons.png) buttons which will move a mapping up or down the list. Mappings may be deleted using the ![alt text](/TrashButton.png) button.
+Mappings can be reordered using the ![alt text](UpDownButtons.png) buttons which will move a mapping up or down the list. Mappings may be deleted using the ![alt text](TrashButton.png) button.
 
 Anchore recommends that a final catch all mapping is applied to ensure that all images are mapped to a policy. This catch-all mapping should specify wildcards in the registry, repository and tag field.
 

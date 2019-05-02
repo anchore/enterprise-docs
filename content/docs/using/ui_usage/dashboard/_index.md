@@ -48,15 +48,15 @@ The following sections in this document describe how to add widgets to the dashb
 ### Widgets
 
 <div>
-  <img class="img_small" src="/WidgetVulnerabilities.png" />
-  <img class="img_small" src="/WidgetPolicyEvaluations.png" />
+  <img class="img_small" src="WidgetVulnerabilities.png" />
+  <img class="img_small" src="WidgetPolicyEvaluations.png" />
 </div>
 
 #### Adding a Widget
 
 To add a new widget, click the **Add New Widget** button present in the Dashboard view. Or, if no widgets are defined, click the **Let's add one!** button shown.
 
-<img class="img_medium" src="/DashboardAddWidget.png" />
+<img class="img_medium" src="DashboardAddWidget.png" />
 
 Upon doing so, a modal will appear with several properties described below:
 
@@ -86,7 +86,7 @@ Vulnerabilities are grouped and colored by severity. *Critical*, *High*, and *Me
 
 Clicking one of these metrics navigates you to a view (shown below) where you can browse the filtered set of vulnerabilities matching that severity.
 
-<img class="img_large" src="/DashboardTagsByVulnerability.png" />
+<img class="img_large" src="DashboardTagsByVulnerability.png" />
 
 For more info on a particular vulnerability, click on its corresponding button visible in the **Links** column. To view the exact tags affected, drill down to a specific repository by expanding the arrows (<i class="fas fa-caret-right mx-1"></i>).
 
@@ -98,7 +98,7 @@ Policy Evaluations are grouped by their evaluation outcome such as *Pass* or *Fa
 
 Clicking one of these results navigates you to a view (shown below) where you can browse the affected and filtered set of tags.
 
-<img class="img_large" src="/DashboardPolicyEvaluationsByTag.png" />
+<img class="img_large" src="DashboardPolicyEvaluationsByTag.png" />
 
 Dig down to a specific tag by expanding the arrow (<i class="fas fa-caret-right mx-1"></i>) shown on the left side of the row.
 

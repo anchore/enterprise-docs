@@ -60,7 +60,7 @@ To add a new user mapping containing an LDAP search filter, click the **Add New 
 
 You will be presented a dialog, similar to the one shown below, where you can provide an LDAP search filter:
 
-<img class="img_medium" src="/LdapAddMapping.png" />
+<img class="img_medium" src="LdapAddMapping.png" />
 
 #### LDAP Search Filters
 The LDAP search filter in each mapping provides the criteria for associating that mapping with an Anchore Engine account. For example:
@@ -96,9 +96,9 @@ A detailed summary of the syntax and formula of LDAP search filters is beyond th
 
 By default, mappings are evaluated in priority order, with new entries being stored at the lowest priority. It can be challenging to infer the exact order of all mappings when they are spread across multiple accounts, so the table listing all current mappings the **LDAP** sidetab shows the priority of every item and includes the account with which they are associated. Example:
 
-![alt text](/LdapMappingTable.png)
+![alt text](LdapMappingTable.png)
 
-From here you can move row entries to a higher or lower order of precedence by clicking down on a hotspot (<img src="/LdapDragMapping.png" class="img_mini" />) and then dragging the row up or down the list.
+From here you can move row entries to a higher or lower order of precedence by clicking down on a hotspot (<img src="LdapDragMapping.png" class="img_mini" />) and then dragging the row up or down the list.
 
 The priority order of user mappings determines the order in which search filters are evaluated when a user logs in. The first mapping to successfully locate an LDAP user record that matches the `$USERNAME` and any other criteria in its search filter will be used to determine the Anchore Engine account association for that user.
 
@@ -114,7 +114,7 @@ If an LDAP record is located that matches the search filter criteria of a mappin
 
 If a set of valid LDAP server connection properties have been stored by an administrator, the **LDAP** authentication option is activated in the application login view, in addition to the **Default** option of authenticating against the user records stored in Anchore Engine:
 
-<img class="img_medium" src="/LdapLogin.png" />
+<img class="img_medium" src="LdapLogin.png" />
 
 The value entered in the **Username** field will be used by the application to populate the `$USERNAME` token when evaluating each user mapping. The value entered in the **Password** field will be used to authenticate the matched user with the LDAP directory server.
 

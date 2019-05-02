@@ -19,7 +19,7 @@ For more information on accounts, users, roles, and permissions see: Role Based 
 
 - After a successful login, navigate to the configuration tab on the main menu.
 
-![alt text](/UIMenuConfigTab.png)
+![alt text](UIMenuConfigTab.png)
 
 ### Creating Accounts
 
@@ -31,7 +31,7 @@ Upon selection, a popup window will display asking for two items:
 - Email
 In the following example I've created a 'security' account:
 
-![alt text](/UIAccountsTab.png)
+![alt text](UIAccountsTab.png)
 
 Now that a group has been created, I can begin to add users to it.
 
@@ -39,7 +39,7 @@ Now that a group has been created, I can begin to add users to it.
 
 To view the permissions associated with a specific role using the UI, select an account, and navigate to the roles tab: 
 
-![alt text](/UIRolePermissionsTab.png)
+![alt text](UIRolePermissionsTab.png)
 
 To view the members in the account assigned to a specific role, select the 'View' button on the right-hand side. 
 
@@ -56,7 +56,7 @@ Upon selection, a popup window will display asking for three items:
 
 In this case I've assigned three roles to the user: 
 
-![alt text](/UIAddNewUser.png)
+![alt text](UIAddNewUser.png)
 
 Once 'OK' is selected, the user will be created and you will be able to edit or remove the user as needed.
 
@@ -79,4 +79,4 @@ A couple notes on disabling accounts:
 
 System administrator users are able to view another account's data context using the dropdown located at the top-right:
 
-![alt text](/UISwitchContext.png)
+![alt text](UISwitchContext.png)

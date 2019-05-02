@@ -14,7 +14,7 @@ To run/edit locally:
 `npm install`
 
 1. Clone this repo locally:
- `git clone --recurse-submodules https://github.com/anchore/enterprise-docs --shallow-submodules`
+ `git clone --recurse-submodules https://github.com/anchore/enterprise-docs`
  
 1. Run hugo
 `cd enterprise-docs ; hugo server`

@@ -23,7 +23,7 @@ Update to the latest external data used for policy evaluation and vulnerability 
 6. **Notify** users of changes to policy evaluations and vulnerability matches
 7. **Repeat** 5 & 6 on intervals to ensure latest external data and updated image evaluations
 
-![alt text](/HowItWorks.png)
+![alt text](HowItWorks.png)
 
 The primary interface is a RESTful API that provides mechanisms to request analysis, policy evaluation, and monitoring of images in registries as well as query for image contents and analysis results. We also provide a CLI and its own container.
 
@@ -42,7 +42,7 @@ The system is a collection of services that can be deployed co-located or fully 
 
 The six services that comprise the Engine can be deployed in a single container or scaled out to handle load:
 
-![alt text](/AnchoreEngineServices.png)
+![alt text](AnchoreEngineServices.png)
 
 For most installations a single instance is sufficient however multiple Analyzer Worker services can be spun up to handle heavy load and to reduce analysis time.
 

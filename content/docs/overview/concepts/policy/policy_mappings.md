@@ -56,7 +56,7 @@ Example 2, all "official" images from DockerHub are evaluated against *officials
   {
     "registry": "*",
     "repository": "*",
-    "image": { "type": "tag", "value": "*"}
+    "image": { "type": "tag", "value": "*"},
     "policy_ids": [ "defaultpolicy"],
     "whitelist_ids": [ "defaultwhitelist"]
   }
@@ -77,7 +77,7 @@ Example 3, all images from a non-known registry will be evaluated against *defau
   {
     "registry": "*",
     "repository": "*",
-    "image": { "type": "tag", "value": "*"}
+    "image": { "type": "tag", "value": "*"},
     "policy_ids": [ "defaultpolicy"],
     "whitelist_ids": [ "defaultwhitelist"]
   }
