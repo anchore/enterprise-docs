@@ -6,11 +6,6 @@ weight: 7
 
 The Anchore Engine is designed to run locally and does not share any data with Anchore Inc. or any third party.
 
-The Anchore Engine will download data from Anchore's cloud service anchore.io however no data is uploaded to Anchore.
+The Anchore Engine will download vulnerability and other feed data from Anchore's service hosted at ancho.re, however no data from your deployment of anchore-engine is uploaded to Anchore.
 
-Depending on your configuration the following data will be downloaded from Anchore's cloud.
-
-- CVE Vulnerability data (Alpine, CentOS, Debian, Oracle, RHEL, Ubuntu) - sourced from Vendor CVE databases
-- NPM package data from the NPM Package Database
-- Ruby Gems package data from the Ruby Gems repository
-- Any user define policies and whitelists created on Anchore's cloud service.
+See [Anchore Feeds Overview](/docs/overview/feeds/) for details on the data feeds that are available for download.

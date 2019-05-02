@@ -40,7 +40,7 @@ All drivers except for the package drivers are enabled by default. The service h
 | gem | packages | https://s3-us-west-2.amazonaws.com/rubygems-dumps |
 | npm | packages | https://replicate.npmjs.com |
 | nvd | nvd | https://nvd.nist.gov/vuln/data-feeds |
-| <third-party> | <third-party> | https://data.anchore-enterprise.com |
+| third-party | third-party | https://data.anchore-enterprise.com |
 
 ### Database 
 
