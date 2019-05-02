@@ -38,4 +38,4 @@ weight: 3
 
 Now, let's get familiar with the architecture of Anchore Enterprise.
 
-To being, go to [Anchore Enterprise Architecture](/docs/overview/architecture)
+aTo being, go to [Anchore Enterprise Architecture](architecture)

@@ -21,7 +21,7 @@ For a full listing of gate, triggers, and their parameters see: Anchore Policy C
 
 These policies can applied globally or customized for specific images or categories of applications.
 
-![alt text](/AnchorePolicyEval.png)
+![alt text](AnchorePolicyEval.png)
 
 A policy can return one of two results:
 

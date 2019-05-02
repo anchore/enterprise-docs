@@ -17,7 +17,7 @@ The UI will attempt to download images from any registry without requiring furth
 
 First off, after a successful login, navigate to the Configuration tab in the main menu.
 
-![alt text](/UIMenuConfigTab.png)
+![alt text](UIMenuConfigTab.png)
 
 ### Add a New Registry
 
@@ -25,7 +25,7 @@ In order to define a registry and its credentials, navigate to the **Registries*
 
 Upon selection, a modal will appear:
 
-![alt text](/UIAddNewRegistry.png)
+![alt text](UIAddNewRegistry.png)
 
 A few items will be required:
 
@@ -44,7 +44,7 @@ As the required field values may vary depending on the type of registry and cred
 
 Once a registry has been successfully configured, its credentials as well as the options mentioned above can be updated by clicking Edit under the Actions column. For more information on analyzing images with your newly defined registry, refer to: UI - Analyzing Images.
 
-![alt text](/UIRegistriesTab.png)
+![alt text](UIRegistriesTab.png)
 
 The instructions provided below for setting up the various registry types can also be seen inline by clicking *'Need some help setting up your registry?'* near the bottom of the modal.
 

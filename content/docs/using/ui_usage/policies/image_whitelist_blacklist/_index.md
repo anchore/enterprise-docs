@@ -6,7 +6,7 @@ weight: 6
 
 ## Introduction
 
-![alt text](/TrustedBlacklistedLogo.jpeg)
+![alt text](TrustedBlacklistedLogo.jpeg)
 
 The *Trusted / Blacklisted Images* tab is split into two sub tabs for:
 
@@ -46,25 +46,25 @@ The Trusted Images list will show a list of any Trusted Images defined by the sy
 - **Image**
   The specification used to define the image
 
-  The ![alt text](/clipboard.jpeg) button can be used to copy the image specification into the clipboard. 
+  The ![alt text](clipboard.jpeg) button can be used to copy the image specification into the clipboard. 
 
-  An existing image may be deleted using the ![alt text](/TrashButton.png) or edited by pressed the ![alt text](/EditButtonLong.jpeg) button.
+  An existing image may be deleted using the ![alt text](TrashButton.png) or edited by pressed the ![alt text](EditButtonLong.jpeg) button.
 
-![alt text](/TrustedImageTab.png)
+![alt text](TrustedImageTab.png)
 
 ### Adding New Trusted or Blacklisted Images.
 
-New Images can by added by pressing the ![alt text](/AddTrustedImageButton.jpeg) or ![alt text](/AddBlacklistedImage.jpeg) buttons.
+New Images can by added by pressing the ![alt text](AddTrustedImageButton.jpeg) or ![alt text](AddBlacklistedImage.jpeg) buttons.
 
 The workflow for adding Trusted or Blacklisted images is identical. In the example below we will add new Trusted images.
 
 The user will be prompted for a name to reference this image. The name does not have to be unique but it is recommended to that the identifier is descriptive.
 
-![alt text](/AddTrustedImageItem.png)
+![alt text](AddTrustedImageItem.png)
 
 Once the image item has been named clicking on the Identify Image will bring up drop down to select how the image is identified: by Name, Image ID or Image Digest.
 
-![alt text](/IdentifyImageDropdown.png)
+![alt text](IdentifyImageDropdown.png)
 
 The Add Image dialog will present a different set of input fields depending on the Identify Image selection.
 
@@ -92,7 +92,7 @@ By default the docker CLI displays a short ID, the long ID is required and it ca
 
 **Note:** The algorithm (sha256:) should not be entered into the Image ID field.
 
-![alt text](/AddTrustedImageId.png)
+![alt text](AddTrustedImageId.png)
 
 ### Adding an Image by Digest
 
@@ -129,7 +129,7 @@ docker.io/debian    latest              sha256:de3eac83cd481c04c5d6c7344cd732762
 
 **Note:** Unlike the Image ID entry, the algorithm (sha256:) is required.
 
-![alt text](/AddTrustedImageDigest.png)
+![alt text](AddTrustedImageDigest.png)
 
 
 ### Adding an Image by Name
@@ -147,4 +147,4 @@ When adding an image by Name the following fields are required:
 
 **Note:** Wild cards are supported, so to trust all images from docker.io you would enter docker.io in the Registry field, and * in the repository and Tag fields.
 
-![alt text](/AddTrustedImageName.png)
+![alt text](AddTrustedImageName.png)

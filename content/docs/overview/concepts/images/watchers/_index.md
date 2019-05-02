@@ -15,7 +15,7 @@ The process for monitoring updates to repositories, the addition of new tag name
 1. Periodically, controlled by the cycle_timers configuration in the config.yaml of the catalog, a process is triggered to list all the Repository Subscription records in the system and for each record, add a task to a specific queue.
 2. Periodically, also controlled by the cycle_timers config, a process is triggered to pick up tasks off that queue and process repository scan tasks. Each task looks approximately like the following:
 
-![alt text](/RepoUpdateTask.jpg)
+![alt text](RepoUpdateTask.jpg)
 
 The output of this process is new tag_update subscription records, which are subsequently processed by the Tag Update handlers as described below. You can view the tag_update subscriptions using the Anchore CLI: 
 
@@ -27,14 +27,14 @@ To detect updates to tags, mapping of a new image digest to a tag name, Anchore 
 
 The process, the duty-cycle of which is configured in the cycle_timers section of the catalog config.yaml is described below:
 
-![alt text](/TagUpdateTask.jpg)
+![alt text](TagUpdateTask.jpg)
 
 As new updates are discovered, they are automatically submitted to the analyzers, via the image analysis internal queue, for processing.
 
 The overall process and interaction of these duty cycles works like:
 
-![alt text](/UpdateFlow.jpg)
+![alt text](UpdateFlow.jpg)
 
 ### Next Steps
 
-Now let's get familiar with [Policy](/docs/overview/concepts/policy) in Anchore. 
+Now let's get familiar with [Policy](/docs/overview/concepts/policy) in Anchore.

@@ -8,7 +8,7 @@ weight: 4
 
 For most CI/CD systems Anchore Integration Follows a similar model:
 
-![alt text](/ci-cd.png)
+![alt text](ci-cd.png)
 
 1. Developers commit code into source control system
 2. CI / CD platform builds container image

@@ -34,19 +34,19 @@ A bundle container 5 elements:
 
 The Policy Manager displays a list of bundles loaded in the Anchore Engine. Each Policy Bundle has a unique name, unique ID (UUID), and optionally a description.
 
-![alt text](/UIPolicyBundle.png)
+![alt text](UIPolicyBundle.png)
 
 The Anchore Engine supports multiple bundles. The Anchore API, CLI, and CI/CD plugins support specifying a Bundle when requesting an image evaluation. For example, the development team may use a different set of policy checks than the operations team. In this case, the development team would specify their bundle ID as part of their policy evaluation request.
 
 If no bundle ID is specified, then the Anchore Engine will use the active bundle which can be considered as the default bundle. Only one bundle can be set as default/active at any time. This bundle will be highlighted with a green ribbon.
 
-![alt text](/GreenPolicyRibbon.png)
+![alt text](GreenPolicyRibbon.png)
 
 **Note:** Bundles which are not marked as Active can still be explicitly requests as part of policy evaluation. 
 
 If multiple users are accessing the Policy Manager or if policy bundles are being added or removed through the API or CLI then you may update the list of bundles using the refresh button.
 
-![alt text](/RefreshBundle.png)
+![alt text](RefreshBundle.png)
 
 The following command can be run to list policy bundles using the Anchore CLI
 
@@ -60,7 +60,7 @@ You will be prompted to name the policy bundle. This name should be unique.
 
 A description is optional but recommended. Once created a unique ID (UUID) will be automatically created by the Anchore Engine.
 
-![alt text](/UICreateBundle.png)
+![alt text](UICreateBundle.png)
 
 ### Uploading a Policy Bundle
 
@@ -68,7 +68,7 @@ If you have a JSON document containing an existing policy bundle then this may b
 
 Selecting the Upload Bundle button will present a dialog allowing for a policy bundle to be uploaded or manually edited in the native JSON format.
 
-![alt text](/UIBundleUpload.png)
+![alt text](UIBundleUpload.png)
 
 Policy Bundle files can be dragged into the dropzone, indicated by a blue plus sign, or clicking in the dropzone will open a file selector dialog allowing a bundle to be loaded from the local filesystem.
 
@@ -86,17 +86,17 @@ Selecting the Edit Policy button will open the policy bundled viewer which is de
 
 The user will be prompted to enter a unique name. The description can be updated.
 
-![alt text](/UICopyBundle.png)
+![alt text](UICopyBundle.png)
 
 ### Deleting a Policy Bundle
 
-![alt text](/UIBundleTools.png)
+![alt text](UIBundleTools.png)
 
 From the Tools menu the Delete Bundle menu option will bring up a dialog to confirm deletion of an existing policy bundle.
 
 **Note:** The active (default) bundle cannot be deleted. To delete the active bundle first you must mark another bundle as active.
 
-![alt text](/UIDeleteBundle.png)
+![alt text](UIDeleteBundle.png)
 
 The following command can be run to list delete a bundle using the Anchore CLI. The policy must be referenced by its UUID
 
@@ -104,7 +104,7 @@ The following command can be run to list delete a bundle using the Anchore CLI. 
 
 ### Downloading a Policy Bundle
 
-![alt text](/UIBundleTools.png) 
+![alt text](UIBundleTools.png) 
 From the Tools menu the Download to JSON menu option will bring up a file dialog to chose a location and name to save the downloaded JSON file.
 
 The following command can be run to download a bundle using the Anchore CLI. The policy must be referenced by its UUID

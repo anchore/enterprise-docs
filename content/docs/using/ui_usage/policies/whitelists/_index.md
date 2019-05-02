@@ -10,26 +10,26 @@ A whitelist contains one or more exceptions that can be used during policy evalu
 
 The Whitelists tab shows a list of whitelists present in the policy bundle. Whitelists are an optional element of the bundle and a policy bundle may contain multiple whitelists.
 
-![alt text](/WhitelistsTab.jpeg)
+![alt text](WhitelistsTab.jpeg)
 
 ### Adding a New Whitelist
 
-![alt text](/WhitelistsButton.png) The Add New Whitelist button launches a dialog to create a new, empty whitelist.
+![alt text](WhitelistsButton.png) The Add New Whitelist button launches a dialog to create a new, empty whitelist.
 
 The Whitelist name is required and should be unique. 
 
 The description is optional but recommended. Often the description is updated as new entries are added to the whitelist to explain any background.
 For example "Updated to account for false positive in glibc library"
 
-![alt text](/AddNewWhitelist.jpeg)
+![alt text](AddNewWhitelist.jpeg)
 
 ### Uploading a Whitelist 
 
-![alt text](/UploadWhitelistButton.jpeg) If you have a JSON document containing an existing whitelist then this may be uploaded into the Anchore Engine.
+![alt text](UploadWhitelistButton.jpeg) If you have a JSON document containing an existing whitelist then this may be uploaded into the Anchore Engine.
 
 Selecting the Upload whitelist button will present a dialog allowing for a whitelist file to be uploaded or manually edited in the native JSON format.
 
-![alt text](/UploadWhitelist.png)
+![alt text](UploadWhitelist.png)
 
 Whitelist files can be dragged into the dropzone, indicated by a blue plus sign, or clicking in the dropzone will open a file selector dialog allowing a file to be loaded from the local filesystem.
 
@@ -43,7 +43,7 @@ A new dialog will be presented in which a unique name for the Whitelist should b
 
 The description is optional but recommended. Often the description is updated as new entries are added to the whitelist to explain any background.
 
-![alt text](/CopyWhitelist.jpeg)
+![alt text](CopyWhitelist.jpeg)
 
 ### Downloading Whitelists
 
@@ -57,14 +57,14 @@ The Anchore Engine supports whitelisting any policy trigger however the whitelis
 
 A vulnerabilities whitelist entry includes two elements:
 
-![alt text](/WhitelistCVEInput.jpeg)
+![alt text](WhitelistCVEInput.jpeg)
 
 The CVE/Vulnerability field contains the vulnerability that should be matched by the whitelist. This can include wildcards.
 
 For example: CVE-2017-7246. This format should match the format of the CVEs shown in the image vulnerabilities report.
 Wildcards are supported however car should be taken with using wildcards to prevent whitelisting too many vulnerabilities.
 
-![alt text](/WhitelistPackageInput.jpeg)
+![alt text](WhitelistPackageInput.jpeg)
 
 The package name field contains the package that should be matched with a vulnerability.
 For example libc-bin.
@@ -85,13 +85,13 @@ A good example of a valid use case for a wildcard in the CVE / Vulnerability Ide
 
 
 
-Whitelist entries can be edited be pressing the ![alt text](/describe.jpeg) button and can be removed using the Remove button.
+Whitelist entries can be edited be pressing the ![alt text](describe.jpeg) button and can be removed using the Remove button.
 
 Ensure that all changes are saved before exiting out of the Edit Whitelist Items Page. At that point the edits will be sent to the Anchore Engine.
 
-![alt text](/UIEditWhitelistItems.jpeg)
+![alt text](UIEditWhitelistItems.jpeg)
 
-![alt text](/WhitelistsTab.jpeg)
+![alt text](WhitelistsTab.jpeg)
 
 
 
