@@ -1,6 +1,6 @@
 {{/* Link directly to documentation etc., if possible. */}}
 
-{{ if eq .Hugo.Environment "production" }}
+{{/* if eq .Hugo.Environment "production" */}}
 <script>
 function populateDropDown() {
 	var dropDown = document.getElementById("version-dropdown");
@@ -31,7 +31,7 @@ function populateDropDown() {
 	}
 }
 </script>
-{{ end }}
+{{/* end */}}
 
 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="populateDropDown()">
 	{{ .Site.Data.versions.this_version }}
