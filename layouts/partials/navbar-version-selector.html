@@ -6,7 +6,6 @@ function populateDropDown() {
 	var dropDown = document.getElementById("version-dropdown");
 	var fetchPath = document.location.href.replace(document.location.pathname, "/versions.json");
 	if ( dropDown.innerHTML == false) {
-		console.log("Generating");
 		fetch(fetchPath)
 				.then(function (response) {
 					if(response.ok) {
@@ -14,14 +13,12 @@ function populateDropDown() {
 					} else {
 						return false;
 					}
-				}, function() { console.log('Error'); }).then(function (versionObj) {
-						console.log(versionObj);
+				}, function() { console.log('Error getting version listing'); }).then(function (versionObj) {
 						var inner = "";
 						var verstr = "";
+						var is_current = false;
 						for (i = 0; i < versionObj.length; i++) {
-							var is_current = versionObj[i].current || false;
-							console.log("Version " + versionObj[i]);
-							console.log("Is current = " + is_current);
+							is_current = versionObj[i].current || false;
 							if (is_current) {
 								verstr = versionObj[i].version + " (current)";
 								inner += "<a class=\"dropdown-item\" href=\"/current/\"/>" + verstr + "</a>";
@@ -32,8 +29,6 @@ function populateDropDown() {
 						}
 						dropDown.innerHTML = inner;
 					});
-	} else {
-		console.log("Skipping Generating");
 	}
 }
 </script>
