@@ -13,7 +13,8 @@ function populateDropDown() {
 				var verstr = "";
 				for (i = 0; i < versionObj.length; i++) {
 					var is_current = versionObj[i].current || false;
-
+					console.log("Version " + versionObj[i]);
+					console.log("Is current = " + is_current);
 					if (is_current) {
 						verstr = versionObj[i].version + " (current)";
 						inner += "<a class=\"dropdown-item\" href=\"/current/\"/>" + verstr + "</a>";
