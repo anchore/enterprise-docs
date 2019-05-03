@@ -5,7 +5,7 @@
 function populateDropDown() {
 	var dropDown = document.getElementById("version-dropdown");
 	var fetchPath = document.location.href.replace(document.location.pathname, "/versions.json");
-	console.lgo("Fetching " + fetchPath);
+	console.log("Fetching " + fetchPath);
 	fetch(fetchPath)
 			.then(function (response) {
 				var versionObj = response.json();
