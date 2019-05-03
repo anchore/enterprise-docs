@@ -3,9 +3,9 @@
 {{ if eq .Hugo.Environment "production" }}
 <script>
 function populateDropDown() {
-	console.log("Adding!");
 	var dropDown = document.getElementById("version-dropdown");
 	var fetchPath = document.location.href.replace(document.location.pathname, "/versions.json");
+	console.lgo("Fetching " + fetchPath);
 	fetch(fetchPath)
 			.then(function (response) {
 				var versionObj = response.json();
@@ -22,12 +22,12 @@ function populateDropDown() {
 						inner += "<a class=\"dropdown-item\" href=\"/" + verstr + "/\"/>" + verstr + "</a>";
 					}
 				}
-				console.log(inner);
 				dropDown.innerHTML = inner;
 			});
+
 }
 </script>
-{{end}}
+{{ end }}
 
 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="populateDropDown()">
 	{{ .Site.Data.versions.this_version }}
