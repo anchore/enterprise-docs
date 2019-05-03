@@ -1,5 +1,6 @@
 ---
 title: "Anchore Enterprise Feeds Advanced API Access"
+linkTitle: "Feeds"
 weight: 1
 ---
 
