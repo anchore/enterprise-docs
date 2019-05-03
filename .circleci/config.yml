@@ -30,7 +30,7 @@ jobs:
           name: Build docs
           command: |
             export PATH=${PATH}:./tools/
-            ./build_site.sh ${SITE_PREFIX_URL}
+            ./build_site.sh ${SITE_PREFIX_URL} ${CIRCLE_BRANCH}
       - persist_to_workspace:
           root: ./
           paths:
@@ -57,7 +57,7 @@ jobs:
           command: |
             export PATH=${PATH}:./tools/
             cp -R /tmp/workspace/public .
-            ./deploy.sh public/ ${BUCKET_NAME}
+            ./deploy.sh public/ ${BUCKET_NAME} ${CIRCLE_BRANCH}
 workflows:
   version: 2
   default_workflow:
@@ -70,5 +70,6 @@ workflows:
             - build
           filters:
             branches:
-              only: master
-              #only: /^[0-9]+\.[0-9]+(\.[0-9]+)?$/
+              only:
+                - master
+                - "/^[0-9]+\.[0-9]+(\.[0-9]+)?$/"
