@@ -31,7 +31,7 @@ Rather than passing command line parameters for every call to the Anchore CLI th
 ANCHORE_CLI_URL=http://myserver.example.com:8228/v1
 ANCHORE_CLI_USER=admin
 ANCHORE_CLI_PASS=foobar
-ANCORE_CLI_SSL_VERIFY=n
+ANCHORE_CLI_SSL_VERIFY=n
 ```
 
 ### Credentials File (recommended)
@@ -45,6 +45,7 @@ default:
         ANCHORE_CLI_USER: 'admin'
         ANCHORE_CLI_PASS: 'foobar'
         ANCHORE_CLI_URL: 'http://localhost:8228/v1'
+        ANCHORE_CLI_SSL_VERIFY: 'n'
 ```
 
 ### Order or Precedence
