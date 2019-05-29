@@ -22,7 +22,7 @@ Example JSON for an empty bundle, showing the sections and top-level elements:
 
 ```
 {
-  "id": "default0,
+  "id": "default0",
   "version": "1_0",
   "name": "My Default bundle",
   "comment": "My system's default bundle",
