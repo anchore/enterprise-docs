@@ -109,7 +109,7 @@ The simplequeue is a postgresql-backed queue service that the other components u
 
 #### Enterprise Feed Service
 
-The feed servuce component provides external vulnerability and package metadata to the policy engine for use in performing vulnerability scans and policy evaluations. It runs a set of drivers which each reach out to specific data sources to ingress the data from that source into a standard format that Anchore can consume. 
+The feed service component provides external vulnerability and package metadata to the policy engine for use in performing vulnerability scans and policy evaluations. It runs a set of drivers which each reach out to specific data sources to ingress the data from that source into a standard format that Anchore can consume. 
 
 Requires a valid Anchore Enterprise license to start and run.
 
