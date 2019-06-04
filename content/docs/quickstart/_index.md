@@ -6,7 +6,7 @@ weight: 2
 
 ## Introduction
 
-In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose]({{< ref "/docs/installation/docker_compose" >}}). If you are specifically looking for a quickstart for Anchore Engine OSS alone, please jump to [Anchore Engine Quickstart]({{< ref "/docs/engine/quickstart" >}}).
+In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose](https://docs.docker.com/compose/install/). If you are specifically looking for a quickstart for Anchore Engine OSS alone, please jump to [Anchore Engine Quickstart]({{< ref "/docs/engine/quickstart" >}}).
 
 **Note:** If your intent is to gain a deeper understanding of Anchore and its concepts, we recommend navigating to the [Overview]({{< ref "/docs/overview" >}}) section prior to conducting an [installation]({{< ref "/docs/installation" >}}) of Anchore Enterprise.
 
