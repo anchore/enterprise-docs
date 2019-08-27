@@ -1,3 +1,4 @@
 [
-  {"version": "2.0", "current": true}
+  {"version": "2.0", "current": false},
+  {"version": "2.1", "current": true}
 ]
