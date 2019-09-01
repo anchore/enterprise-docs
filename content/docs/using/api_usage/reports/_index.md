@@ -17,351 +17,233 @@ To access it in a running Anchore Enterprise deployment, open http://\<servernam
 
 ![Reports GraphQL Schema](ReportsGraphiQLSchema.png)
 
-More importantly, you can test any of the supported queries. Here is an example of a query for available metrics in the system. Happy querying!
+In addition to being able to see the API docs, GraphiQL is handy for exploring and constructing queries supported by the backing API. Here is an example of a query for available metrics in the system. Happy querying!
 
 ![Reports GraphQL Example](ReportsGraphiQLExample.png)
 
 #### Command line using curl 
 
-You can also use curl to send HTTP requests to Anchore Enterprise Reports API
-
-- Get all the metric values
+You can also use curl to send HTTP requests to Anchore Enterprise Reports API. To view the schema
 
 ```bash
-$ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graphql?query=%7BmetricData%7BpageInfo%7BnextToken%20count%7Dresults%7BmetricId%20value%20collectedAt%7D%7D%7D"
+$ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graphql?query=%7B__schema%7BqueryType%7Bname%20description%20fields%7Bname%20description%20args%7Bname%20description%20type%7Bname%20kind%7D%7D%7D%7D%7D%7D%0A"
+``` 
+
+### Pagination
+
+Depending on the size of data set (i.e. number of tags, images etc in the system) results of a query could be very large. Reports service implements pagination for all queries to better handle the volume of the results and respond to the clients within a reasonable amount of time.
+
+Structure of every query contains a metadata object called `pageInfo`
 ```
-```json
+{
+  imagesByVulnerability {
+    pageInfo {
+      nextToken
+      count
+    }
+    results {
+      ...
+    }
+  }
+}
+``` 
+
+Including this object in the query is recommended even though its optional. It instructs the Reports service to return metadata about the response. Response structure mirrors the query structure and should contain the requested metadata  
+```
 {
   "data": {
-    "metricData": {
+    "imagesByVulnerability": {
       "pageInfo": {
-        "nextToken": "MjAxOS0wNC0yNlQxODozOTozNC4xNzA5Njd8dnVsbmVyYWJpbGl0aWVzLnRhZ3MuY3VycmVudC51bmtub3du",
+        "nextToken": "Q1ZFLTIwMTYtMTAyNjY=",
         "count": 1000
       },
       "results": [
-        {
-          "metricId": "vulnerabilities.tags.current.unknown",
-          "value": "55",
-          "collectedAt": "2019-04-30T20:48:28.482534"
-        },
-        {
-          "metricId": "vulnerabilities.tags.current.negligible",
-          "value": "402",
-          "collectedAt": "2019-04-30T20:48:28.482534"
-        },
-        {
-          "metricId": "vulnerabilities.tags.current.medium",
-          "value": "1560",
-          "collectedAt": "2019-04-30T20:48:28.482534"
-        },
-        {
-          "metricId": "vulnerabilities.tags.current.low",
-          "value": "576",
-          "collectedAt": "2019-04-30T20:48:28.482534"
-        },
         ...
       ]
     }
   }
-}
+}      
 ```
 
-- Get a list of repositories and a count of tags within each repository that resulted in successful policy evaluation check 
-
-```bash
-$ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graphql?query=%7BpolicyEvaluationsByTag(filter%3A%7BpolicyEvaluation%3A%7Bresult%3APass%2Creason%3Apolicy_evaluation%7D%7D)%7BpageInfo%7BnextToken%20count%7Dresults%7BregistryName%20repositories%7BrepositoryName%20tagsCount%7D%7D%7D%7D"
+A non-null `nextToken` indicates that results are paginated. To get the next page of results, fire the same query along with `nextToken` as a query parameter
 ```
-```json
 {
-  "data": {
-    "policyEvaluationsByTag": {
-      "pageInfo": {
-        "nextToken": null,
-        "count": 3
-      },
-      "results": [
-        {
-          "registryName": "docker.io",
-          "repositories": [
-            {
-              "repositoryName": "library/ubuntu",
-              "tagsCount": 16
-            },
-            {
-              "repositoryName": "library/debian",
-              "tagsCount": 4
-            },
-            {
-              "repositoryName": "library/alpine",
-              "tagsCount": 1
-            }
-          ]
-        }
-      ]
+  imagesByVulnerability(nextToken: "Q1ZFLTIwMTYtMTAyNjY=") {
+    pageInfo {
+      nextToken
+      count
+    }
+    results {
+      ...
     }
   }
 }
-```
+```       
 
-- Get a list of repositories and a count of tags within each repository that are affected by a `High` severity vulnerability
+### Some useful queries 
 
-```bash
-$ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graphql?query=%7BtagsByVulnerability(filter%3A%7Bvulnerability%3A%7Bseverity%3AHigh%7D%7D)%7BpageInfo%7BnextToken%20count%7Dresults%7BvulnerabilityId%20links%20registries%7BregistryName%20repositories%7BrepositoryName%20tagsCount%7D%7D%7D%7D%7D%0A"
-``` 
-```json
-{
-  "data": {
-    "tagsByVulnerability": {
-      "pageInfo": {
-        "nextToken": null,
-        "count": 3
-      },
-      "results": [
-        {
-          "vulnerabilityId": "CVE-2019-9924",
-          "links": [
-            "https://security-tracker.debian.org/tracker/CVE-2019-9924"
-          ],
-          "registries": [
-            {
-              "registryName": "docker.io",
-              "repositories": [
-                {
-                  "repositoryName": "library/node",
-                  "tagsCount": 10
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vulnerabilityId": "CVE-2019-9169",
-          "links": [
-            "https://security-tracker.debian.org/tracker/CVE-2019-9169"
-          ],
-          "registries": [
-            {
-              "registryName": "docker.io",
-              "repositories": [
-                {
-                  "repositoryName": "library/node",
-                  "tagsCount": 1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vulnerabilityId": "CVE-2019-9003",
-          "links": [
-            "https://security-tracker.debian.org/tracker/CVE-2019-9003"
-          ],
-          "registries": [
-            {
-              "registryName": "docker.io",
-              "repositories": [
-                {
-                  "repositoryName": "library/node",
-                  "tagsCount": 2
-                }
-              ]
-            }
-          ]
+#### Vulnerability centric queries
+
+- List vulnerabilities of a specific severity. And include all the images, currently or historically mapped to a tag, affected by each vulnerability 
+    
+    Use the query's `filter` argument for specifying the conditionality          
+    ```
+    {
+      imagesByVulnerability(filter: {vulnerability: {severity: Critical}, tag: {currentOnly: false}}) {
+        pageInfo {
+          nextToken
         }
-      ]
-    }
-  }
-}
-```
-- Get Anchore Enterprise Reports GraphQL schema (introspection)
-
-```bash
-$ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graphql?query=%7B__schema%7BqueryType%7Bname%20description%20fields%7Bname%20description%20args%7Bname%20description%20type%7Bname%20kind%7D%7D%7D%7D%7D%7D%0A"
-
-```
-```json
-{
-  "data": {
-    "__schema": {
-      "queryType": {
-        "name": "Query",
-        "description": "Anchore Enterprise Reporting GraphQL Interface",
-        "fields": [
-          {
-            "name": "tagsByVulnerability",
-            "description": "Returns a list of unique vulnerabilities and a hierarchical view of tags affected by each vulnerability",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "name": "VulnerabilityQueryFilter",
-                  "kind": "INPUT_OBJECT"
-                }
-              }
-            ]
-          },
-          {
-            "name": "imagesByVulnerability",
-            "description": "Returns a list of unique vulnerabilities and the images affected by each vulnerability",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "name": "VulnerabilityQueryFilter",
-                  "kind": "INPUT_OBJECT"
-                }
-              }
-            ]
-          },
-          {
-            "name": "artifactsByVulnerabilities",
-            "description": "Returns a list of unique vulnerabilities and the artifacts affected by each vulnerability",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "name": "VulnerabilityQueryFilter",
-                  "kind": "INPUT_OBJECT"
-                }
-              }
-            ]
-          },
-          {
-            "name": "policyEvaluationsByTag",
-            "description": "Returns policy evaluations for tags in a hierarchical view",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "name": "PolicyEvaluationsQueryFilter",
-                  "kind": "INPUT_OBJECT"
-                }
-              }
-            ]
-          },
-          {
-            "name": "metrics",
-            "description": "Lists the available metrics in the system",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              }
-            ]
-          },
-          {
-            "name": "metricData",
-            "description": "Lists metric data points in a chronologically descending order",
-            "args": [
-              {
-                "name": "limit",
-                "description": "Number of items per page",
-                "type": {
-                  "name": "Int",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "nextToken",
-                "description": "Opaque token for paginating results",
-                "type": {
-                  "name": "String",
-                  "kind": "SCALAR"
-                }
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "name": "MetricDataFilter",
-                  "kind": "INPUT_OBJECT"
-                }
-              }
-            ]
+        results {
+          vulnerabilityId
+          links
+          imagesCount
+          images {
+            digest
           }
-        ]
+        }
       }
     }
-  }
-}
-```
+    ```
+    To get more details such as tag mappings for the image, add the relevant attributes from the schema to the body of the query.       
+    
+
+- List vulnerabilities detected in the last x hours. And include all the images, currently or historically mapped to a tag, affected by each vulnerability    
+    
+    Use `vulnerability` filter's `after` and `before` attributes for specifying a time window. They accept a UTC timestamp  
+    
+    ```
+    {
+      imagesByVulnerability(filter: {vulnerability: {after: "2019-08-01T00:00:00"}, tag: {currentOnly: false}}) {
+        pageInfo {
+          nextToken
+        }
+        results {
+          vulnerabilityId
+          images {
+            digest
+          }
+        }
+      }
+    }
+    ```
+
+- Given a vulnerability ID, list all the artifacts affected by that vulnerability. And include all the images, currently or historically mapped to a tag, containing the said artifact  
+    ```
+    {
+      artifactsByVulnerability(filter: {vulnerability: {id: "CVE-2019-15213"}, tag: {currentOnly: false}}) {
+        pageInfo {
+          nextToken
+        }
+        results {
+          vulnerabilityId
+          links
+          artifactsCount
+          artifacts {
+            artifactName
+            artifactVersion
+            artifactType
+            severity
+            images {
+              digest
+            }
+          }
+        }
+      }
+    }
+    ```
+  
+#### Policy evaluation centric queries
+
+- Given a repository, get the policy evaluation results for all the tags currently mapped to an image (historical tag-image mappings excluded) using the active policy bundle in its current state 
+    ```
+    {
+      policyEvaluationsByTag(filter: {registry: {name: "docker.io"}, repository: {name: "library/node"}}) {
+        pageInfo {
+          nextToken
+        }
+        results {
+          repositories {
+            tagsCount
+            tags {
+              tagName
+              imageDigest
+              evaluations {
+                result
+                reason
+              }
+            }
+          }
+        }
+      }
+    }
+    ```
+
+- Given a tag, get the policy evaluation history. Include policy evaluations encompassing updates to the tag and the active policy bundle
+    
+    Reports service defaults to the "current" state for computing results. To compute results across historic state, a few `filter` knobs have to be turned
+    * `tag` -> `currentOnly` set to `false` instructs the service to include all, current and historic, image tag mappings 
+    * `policyEvaluation` -> `latestOnly` set to `false` instructs the service to include all, current and historic, policy evaluations
+    * `policyBundle` -> `active` set to `false` instructs service to include all, current and historic, active policy bundles         
+
+    ```
+    {
+      policyEvaluationsByTag(filter: {registry: {name: "docker.io"}, repository: {name: "library/node"}, tag: {name: "latest", currentOnly: false}, policyEvaluation: {latestOnly: false}, policyBundle: {active: false}}) {
+        pageInfo {
+          nextToken
+        }
+        results {
+          repositories {
+            tags {
+              imageDigest
+              detectedAt
+              current
+              evaluations {
+                result
+                reason
+                lastEvaluatedAt
+                policyBundle {
+                  bundleId
+                  bundleDigest
+                }
+                latest
+              }
+            }
+          }
+        }
+      }
+    }
+    ``` 
+
+#### Metric centric queries
+  
+- List all the available metrics 
+    ```
+    {
+      metrics {
+        pageInfo {
+          nextToken
+        }
+        results {
+          id
+          name
+          description
+          metricType
+        }
+      }
+    }
+    ```
+
+- Given a metric ID, list values for that metric within a period of time. Useful for plotting changes over a timescale
+    ```
+    {
+      metricData(filter: {metricId: "vulnerabilities.tags.all.critical", start: "2019-08-01T00:00:00", end: "2019-09-01T00:00:00"}) {
+        pageInfo {
+          nextToken
+        }
+        results {
+          collectedAt
+          value
+        }
+      }
+    }
+    ```
