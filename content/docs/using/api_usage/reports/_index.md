@@ -33,7 +33,7 @@ $ curl -u <username:password> -X POST "http://<servername:port>/v1/reports/graph
 
 Depending on the size of data set (i.e. number of tags, images etc in the system) results of a query could be very large. Reports service implements pagination for all queries to better handle the volume of the results and respond to the clients within a reasonable amount of time.
 
-Structure of every query contains a metadata object called `pageInfo`
+Structure of the query contains a metadata object called `pageInfo`. It is optional but we recommend adding it to all queries
 ```
 {
   imagesByVulnerability {
@@ -48,7 +48,7 @@ Structure of every query contains a metadata object called `pageInfo`
 }
 ``` 
 
-Including this object in the query is recommended even though its optional. It instructs the Reports service to return metadata about the response. Response structure mirrors the query structure and should contain the requested metadata  
+The response may return an opaque token or a `null` value for `nextToken`     
 ```
 {
   "data": {
@@ -65,7 +65,7 @@ Including this object in the query is recommended even though its optional. It i
 }      
 ```
 
-A non-null `nextToken` indicates that results are paginated. To get the next page of results, fire the same query along with `nextToken` as a query parameter
+A non-null `nextToken` indicates that results are paginated. To get the next page of results, fire the same query along with the `nextToken` from the last response as a query parameter
 ```
 {
   imagesByVulnerability(nextToken: "Q1ZFLTIwMTYtMTAyNjY=") {
@@ -86,7 +86,7 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
 
 - List vulnerabilities of a specific severity. And include all the images, currently or historically mapped to a tag, affected by each vulnerability 
     
-    Use the query's `filter` argument for specifying the conditionality          
+    Use the query's `filter` argument for specifying the conditionality. Reports service defaults to the "current" image-tag mapping for computing results. To compute results across all image-tag mappings - current and historic,  set the `tag` filter's `currentOnly` attribute to `false`. Query for vulnerabilities of Critical severity:           
     ```
     {
       imagesByVulnerability(filter: {vulnerability: {severity: Critical}, tag: {currentOnly: false}}) {
@@ -109,7 +109,7 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
 
 - List vulnerabilities detected in the last x hours. And include all the images, currently or historically mapped to a tag, affected by each vulnerability    
     
-    Use `vulnerability` filter's `after` and `before` attributes for specifying a time window. They accept a UTC timestamp  
+    Use `vulnerability` filter's `after` and `before` attributes for specifying a time window using UTC timestamps. Query for vulnerabilities detected after/since August 1st 2019:   
     
     ```
     {
@@ -127,7 +127,9 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
     }
     ```
 
-- Given a vulnerability ID, list all the artifacts affected by that vulnerability. And include all the images, currently or historically mapped to a tag, containing the said artifact  
+- Given a vulnerability ID, list all the artifacts affected by that vulnerability. And include all the images, currently or historically mapped to a tag, containing the said artifact 
+
+    Use `vulnerability` filter's `id` attribute for specifying a vulnerability identifier. Query for vulnerability ID CVE-2019-15213:
     ```
     {
       artifactsByVulnerability(filter: {vulnerability: {id: "CVE-2019-15213"}, tag: {currentOnly: false}}) {
@@ -154,7 +156,10 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
   
 #### Policy evaluation centric queries
 
-- Given a repository, get the policy evaluation results for all the tags currently mapped to an image (historical tag-image mappings excluded) using the active policy bundle in its current state 
+- Given a repository, get the policy evaluation results for all the tags currently mapped to an image using the active policy bundle
+
+    Use `registry` and `repository` filters for narrowing the results down. Query for docker.io registry and library/node repository:
+
     ```
     {
       policyEvaluationsByTag(filter: {registry: {name: "docker.io"}, repository: {name: "library/node"}}) {
@@ -183,8 +188,8 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
     Reports service defaults to the "current" state for computing results. To compute results across historic state, a few `filter` knobs have to be turned
     * `tag` -> `currentOnly` set to `false` instructs the service to include all, current and historic, image tag mappings 
     * `policyEvaluation` -> `latestOnly` set to `false` instructs the service to include all, current and historic, policy evaluations
-    * `policyBundle` -> `active` set to `false` instructs service to include all, current and historic, active policy bundles         
-
+    * `policyBundle` -> `active` set to `false` instructs service to include all, current and historic, active policy bundles
+        
     ```
     {
       policyEvaluationsByTag(filter: {registry: {name: "docker.io"}, repository: {name: "library/node"}, tag: {name: "latest", currentOnly: false}, policyEvaluation: {latestOnly: false}, policyBundle: {active: false}}) {
@@ -234,6 +239,8 @@ A non-null `nextToken` indicates that results are paginated. To get the next pag
     ```
 
 - Given a metric ID, list values for that metric within a period of time. Useful for plotting changes over a timescale
+    
+    Query for vulnerabilities.tags.all.critical metric between 1st August and 1st September 2019:
     ```
     {
       metricData(filter: {metricId: "vulnerabilities.tags.all.critical", start: "2019-08-01T00:00:00", end: "2019-09-01T00:00:00"}) {
