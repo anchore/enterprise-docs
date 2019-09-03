@@ -91,3 +91,24 @@ SAML response presented at login based on the rules covered above, then the user
 Thus, changes to the IDP configuration record in Anchore will affect subsequent log-ins and initializations of users. Using attributes
 instead of defaults will impact the next logins as those attributes must be present for the user to login, but will not re-initialize the user.
 
+## Examples
+
+## Identity Mapping Example Configurations
+
+Examples of configuration values for a single IDP configuration in Anchore to achieve different behavior:
+
+1. All SSO users in one account with the same `read-write` permissions:
+    * default_account = 'account'
+    * default_role = 'read-write'
+
+1. SSO users in accounts managed by the IDP property, for example a 'groups' property:
+    * `default_account = null`
+    * `default_role = null`
+    * `idp_account_attribute = "primary_group"`
+    * `idp_role_attribute = "roles"`    
+    * Will initialize the user with the roles specified in the 'roles' attribute for the accounts in the 'primary_group' attribute.
+        * E.g. if 'primary_group' = ['testers'], and 'roles' = ['read-only'] for a user, _testuser@mycompany.com_
+        * _testuser@mycompany.com_ will be initialized at login as username = _testuser@mycompany.com_ in account _testers_ with role _read-only_
+        * Because the account is from an attribute, _testuser2@mycompany.com_ might have 'primary_group' = ['security_engineers'] and 
+        thus be initialized in a different account in Anchore.    
+

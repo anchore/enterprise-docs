@@ -90,11 +90,6 @@ roles. This may be a multi-value property. This property and Default Role are mu
 * **Require Signed Assertions** - If true, require the individual assertions in the SAML response to be signed by the IDP. 
 * **Require Signed Response** - If true, require the SAML response document to be signed.
 
-For configuration examples see:
-
-* [Okta]({{< ref "/docs/overview/sso/okta">}})
-* [KeyCloak]({{< ref "/docs/overview/sso/keycloak">}})
-
 
 ### Using SAML Attributes to Initialize Users and Account in Anchore
 
