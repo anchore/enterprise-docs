@@ -15,7 +15,7 @@ weight: 4
 
 Added in Anchore Enterprise v2.2
 
-Anchore Enterprise includes Notifications service to alert external endpoints about Anchore Engine activity. Services that make up Anchore Engine and Anchore Enterprise generate events to record significant activity such as an update in the policy evaluation result or vulnerabilities for a tag, or an error analyzing an image. This service provides a mechanism to selectively notify events of interest to supported external endpoints. The actual notification itself depends on the endpoint - a formatted message for Slack, email, MS Teams and webhook endpoints, and tickets in a project for GitHub and Jira endpoints.   
+Anchore Enterprise includes Notifications service to alert external endpoints about Anchore Engine activity. Services that make up Anchore Engine and Anchore Enterprise generate events to record significant activity such as an update in the policy evaluation result or vulnerabilities for a tag, or an error analyzing an image. This service provides a mechanism to selectively notify events of interest to supported external endpoints. The actual notification itself depends on the endpoint - formatted message to Slack, email and MS Teams endpoints, tickets in GitHub and Jira endpoints and json payload to webhook endpoint   
 
 ### Installation
 
@@ -64,30 +64,67 @@ In an Anchore Enterprise RBAC enabled deployment the table below lists the requi
 | delete an endpoint configuration and associated selectors | deletetNotificationEndpointConfiguration | Read Write |
 
 
-### Concepts
-
-Notifications service maintains the status and connection information for external tools using Anchore Engine's persistence layer. They are also referred by the service as 'Endpoint Status' and 'Endpoint Configuration' 
-
-More importantly the service exposes a mechanism to select specific events and route their notifications to endpoint configurations. To understand more, skip to Selector section      
+### Concepts 
  
 #### Endpoint Status
 
-Reflects availability of an endpoint such as Slack, GitHub, Jira, MS Teams, email or webhook for the entire deployment. By default all the endpoint statuses are enabled out of the box. But the administrator can disable an endpoint preventing notifications from going out to all configurations of that specific endpoint. This is a system-wide setting that can only be updated by the administrator account and read only for all the remaining accounts 
+All endpoints in the Notifications service have a switch that can be toggled enabled/disabled. Endpoint status reflects state of this switch. By default status for all endpoints is enabled out of the box. Setting endpoint status to disabled stops all notifications from going out to any configurations of that specific endpoint. This is a system-wide setting that can only be updated by the admin account. It is read-only for remaining accounts 
 
 #### Endpoint Configuration
 
-Connection information for an endpoint. Each endpoint can have multiple configurations. This is an account wide setting   
+Connection information such as URL, user credentials etc. for an endpoint. The service allows multiple configurations per endpoint. Endpoint configurations are scoped to the account   
 
 #### Selector
 
-- Anatomy of an event
-- Selector fields explained
+Notifications services provides a mechanism to selectively choose events and route the corresponding notifications to a configured endpoint. This is achieved using a 'Selector' - a collection of filter criteria that process against an event and output a match or no-match result. If the result is a match, a notification message relating to the event is sent out. 
+
+To understand this better, lets take a closer look at events
+
+TODO available events api output here
+
+##### Scope
+
+Allowed values: `account`, `global`
+
+All events are scoped to the account responsible for triggering the event. This includes even system generated events which are associated with a special account. `account` scope ensures that events associated with your account are matched. `global` scope matches all events in the system and is restricted only to admin account, non-admin account users cannot create `global` scoped selector     
+
+##### Level 
+
+Allowed values: `info`, `error`, `*`
+
+`info` matches informational events such as policy evaluation or vulnerabilities update, image analysis completion etc. `error` matches failed attempts such as image analysis failure. `*` will match all events
+
+##### Type
+
+TODO explain the type field, this is the important one 
+
+##### Resource type
+
+Allowed values: `*`, `image_tag` 
+
+`*` matches events associated with any resource and so on. TODO fill some words
+
+##### Useful combinations
+
+Here is a list 
+
+| Notifications for | Scope | Level | Type | Resource Type |
+| :---------------- | :---- | :---- | :--- | :------------ |
+| Policy evaluation and vulnerabilities updates| `account` | `*` | `user.checks.*` | `*` |
+| User errors  | `account` | `error` | `user.*` | `*` |
+| User infos | `account` | `info` | `user.*` | `*` |
+| Everything user related | `account` | `*` | `user.*` | `*` |  
+| System errors | `account` | `error` | `system.*` | `*` |
+| System infos | `account` | `info` | `system.*` | `*` |
+| Everything system related | `account` | `*` | `system.*` | `*` |
+| All | `account` | `*` | `*` | `*` |
+| All for every account (admin account only) | `global` | `*` | `*` | `*` |
 
 
 ### See it in action
 
 To learn more about configuring Notifications service in the Enterprise UI go to [Notifications]({{< ref "/docs/using/ui_usage/reports" >}})             
 
-For using the API directly refer to <API Access link here> 
+For using the API directly refer to <TODO API Access link here> 
 
 
