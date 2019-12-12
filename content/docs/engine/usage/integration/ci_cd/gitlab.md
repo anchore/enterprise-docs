@@ -4,135 +4,81 @@ linkTitle: "Gitlab"
 weight: 4
 ---
 
-## Introduction
-
-For most CI/CD systems, Anchore Integration follows a similar model:
-
-![alt text](../ci-cd.png)
-
-1. Developers commit code into source control system
-2. CI / CD platform builds container image
-3. CI /CD platform pushes container image to staging registry
-4. CI / CD calls Anchore to Analyze container image
-5. Anchore Passes or Fails the image based on the policy mapped to the image
-6. CI / CD performs automated tests
-7. If the container passes automated tests and policy evaluation the container image is pushed to the production registry.
-
 ### Adding Anchore Scanning to Gitlab
 
-There are two different solutions for adding Anchore Engine image scanning to your GitLab CI/CD pipelines. The 'on premises' solution requires a functional installation of Anchore Engine running on a system that is accessible from your GitLab runners. The 'integrated' solution allows you to run Anchore Engine directly on your GitLab docker runner and utilizes a pre-populated vulnerability database image. This solution does not require any external systems.
+There are two different solutions for adding Anchore Engine image scanning to your GitLab CI/CD pipelines. The 'on premises' solution requires a functional installation of Anchore Engine running on a system that is accessible from your GitLab runners. The 'integrated' solution allows you to run Anchore Engine directly on your GitLab docker runner and utilizes a pre-populated vulnerability database image. This solution does not require any external systems. 
 
 A container scanning job can be added to the CI/CD pipeline to allow any image to be scanned for vulnerabilities and policy compliance.
 
 #### Integrated Solution:
 
-This sample pipeline runs directly on a GitLab runner, including shared runners on Gitlab.com
+This sample pipeline runs directly on a GitLab runner, including shared runners on gitlab.com
 
 The Docker executor is required for this job, as it utilizes the official Anchore Engine container.
 
-A fully functional pipeline can be viewed at gitlab.com
+A fully functional pipeline can be viewed at [gitlab.com/anchore/gitlab-demo](https://gitlab.com/anchore/gitlab-demo/blob/master/.gitlab-ci.yml)
 
-To be a thorough as possible, this document will provide an entire Docker build/scan/publish pipeline. This is just one example of a pipeline utilizing the integrated Anchore Engine solution, users are free to tweak it to their needs. The 'container_scan' job is responsible for the actual Anchore Engine image scanning, the only requirement of this job is that the image to be scanned is pushed to the GitLab registry.
-
-The example pipeline is shown below and is attached at the bottom of this page named anchore-integrated-gitlab.txt
+To be a thorough as possible, this document will provide an entire Docker build/scan/publish pipeline. This is just one example of a pipeline utilizing the integrated Anchore Engine solution, users are free to tweak it to their needs. The 'container_scan' job is responsible for the actual Anchore Engine image scanning, the only requirement of this job is that the image to be scanned is pushed to the GitLab registry. 
 
 ```
 variables:
   IMAGE_NAME: ${CI_REGISTRY_IMAGE}/build:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
 
 stages:
-  - build
-  - scan
-  - publish
+- build
+- scan
+- publish
 
 container_build:
   stage: build
   image: docker:stable
   services:
-    - docker:stable-dind
+  - docker:stable-dind
 
   variables:
     DOCKER_DRIVER: overlay2
 
   script:
-    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "${CI_REGISTRY}"
-    - docker pull "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" || true
-    - docker build --cache-from "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" -t "$IMAGE_NAME" .
-    - docker push "$IMAGE_NAME"
+  - echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin "${CI_REGISTRY}"
+  - docker build -t "$IMAGE_NAME" .
 
-container_scan:
+container_scan_service:
   stage: scan
-  image:
-    name: anchore/anchore-engine:v0.3.0
-    entrypoint: [""]
-  services:
-    - name: anchore/engine-db-preload:v0.3.0
-      alias: anchore-db
-
   variables:
+    ANCHORE_CLI_URL: "http://anchore-engine:8228/v1"
     GIT_STRATEGY: none
-    ANCHORE_FAIL_ON_POLICY: "false"
-    ANCHORE_TIMEOUT: 500
+  image: docker.io/anchore/inline-scan:v0.6.0
+  services:
+  - name: docker.io/anchore/inline-scan:v0.6.0
+    alias: anchore-engine
+    command: ["start"]
 
   script:
-    - |
-        curl -o /tmp/anchore_ci_tools.py https://raw.githubusercontent.com/anchore/ci-tools/v0.3.0/scripts/anchore_ci_tools.py
-        chmod +x /tmp/anchore_ci_tools.py
-        ln -s /tmp/anchore_ci_tools.py /usr/local/bin/anchore_ci_tools
-    - anchore_ci_tools --setup
-    - anchore-cli --u admin --p foobar registry add "$CI_REGISTRY" gitlab-ci-token "$CI_JOB_TOKEN" --skip-validate
-    - anchore_ci_tools --analyze --report --image "$IMAGE_NAME" --timeout "$ANCHORE_TIMEOUT"
-    - |
-        if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ]; then
-          anchore-cli evaluate check "$IMAGE_NAME"
-        else
-          set +o pipefail
-          anchore-cli evaluate check "$IMAGE_NAME" | tee /dev/null
-        fi
+  - source /opt/rh/rh-python36/enable
+  - anchore-cli system wait
+  - anchore-cli registry add "$CI_REGISTRY" gitlab-ci-token "$CI_JOB_TOKEN" --skip-validate 
+  - anchore_ci_tools.py -a -r --timeout 500 --image $IMAGE_NAME
 
   artifacts:
     name: ${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}
     paths:
     - anchore-reports/*
 
-anchore_reports:
-  stage: publish
-  image: alpine:latest
-  dependencies:
-    - container_scan
-
-  variables:
-    GIT_STRATEGY: none
-
-  script:
-    - apk add jq
-    - |
-        echo "Parsing anchore reports."
-        printf "\n%s\n" "The following OS packages are installed on ${IMAGE_NAME}:"
-        jq '[.content | sort_by(.package) | .[] | {package: .package, version: .version}]' anchore-reports/image-content-os-report.json || true
-        printf "\n%s\n" "The following vulnerabilites were found on ${IMAGE_NAME}:"
-        jq '[.vulnerabilities | group_by(.package) | .[] | {package: .[0].package, vuln: [.[].vuln]}]' anchore-reports/image-vuln-report.json || true
-
 container_publish:
   stage: publish
   image: docker:stable
   services:
-    - docker:stable-dind
+  - docker:stable-dind
 
   variables:
     DOCKER_DRIVER: overlay2
     GIT_STRATEGY: none
 
   script:
-    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "${CI_REGISTRY}"
-    - docker pull "$IMAGE_NAME"
-    - docker tag "$IMAGE_NAME" "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
-    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
-    - |
-        if [ "$CI_COMMIT_REF_NAME" == "master" ]; then
-          docker tag "$IMAGE_NAME" "${CI_REGISTRY_IMAGE}:latest"
-          docker push "${CI_REGISTRY_IMAGE}:latest"
-        fi
+  - echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin "${CI_REGISTRY}"
+  - docker pull "$IMAGE_NAME"
+  - docker tag "$IMAGE_NAME" "${CI_REGISTRY_IMAGE}:latest"
+  - docker push "${CI_REGISTRY_IMAGE}:latest"
 ```
 
 #### On Premises Solution:
