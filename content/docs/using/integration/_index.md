@@ -4,9 +4,8 @@ linkTitle: "Integration"
 weight: 5
 ---
 
-## Introduction
-
-There are several different ways to integrate with Anchore Engine: 
+## Integrations that Anchore Supports
 
 - [CI/CD Integration]({{< ref "/docs/using/integration/ci_cd" >}})
 - [Kubernetes Integration]({{< ref "/docs/using/integration/kubernetes" >}})
+- [Image Registry Integrations]({{< ref "/docs/using/integration/container_registries" >}})
