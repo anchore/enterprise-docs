@@ -42,11 +42,6 @@ container_build:
   - echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin "${CI_REGISTRY}"
   - docker build -t "$IMAGE_NAME" .
 
-  artifacts:
-    name: ${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}
-    paths:
-    - anchore-reports/*
-
 container_scan_service:
   stage: scan
   variables:
