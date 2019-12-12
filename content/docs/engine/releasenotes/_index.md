@@ -4,6 +4,8 @@ linkTitle: "Release Notes"
 weight: 7
 ---
 
+* [Anchore Engine Version 0.6.0]({{< ref "/docs/engine/releasenotes/060.md" >}})
+* [Anchore Engine Version 0.5.2]({{< ref "/docs/engine/releasenotes/052.md" >}})
 * [Anchore Engine Version 0.5.1]({{< ref "/docs/engine/releasenotes/051.md" >}})
 * [Anchore Engine Version 0.5.0]({{< ref "/docs/engine/releasenotes/050.md" >}})
 * [Anchore Engine Version 0.4.2]({{< ref "/docs/engine/releasenotes/042.md" >}})
