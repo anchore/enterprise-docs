@@ -21,7 +21,9 @@ Anchore Enterprise includes Notifications service to alert external endpoints ab
 
 Anchore Enterprise Notifications is included with Anchore Enterprise, and is installed by default when deploying a trial quickstart with [Docker Compose]({{< ref "/docs/installation/docker_compose" >}}) or a production deployment [Kubernetes]({{< ref "/docs/installation/helm" >}}).
 
-#### Configuration
+### Configuration
+
+#### Enterprise Notifications Service
 
 The service loads configuration from the `notifications` section of the config.yaml. Following is a snippet of the configuration
 
@@ -49,9 +51,8 @@ services:
 
 > NOTE: Any changes to the configuration requires a restart of the service for the updates to take effect
 
-#### Permissions
+#### RBAC Permissions
 
-TODO May be move this to API access
 In an Anchore Enterprise RBAC enabled deployment the table below lists the required actions and containing roles     
 
 | Description | Action | Roles |
@@ -65,7 +66,7 @@ In an Anchore Enterprise RBAC enabled deployment the table below lists the requi
 
 
 ### Concepts 
- 
+
 #### Endpoint Status
 
 All endpoints in the Notifications service have a switch that can be toggled enabled/disabled. Endpoint status reflects state of this switch. By default status for all endpoints is enabled out of the box. Setting endpoint status to disabled stops all notifications from going out to any configurations of that specific endpoint. This is a system-wide setting that can only be updated by the admin account. It is read-only for remaining accounts 
@@ -76,39 +77,41 @@ Connection information such as URL, user credentials etc. for an endpoint. The s
 
 #### Selector
 
-Notifications services provides a mechanism to selectively choose events and route the corresponding notifications to a configured endpoint. This is achieved using a 'Selector' - a collection of filter criteria that process against an event and output a match or no-match result. If the result is a match, a notification message relating to the event is sent out. 
+The services provides a mechanism to selectively choose notifications and route them to a configured endpoint. This is achieved using a 'Selector' - a collection of filtering criteria. Each event is processed against a Selector to determine whether it is a match or not. If the Selector matches the event a notification is sent to the configured endpoint by the service
 
-To understand this better, lets take a closer look at events
+For a quick list of useful notifications and associated Selector configurations, skip to [Quick Selection]({{< ref "/docs/overview/notifications#quick-selection" >}})   
 
-TODO available events api output here
+Selector encapsulates four distinct filtering criteria as of v2.2 - scope, level, type and resource type explained below. Some of them allow a limited set of values and others wildcards. Value for each criteria has to be set for the matching to compute correctly
 
 ##### Scope
 
 Allowed values: `account`, `global`
 
-All events are scoped to the account responsible for triggering the event. This includes even system generated events which are associated with a special account. `account` scope ensures that events associated with your account are matched. `global` scope matches all events in the system and is restricted only to admin account, non-admin account users cannot create `global` scoped selector     
+Events are scoped to the account responsible for the event creation. `account` scope matches events associated with user's account. `global` scope matches events of any and all users. `global` scope is limited to admin account only, non-admin account users can only specify `account` as the scope      
 
 ##### Level 
 
 Allowed values: `info`, `error`, `*`
 
-`info` matches informational events such as policy evaluation or vulnerabilities update, image analysis completion etc. `error` matches failed attempts such as image analysis failure. `*` will match all events
+Events are associated with a level that indicates whether the underlying activity is informational or resulted in an error. `info` matches informational events such as policy evaluation or vulnerabilities update, image analysis completion etc. `error` matches failures such as image analysis failure. `*` will match all events
 
 ##### Type
 
-TODO explain the type field, this is the important one 
+Allowed values: strings with or without regular expressions
 
-##### Resource type
+Event types have a structured format `<category>.<subcategory>.<event>`. Thus, `*` matches all types of events. Category is indicative of the origin of the event - `system.*` matches all system events, `user.*` matches events that are relevant to individual consumption, and omitting an asterisk will do an exact match. See the GET /event_types route definition in the engine's external API for the list of event types.
 
-Allowed values: `*`, `image_tag` 
+##### Resource Type
 
-`*` matches events associated with any resource and so on. TODO fill some words
+Allowed values: `*`, `image_digest`, `image_tag`, `image_reference`, `repository`, `feeds`, `feed`, `feed_group`, `*` 
 
-##### Useful combinations
+In most cases events are generated during an operation involving a resource. Resource type is metadata of that resource. For instance `image_tag` is the resource type in a policy evaluation update event. `*` matches all resource types if you are uncertain what resource type to use
 
-Here is a list 
+##### Quick Selection
 
-| Notifications for | Scope | Level | Type | Resource Type |
+Selector configurations for notifying a few interesting events      
+
+| Receive | Scope | Level | Type | Resource Type |
 | :---------------- | :---- | :---- | :--- | :------------ |
 | Policy evaluation and vulnerabilities updates| `account` | `*` | `user.checks.*` | `*` |
 | User errors  | `account` | `error` | `user.*` | `*` |
@@ -120,11 +123,10 @@ Here is a list
 | All | `account` | `*` | `*` | `*` |
 | All for every account (admin account only) | `global` | `*` | `*` | `*` |
 
-
 ### See it in action
 
-To learn more about configuring Notifications service in the Enterprise UI go to [Notifications]({{< ref "/docs/using/ui_usage/reports" >}})             
+#### Enterprise UI
 
-For using the API directly refer to <TODO API Access link here> 
+To learn more about configuring Notifications service in the Enterprise UI go to [Notifications]({{< ref "/docs/using/ui_usage/reports" >}})             
 
 
