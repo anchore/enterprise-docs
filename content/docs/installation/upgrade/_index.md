@@ -11,6 +11,12 @@ files that are provided along with each release, following the general methods f
 
 This section is intended as a guide for any special instructions and information related to upgrading to specific versions of Enterprise.
 
+### Upgrading from Anchore Enterprise 2.1 to Anchore Enterprise 2.2
+
+Prior to Anchore Engine 0.6.0 omitting the "feeds" section from the configuration or setting feeds.selective_sync.enabled=false in config.yaml would sync vulnerabilities, nvdv2, packages, and 3rd party feeds as well. This could result in sync errors when the feeds are not available in some configurations. In 0.6.0 that behavior has changed and will cause the system to only sync the vulnerabilities and nvdv2 feeds which are always available for all configurations, giving a better experience. If you have removed that configuration or set the selective_sync.enabled=false but want to continue to sync the packages and vulndb feeds, you will need to enable the selective sync and explicitly enable the packages and vulndb feeds in that configuration section.
+
+The upgrade from Anchore Engine version 0.5.2 to version 0.6.0 includes an database schema update which is handled automatically.  However, if your deployment has a large number of images (tens of thousands or more), the upgrade step will take some time (we've observed sub ten minutes) before the upgrade is complete.  As with any upgrade, progress can be tracked by monitoring the anchore catalog service logs.
+
 ### Upgrading from Anchore Enterprise 1.2 to Anchore Enterprise 2.X
 
 Anchore Enterprise 2.X includes all of the services of Enterprise 1.2, plus a new UI Dashboard control, UI LDAP Integration, and an additional element called the Reporting Service. 

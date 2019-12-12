@@ -6,7 +6,7 @@ weight: 6
 
 The anchore-engine is distributed as a [Docker Image](https://hub.docker.com/r/anchore/anchore-engine), which is comprised of smaller micro-services that can be deployed in a single container or scaled out to handle load.
 
-The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example **latest** and **v0.5.0**.
+The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example **latest** and **v0.6.0**.
 
 To retrieve the version of a running anchore-engine the system status command can be run.
 
@@ -16,11 +16,11 @@ To retrieve the version of a running anchore-engine the system status command ca
 ...
 ...
 
-Engine DB Version: 0.0.10
-Engine Code Version: 0.4.2
+Engine DB Version: 0.0.11
+Engine Code Version: 0.5.2
 ```
 
-In this example the anchore-engine is version 0.4.2 and the database schema is version 0.0.10.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
+In this example the anchore-engine is version 0.5.2 and the database schema is version 0.0.11.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
 
 ### Pre-upgrade Procedure
 
