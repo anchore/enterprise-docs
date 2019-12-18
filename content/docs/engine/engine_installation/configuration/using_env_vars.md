@@ -29,7 +29,7 @@ ANCHORE_HOST_ID=myservice1
 ANCHORE_LOG_LEVEL=DEBUG
 ```
 
-The Anchore Engine will check for an environment variable named *ANCHORE_ENV_FILE* if this variable is set the the Anchore Engine will attempt to read a file at the location specified in this variable.
+The Anchore Engine will check for an environment variable named *ANCHORE_ENV_FILE* if this variable is set the Anchore Engine will attempt to read a file at the location specified in this variable.
 
 The Anchore environment file is read before any other Anchore environment variables so any ANCHORE variables passed in the environment will override the values set in the environment file.
 
