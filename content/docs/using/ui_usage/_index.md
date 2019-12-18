@@ -20,3 +20,4 @@ To jump to a particular guide, select from the following below:
 - [LDAP]({{< ref "/docs/using/ui_usage/ldap" >}})
 - [Dashboard]({{< ref "/docs/using/ui_usage/dashboard" >}})
 - [Reports]({{< ref "/docs/using/ui_usage/reports" >}})
+- [System Health]({{< ref "/docs/using/ui_usage/system_health" >}})
