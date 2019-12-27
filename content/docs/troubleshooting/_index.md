@@ -227,3 +227,37 @@ As stated above, if you are running into issues performing certain Anchore opera
 There may be a time when you wish to stop a repository analysis when the analysis is running (e.g., accidentally watching an image with a large number of tags).  There are several steps in the process which can be found under [Removing a Repository and All Images]({{< ref "/docs/engine/usage/cli_usage/repositories/_index.md#removing-a-repository-and-all-images" >}}).
 
 **Note:** Be careful when deleting images. In this flow, Anchore deletes the image, not just the repository/tag combo.  Because of this, deletes may impact more than the expected repository since an image may have tags in multiple repositories or even registries.
+
+
+## Disabling feeds 
+Once you have enabled feeds (nvd,vulndb etc) in the config file and deployed Anchore Engine , the only way to disable feeds is to delete the feed data from the DB (disabling them in the config.yaml file(conf/default_config.yaml) will not delete the existing data from the DB)
+
+The following are the Database commands you need to run to delete feed data from the DB:
+### to delete `nvd` feed from the DB:
+```
+DELETE  FROM feed_data_cpe_vulnerabilities WHERE feed_name='nvd';
+DELETE FROM feed_data_nvd_vulnerabilities ;
+```
+
+### Delete `nvd2` feed from the DB:
+```
+DELETE  FROM feed_data_cpev2_vulnerabilities WHERE feed_name='nvdv2';
+DELETE FROM feed_data_nvdv2_vulnerabilities ;
+```
+
+### Delete `gem` feed from the DB:
+```
+DELETE FROM feed_data_gem_packages ;
+```
+
+### Delete `npm` feed from the DB:
+```
+DELETE FROM feed_data_npm_packages ;
+```
+
+### Delete `vulndb` feed from the DB:
+```
+DELETE FROM feed_data_vulndb_vulnerabilities ;
+```
+
+**Note:** Make sure you have disabled the feeds you want deleted in the config.yaml file (conf/default_config.yaml), otherwise the feed data will be downloaded during the next Anchore Engine feed-sync.
