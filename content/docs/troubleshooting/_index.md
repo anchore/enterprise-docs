@@ -233,29 +233,30 @@ There may be a time when you wish to stop a repository analysis when the analysi
 Once you have enabled feeds (nvd,vulndb etc) in the config file and deployed Anchore Engine , the only way to disable feeds is to delete the feed data from the DB (disabling them in the config.yaml file(conf/default_config.yaml) will not delete the existing data from the DB)
 
 The following are the Database commands you need to run to delete feed data from the DB:
-### to delete `nvd` feed from the DB:
+
+Delete `nvd` feed from the DB:
 ```
 DELETE  FROM feed_data_cpe_vulnerabilities WHERE feed_name='nvd';
 DELETE FROM feed_data_nvd_vulnerabilities ;
 ```
 
-### Delete `nvd2` feed from the DB:
+Delete `nvd2` feed from the DB:
 ```
 DELETE  FROM feed_data_cpev2_vulnerabilities WHERE feed_name='nvdv2';
 DELETE FROM feed_data_nvdv2_vulnerabilities ;
 ```
 
-### Delete `gem` feed from the DB:
+Delete `gem` feed from the DB:
 ```
 DELETE FROM feed_data_gem_packages ;
 ```
 
-### Delete `npm` feed from the DB:
+Delete `npm` feed from the DB:
 ```
 DELETE FROM feed_data_npm_packages ;
 ```
 
-### Delete `vulndb` feed from the DB:
+Delete `vulndb` feed from the DB:
 ```
 DELETE FROM feed_data_vulndb_vulnerabilities ;
 ```
