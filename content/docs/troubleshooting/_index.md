@@ -229,8 +229,8 @@ There may be a time when you wish to stop a repository analysis when the analysi
 **Note:** Be careful when deleting images. In this flow, Anchore deletes the image, not just the repository/tag combo.  Because of this, deletes may impact more than the expected repository since an image may have tags in multiple repositories or even registries.
 
 
-## Disabling feeds 
-Once you have enabled feeds (nvd,vulndb etc) in the config file and deployed Anchore Engine , the only way to disable feeds is to delete the feed data from the DB (disabling them in the config.yaml file(conf/default_config.yaml) will not delete the existing data from the DB)
+## Deleting feed data 
+Once you have enabled feeds (nvd,vulndb etc) in the config file(conf/default_config.yaml) and deployed Anchore Engine , the only way to disable feeds is to delete the feed data from the DB (disabling them in the config.yaml file will not delete the existing data from the DB)
 
 The following are the Database commands you need to run to delete feed data from the DB:
 
@@ -242,7 +242,7 @@ DELETE FROM feed_data_nvd_vulnerabilities ;
 
 Delete `nvd2` feed from the DB:
 ```
-DELETE  FROM feed_data_cpev2_vulnerabilities WHERE feed_name='nvdv2';
+DELETE FROM feed_data_cpev2_vulnerabilities WHERE feed_name='nvdv2';
 DELETE FROM feed_data_nvdv2_vulnerabilities ;
 ```
 
