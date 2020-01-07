@@ -17,4 +17,4 @@ To receive notifications
      * (Optional) username
      * (Optional) password
      * (Optional) use tls to encrypt connection
-2. Create an SMTP endpoint configuration in the Notifications service either via Enterprise UI or the API directly
+2. Create an SMTP endpoint configuration in the Notifications service either via [Enterprise UI]({{< ref "/docs/using/ui_usage/notifications" >}}) or the API directly
