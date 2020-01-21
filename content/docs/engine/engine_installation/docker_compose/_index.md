@@ -12,7 +12,7 @@ In this section, you'll learn how to get up and running with a stand-alone Ancho
 
 The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.
 
-* A stand-alone installation will requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient.  
+* A stand-alone installation will requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient.
 
 
 ### Step 1: Setup installation location
@@ -25,7 +25,7 @@ cd ~/aevolume
 
 ### Step 2: Copy configuration files
 
-Download the latest Anchore Engine container image, which contains the necessary `docker-compose.yaml` and configuration files that will be used for the deployment.
+Download the latest Anchore Engine container image, which contains the necessary `docker-compose.yaml` and configuration files that the deployment requires.
 ```
 # docker pull docker.io/anchore/anchore-engine:latest
 ```
@@ -47,8 +47,8 @@ docker-compose.yaml
 
 ### Step 3: Download and run the containers
 
-Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.  
-NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart 
+Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.
+NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart
 
 ```
 # cd ~/aevolume
@@ -63,14 +63,14 @@ After a few moments (depending on system speed), your Anchore Engine services sh
 ```
 # cd ~/aevolume
 # docker-compose ps
-                Name                               Command               State           Ports         
+                Name                               Command               State           Ports
 -------------------------------------------------------------------------------------------------------
-aevolume_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp              
-aevolume_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp              
+aevolume_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp
+aevolume_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp
 aevolume_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
-aevolume_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
+aevolume_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
+aevolume_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp
+aevolume_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
 ```
 
 You can run a command to get the status of the Anchore Engine services:
@@ -93,35 +93,35 @@ Engine Code Version: 0.4.0
 ```
 # cd ~/aevolume
 # docker-compose exec engine-api anchore-cli system feeds list
-Feed                   Group                  LastSync                           RecordCount        
-vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457                
-vulnerabilities        alpine:3.4             2018-06-27T17:13:59.103245Z        594                
-vulnerabilities        alpine:3.5             2018-06-27T17:14:05.000942Z        649                
-vulnerabilities        alpine:3.6             2018-06-27T17:14:10.606606Z        632                
-vulnerabilities        alpine:3.7             2018-06-27T17:14:17.673851Z        767                
-vulnerabilities        centos:5               2018-06-27T17:14:46.616051Z        1270               
-vulnerabilities        centos:6               2018-06-27T17:15:18.600668Z        1266               
-vulnerabilities        centos:7               2018-06-27T17:15:41.468527Z        657                
-vulnerabilities        debian:10              2018-06-27T17:18:16.960078Z        17494              
-vulnerabilities        debian:7               2018-06-27T17:21:20.058941Z        20455              
-vulnerabilities        debian:8               None                               0                  
-vulnerabilities        debian:9               None                               0                  
-vulnerabilities        debian:unstable        None                               0                  
-vulnerabilities        ol:5                   None                               0                  
-vulnerabilities        ol:6                   None                               0                  
-vulnerabilities        ol:7                   None                               0                  
-vulnerabilities        ubuntu:12.04           None                               0                  
-vulnerabilities        ubuntu:12.10           None                               0                  
-vulnerabilities        ubuntu:13.04           None                               0                  
-vulnerabilities        ubuntu:14.04           None                               0                  
-vulnerabilities        ubuntu:14.10           None                               0                  
-vulnerabilities        ubuntu:15.04           None                               0                  
-vulnerabilities        ubuntu:15.10           None                               0                  
-vulnerabilities        ubuntu:16.04           None                               0                  
-vulnerabilities        ubuntu:16.10           None                               0                  
-vulnerabilities        ubuntu:17.04           None                               0                  
-vulnerabilities        ubuntu:17.10           None                               0                  
-vulnerabilities        ubuntu:18.04           None                               0                  
+Feed                   Group                  LastSync                           RecordCount
+vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457
+vulnerabilities        alpine:3.4             2018-06-27T17:13:59.103245Z        594
+vulnerabilities        alpine:3.5             2018-06-27T17:14:05.000942Z        649
+vulnerabilities        alpine:3.6             2018-06-27T17:14:10.606606Z        632
+vulnerabilities        alpine:3.7             2018-06-27T17:14:17.673851Z        767
+vulnerabilities        centos:5               2018-06-27T17:14:46.616051Z        1270
+vulnerabilities        centos:6               2018-06-27T17:15:18.600668Z        1266
+vulnerabilities        centos:7               2018-06-27T17:15:41.468527Z        657
+vulnerabilities        debian:10              2018-06-27T17:18:16.960078Z        17494
+vulnerabilities        debian:7               2018-06-27T17:21:20.058941Z        20455
+vulnerabilities        debian:8               None                               0
+vulnerabilities        debian:9               None                               0
+vulnerabilities        debian:unstable        None                               0
+vulnerabilities        ol:5                   None                               0
+vulnerabilities        ol:6                   None                               0
+vulnerabilities        ol:7                   None                               0
+vulnerabilities        ubuntu:12.04           None                               0
+vulnerabilities        ubuntu:12.10           None                               0
+vulnerabilities        ubuntu:13.04           None                               0
+vulnerabilities        ubuntu:14.04           None                               0
+vulnerabilities        ubuntu:14.10           None                               0
+vulnerabilities        ubuntu:15.04           None                               0
+vulnerabilities        ubuntu:15.10           None                               0
+vulnerabilities        ubuntu:16.04           None                               0
+vulnerabilities        ubuntu:16.10           None                               0
+vulnerabilities        ubuntu:17.04           None                               0
+vulnerabilities        ubuntu:17.10           None                               0
+vulnerabilities        ubuntu:18.04           None                               0
 ```
 
 As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Engine it will be ready immediately.  The CLI tool includes a useful utility that will block until the feeds have completed a successful sync:
@@ -167,11 +167,11 @@ debconf                       1.5.49                       BSD-2-clause
 ...
 
 # docker-compose exec engine-api anchore-cli image vuln docker.io/library/debian:7 all
-Vulnerability ID        Package                                  Severity          Fix         Vulnerability URL                                                 
-CVE-2005-2541           tar-1.26+dfsg-0.1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2005-2541         
-CVE-2007-5686           login-1:4.1.5.1-1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-5686         
-CVE-2007-5686           passwd-1:4.1.5.1-1+deb7u1                Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-5686         
-CVE-2007-6755           libssl1.0.0-1.0.1t-1+deb7u4              Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-6755         
+Vulnerability ID        Package                                  Severity          Fix         Vulnerability URL
+CVE-2005-2541           tar-1.26+dfsg-0.1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2005-2541
+CVE-2007-5686           login-1:4.1.5.1-1+deb7u1                 Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-5686
+CVE-2007-5686           passwd-1:4.1.5.1-1+deb7u1                Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-5686
+CVE-2007-6755           libssl1.0.0-1.0.1t-1+deb7u4              Negligible        None        https://security-tracker.debian.org/tracker/CVE-2007-6755
 ...
 ...
 ...
@@ -184,7 +184,7 @@ Last Eval: 2018-11-06T22:51:47Z
 Policy ID: 2c53a13c-1765-11e8-82ef-23527761d060
 ```
 
-**Note:** This document is intended to serve as a quickstart guide. Before moving further with Anchore to explore the scanning, policy evaluation, image content reporting, CI/CD integrations and other capabilities, it is highly recommended that you enhance your learning by reading the [Overview]({{< ref "/docs/engine/general" >}}) sections to gain a deeper understanding of fundamentals, concepts, and proper usage. 
+**Note:** This document is intended to serve as a quickstart guide. Before moving further with Anchore to explore the scanning, policy evaluation, image content reporting, CI/CD integrations and other capabilities, it is highly recommended that you enhance your learning by reading the [Overview]({{< ref "/docs/engine/general" >}}) sections to gain a deeper understanding of fundamentals, concepts, and proper usage.
 
 ### Next Steps
 
