@@ -190,4 +190,4 @@ $ anchore-cli --url http://40.114.26.147/v1/ --u admin --p foobar system feeds l
 
 **Note:** It is not uncommon for the above command to return a: `[]` as the initial feed sync occurs. 
 
-Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage](/docs/using) section of our documentation for more information.
+Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage]({{< ref "/docs/using" >}}) section of our documentation for more information.

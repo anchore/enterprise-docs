@@ -208,32 +208,32 @@ It can take some time to fetch all of the vulnerability feeds from the upstream 
 
 ```
 $ anchore-cli --url http://anchore-engine-anchore-enterprise.apps.54.84.147.202.nip.io/v1 --u admin --p foobar system feeds list
-Feed                   Group                  LastSync                          RecordCount        
-nvdv2                  nvdv2:cves             None                              0                  
-vulnerabilities        alpine:3.10            2019-10-03T15:05:23.878969        1485               
-vulnerabilities        alpine:3.3             2019-10-03T15:05:23.898953        457                
-vulnerabilities        alpine:3.4             2019-10-03T15:05:23.923604        678                
-vulnerabilities        alpine:3.5             2019-10-03T15:05:23.944190        875                
-vulnerabilities        alpine:3.6             2019-10-03T15:05:23.967389        1049               
-vulnerabilities        alpine:3.7             2019-10-03T15:05:23.985487        1253               
-vulnerabilities        alpine:3.8             2019-10-03T15:05:24.003828        1332               
-vulnerabilities        alpine:3.9             2019-10-03T15:05:24.021340        1428               
-vulnerabilities        amzn:2                 2019-10-03T15:05:24.038047        219                
-vulnerabilities        centos:5               2019-10-03T15:05:24.056800        1145               
-vulnerabilities        centos:6               2019-10-03T15:05:24.075533        1117               
-vulnerabilities        centos:7               2019-10-03T15:05:24.092966        870                
-vulnerabilities        centos:8               2019-10-03T15:05:24.110261        76                 
-vulnerabilities        debian:10              2019-10-03T15:05:24.140262        17809              
-vulnerabilities        debian:11              2019-10-03T15:05:24.169900        17720              
-vulnerabilities        debian:8               2019-10-03T14:55:20.216348        22339              
-vulnerabilities        debian:9               2019-10-03T14:55:20.247996        20475              
-vulnerabilities        debian:unstable        2019-10-03T14:55:20.278812        19647              
-vulnerabilities        ol:5                   2019-10-03T14:56:03.555345        1238               
-vulnerabilities        ol:6                   2019-10-03T15:00:44.582514        1455               
-vulnerabilities        ol:7                   2019-10-03T15:05:19.911031        1036               
-vulnerabilities        ol:8                   2019-10-03T15:05:23.850474        68               
+Feed                   Group                  LastSync                          RecordCount
+nvdv2                  nvdv2:cves             None                              0
+vulnerabilities        alpine:3.10            2019-10-03T15:05:23.878969        1485
+vulnerabilities        alpine:3.3             2019-10-03T15:05:23.898953        457
+vulnerabilities        alpine:3.4             2019-10-03T15:05:23.923604        678
+vulnerabilities        alpine:3.5             2019-10-03T15:05:23.944190        875
+vulnerabilities        alpine:3.6             2019-10-03T15:05:23.967389        1049
+vulnerabilities        alpine:3.7             2019-10-03T15:05:23.985487        1253
+vulnerabilities        alpine:3.8             2019-10-03T15:05:24.003828        1332
+vulnerabilities        alpine:3.9             2019-10-03T15:05:24.021340        1428
+vulnerabilities        amzn:2                 2019-10-03T15:05:24.038047        219
+vulnerabilities        centos:5               2019-10-03T15:05:24.056800        1145
+vulnerabilities        centos:6               2019-10-03T15:05:24.075533        1117
+vulnerabilities        centos:7               2019-10-03T15:05:24.092966        870
+vulnerabilities        centos:8               2019-10-03T15:05:24.110261        76
+vulnerabilities        debian:10              2019-10-03T15:05:24.140262        17809
+vulnerabilities        debian:11              2019-10-03T15:05:24.169900        17720
+vulnerabilities        debian:8               2019-10-03T14:55:20.216348        22339
+vulnerabilities        debian:9               2019-10-03T14:55:20.247996        20475
+vulnerabilities        debian:unstable        2019-10-03T14:55:20.278812        19647
+vulnerabilities        ol:5                   2019-10-03T14:56:03.555345        1238
+vulnerabilities        ol:6                   2019-10-03T15:00:44.582514        1455
+vulnerabilities        ol:7                   2019-10-03T15:05:19.911031        1036
+vulnerabilities        ol:8                   2019-10-03T15:05:23.850474        68
 ```
 
 **Note:** It is not uncommon for the above command to return a: [] as the initial feed sync occurs.
 
-Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage](/docs/using) section of our documentation for more information.
+Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage]({{< ref "/docs/using" >}}) section of our documentation for more information.
