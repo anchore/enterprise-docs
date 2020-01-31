@@ -1,12 +1,12 @@
 ---
 title: "Trouble Shooting"
 linkTitle: "Trouble Shooting"
-weight: 7
+weight: 9
 ---
 
 This guide will walkthrough some general troubleshooting tips with your Anchore Engine instance. When troubleshooting Anchore Engine, the recommend approach is to first verify all Anchore services are up, use the event subsystem to narrow down particular issues, and then navigate to the logs for specific services to find out more information.
 
-If you are running into issues performing certain Anchore operations (examples: images are failing analysis or cannot access a private registry) please consult the [FAQs]({{< ref "/docs/troubleshooting/faqs" >}}) document.
+If you are running into issues performing certain Anchore operations (examples: images are failing analysis or cannot access a private registry) please consult the [FAQ]({{< ref "/docs/faq" >}}) document.
 
 Throughout this guide, Anchore CLI commands will be executed to assist with troubleshooting. For more information on the Anchore CLI, please reference the CLI section.
 
@@ -220,7 +220,7 @@ The logs themselves are also persisted as logfiles inside the anchore service co
 
 ```
 
-As stated above, if you are running into issues performing certain Anchore operations (examples: images are failing analysis or cannot access a private registry) please consult the [FAQs]({{< ref "/docs/troubleshooting/faqs" >}}) document.
+As stated above, if you are running into issues performing certain Anchore operations (examples: images are failing analysis or cannot access a private registry) please consult the [FAQ]({{< ref "/docs/faq" >}}) document.
 
 ## Removing a Repository and Images
 

@@ -1,7 +1,7 @@
 ---
 title: "Anchore Enterprise Release Notes"
 linkTitle: "Release Notes"
-weight: 7
+weight: 8
 ---
 
 * [Anchore Enterprise Version 2.2.0]({{< ref "/docs/releasenotes/220.md" >}})
