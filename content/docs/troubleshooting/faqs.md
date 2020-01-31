@@ -4,146 +4,129 @@ linkTitle: "FAQs"
 weight: 2
 ---
 
-# Anchore Troubleshooting FAQs
+**Open Source**
 
-For each of the following frequently asked questions, read the [General Troubleshooting Approach Guide]({{< ref "/docs/troubleshooting" >}}) first, then following the data from there, follow the query specific answers below.
+[What is the difference between Anchore Engine and the Inline Scanner?](#1)
+
+**Open Source vs Enterprise**
+
+[What are the main differences between Anchore Engine and Anchore Enterprise?](#2)
+
+**Environment**
+
+[Where does Anchore run? On-prem? Cloud? Hosted?](#3)
+
+[Can Anchore be used without internet access?](#4)
+
+[What K8S resource allocations are required with Amazon EKS?](#5)
+
+[What are the database requirements?](#6)
+
+[What base image is Anchore Engine built on?](#7)
+
+[Why does the Anchore Engine container keep exiting?](#8)
+
+**Feeds**
+
+[Where does Anchore get its vulnerability data from?](#9)
+
+[Why aren’t my feeds syncing?](#10)
+
+[How do I manually trigger a feed sync?](#11)
+
+[How often are feeds synced?](#12)
+
+[How long should a feed sync take?](#13)
+
+[Can I only enable certain feeds?](#14)
+
+**Integration**
+
+[What registries are supported?](#15)
+
+[What CI/CD systems are supported?](#16)
+
+[What notification systems are supported? ](#17)
+
+[How does anchore integrate with Kubernetes?](#18)
+
+[How do I access content in my private registry?](#19)
+
+**Scanning**
+
+[What packages does Anchore scanning support?](#20)
+
+[Do I need to rescan images?](#21)
+
+[How can I scan local images?](#22)
+
+[Can Anchore look inside a file and scan for contents?](#23)
+
+**CLI**
+
+[Why do I get an “Unauthorized” error when using the CLI?](#24)
+
+**Results**
+
+[Why am I getting false positives?](#25)
+
+[What can I do in response to a false positive?](#26)
+
+**Reports**
+
+[Can I generate reports using Anchore Engine?](#27)
+
+**Monitoring**
+
+[How do I monitor my Anchore deployment?](#28)
+
+**Support**
+
+[Where can I ask other questions?](#29)
 
 
-* [Unauthorized error when using the Anchore CLI]({{< ref "#unauthorized-error-when-using-the-anchore-cli" >}})
-* [No vulnerability results for an analyzed image]({{< ref "#no-vulnerability-results-for-an-analyzed-image" >}})
-* [My image will not analyze]({{< ref "#my-image-will-not-analyze" >}})
-* [Unable to access private registry]({{< ref "#unable-to-access-private-registry" >}})
-* [Anchore Engine container keeps exiting]({{< ref "#anchore-engine-container-keeps-exiting" >}})
+### 
 
-**Note:** As stated in the [General Troubleshooting Approach Guide]({{< ref "/docs/troubleshooting" >}}), passing the `--debug` option to any Anchore CLI command can often help narrow down particular issues.
+---
 
-## Unauthorized error when using the Anchore CLI
 
-If you run into an `"Unauthorized"` error, verify you have configured the Anchore CLI correctly, as this error is most commonly seen when the Username, Password, or Service URL are improperly set.
+### Open Source
 
-By default the Anchore CLI will try to connect to the Anchore Engine at `http://localhost:8228/v1` with no authentication. The username, password and URL for the server can be passed to the Anchore CLI as command line arguments.
+<a name="1"></a>**What is the difference between Anchore Engine and the Inline Scanner?**
 
-```
---u   TEXT   Username     eg. admin (default)
---p   TEXT   Password     eg. foobar (default)
---url TEXT   Service URL  eg. http://localhost:8228/v1
-```
+Anchore Engine runs as a persistent, stateful web service that stores information about containers it has scanned in a database that can be queried and used for policy enforcement. The Anchore Inline Scanner uses much of the same code as Anchore Engine but is designed to be used ephemerally, on a desktop or as a plugin to CI/CD tools, where CVE results need to be generated but not persisted. 
 
-Rather than passing these parameters for every call to the cli they can be stores as environment variables.
 
-```
-ANCHORE_CLI_URL=http://myserver.example.com:8228/v1
-ANCHORE_CLI_USER=admin
-ANCHORE_CLI_PASS=foobar
-```
+### Open Source vs Enterprise
 
-**Note:** When passing the parameters through the command line, order matters. For example, `anchore-cli --url http://localhost:8228/v1 --u admin --p foobar system status`
+<a name="2"></a>**What are the main differences between Anchore Engine and Anchore Enterprise?**
 
-## No vulnerability results for an analyzed image
+Anchore Engine is an Apache v2-licensed open source project. Anchore Enterprise is a proprietary commercial product which adds additional functionality to Anchore Engine. Anchore Enterprise provides a GUI, enhanced vulnerability feed data, enterprise feed service (for running disconnected from the internet), enterprise reporting service (based on GraphQL) and integrations for popular workflow tools like Github, Jira and others, as well enterprise authentication systems like LDAP and SSO. 
 
-In order to return vulnerability results on analyzed images feed data must be synced. Verify that feed data has successfully synced and indicate record counts with the following:
 
-### Verifying feed data
+### Environment
 
-The following command will report a list of feeds synced by Anchore: `anchore-cli system feeds list`
+<a name="3"></a>**Where does Anchore run? On-prem? Cloud? Hosted?**
 
-```
-anchore-cli system feeds list
-Feed                   Group                  LastSync                          RecordCount        
-nvdv2                  nvdv2:cves             2019-11-25T22:19:53.961641        133810             
-vulnerabilities        alpine:3.10            2019-11-25T22:19:52.819559        1725               
-vulnerabilities        alpine:3.3             2019-11-25T22:19:46.581789        457                
-vulnerabilities        alpine:3.4             2019-11-25T22:19:50.728927        681                
-vulnerabilities        alpine:3.5             2019-11-25T22:19:52.619737        875                
-vulnerabilities        alpine:3.6             2019-11-25T22:19:44.783531        1051               
-vulnerabilities        alpine:3.7             2019-11-25T22:19:50.055020        1395               
-vulnerabilities        alpine:3.8             2019-11-25T22:19:46.352638        1486               
-vulnerabilities        alpine:3.9             2019-11-25T22:19:47.608825        1558               
-vulnerabilities        amzn:2                 2019-11-25T22:19:47.785204        282                
-vulnerabilities        centos:5               2019-11-25T22:19:47.987641        1325               
-vulnerabilities        centos:6               2019-11-25T22:19:48.756978        1362               
-vulnerabilities        centos:7               2019-11-25T22:19:50.939557        911                
-vulnerabilities        centos:8               2019-11-25T22:19:45.016264        129                
-vulnerabilities        debian:10              2019-11-25T22:19:51.971215        21630              
-vulnerabilities        debian:11              2019-11-25T22:19:50.288326        18371              
-vulnerabilities        debian:7               2019-11-25T22:19:47.026591        20455              
-vulnerabilities        debian:8               2019-11-25T22:19:47.389327        22889              
-vulnerabilities        debian:9               2019-11-25T22:19:49.366756        21793              
-vulnerabilities        debian:unstable        2019-11-25T22:19:49.624134        22744              
-vulnerabilities        ol:5                   2019-11-25T22:19:49.845383        1241               
-vulnerabilities        ol:6                   2019-11-25T22:19:44.572298        1469               
-vulnerabilities        ol:7                   2019-11-25T22:19:46.786958        1059               
-vulnerabilities        ol:8                   2019-11-25T22:19:48.983817        116                
-vulnerabilities        ubuntu:12.04           2019-11-25T22:19:46.110109        14948              
-vulnerabilities        ubuntu:12.10           2019-11-25T22:19:45.242311        5652               
-vulnerabilities        ubuntu:13.04           2019-11-25T22:19:50.510165        4127               
-vulnerabilities        ubuntu:14.04           2019-11-25T22:19:45.684811        20218              
-vulnerabilities        ubuntu:14.10           2019-11-25T22:19:45.917066        4456               
-vulnerabilities        ubuntu:15.04           2019-11-25T22:19:53.048077        5860               
-vulnerabilities        ubuntu:15.10           2019-11-25T22:19:51.405542        6513               
-vulnerabilities        ubuntu:16.04           2019-11-25T22:19:51.697377        17330              
-vulnerabilities        ubuntu:16.10           2019-11-25T22:19:44.354528        8647               
-vulnerabilities        ubuntu:17.04           2019-11-25T22:19:52.156023        9157               
-vulnerabilities        ubuntu:17.10           2019-11-25T22:19:43.293815        7935               
-vulnerabilities        ubuntu:18.04           2019-11-25T22:19:51.209554        11582              
-vulnerabilities        ubuntu:18.10           2019-11-25T22:19:48.233665        8394               
-vulnerabilities        ubuntu:19.04           2019-11-25T22:19:53.291181        8123               
-vulnerabilities        ubuntu:19.10           2019-11-25T22:19:52.414912        6354
-```
+Anchore can be installed and run on any environment where a container can be run, be this on-premises with a platform like OpenShift or in the public cloud using services like Amazon ECS, EKS et.
 
-### Waiting for Anchore feed data to sync
+<a name="4"></a>**Can Anchore be used without internet access?**
 
-**Note:** Upon a fresh installation of Anchore Engine, the system will take some time to bootstrap. CVE data for Linux distributions such as Alpine, CentOS, Debian, Oracle, Red Hat and Ubuntu will be downloaded. The initial sync may take several hours, depending on the speed of your network connection.
+Anchore Engine needs to connect to the internet to download the initial vulnerability database and all updates made to it as upstream sources (NVD, Red Hat RHSAs etc) add fresh data. The database service is currently hosted on Amazon Web Services. No other outbound internet access is needed (in contrast to other scanning solutions which push content out to the internet for scanning. For users requiring disconnected installations, Anchore Enterprise provides the ability to run the feed service locally.
 
-You can run the following command to wait until Anchore Engine is available and ready. This can be useful when waiting for vulnerability data to sync on intial installation. `anchore-cli system wait`
+<a name="5"></a>**What K8S resource allocations are required with Amazon EKS?**
 
-```
-# Blocking operation that will return when anchore-engine is available and ready
+Minimum resource allocations are included in the Helm chart for Anchore Engine which is accessible in our [repository](https://github.com/valancej/Anchore-Enterprise-k8s/blob/master/anchore_values.yaml).
 
-root@4c0a95557659:/anchore-engine# anchore-cli system wait
-Starting checks to wait for anchore-engine to be available timeout=-1.0 interval=5.0
-API availability: Checking anchore-engine URL (http://localhost:8228)...
-API availability: Success.
-Service availability: Checking for service set (catalog,apiext,policy_engine,simplequeue,analyzer)...
-Service availability: Success.
-Feed sync: Checking sync completion for feed set (vulnerabilities)...
-Feed sync: Success.
-```
+<a name="6"></a>**What are the database requirements?**
 
-### Logs
+Anchore Engine and Enterprise require access to a PostgreSQL database to operate. This database can run in a container as a persisted volume or via an external service such as Amazon RDS. At a minimum, we recommend at least 100GB of storage allocated for images, tags, subscriptions, policies, and other artifacts.  Also, the database should have a max client connections setting of 2000 or higher. This should be increased where you are running more than the default number of Anchore services.
 
-If you are running into feed sync failures a good place to begin investigation is the the policy engine service logs (`/var/log/anchore/anchore-policy-engine.log`).
+<a name="7"></a>**What base image is Anchore Engine built on?**
 
-## My image will not analyze
+Red Hat’s UBI image. See: [https://github.com/anchore/anchore-engine/blob/master/Dockerfile](https://github.com/anchore/anchore-engine/blob/master/Dockerfile)
 
-Image analysis is performed as a distinct, asynchronous, and scheduled task driven by queues that analyzer workers periodically poll. Image records have a small state-machine as follows:
-
-**Note:** In order for an image to move from 'not_analyzed' to 'analyzing', you need a healthy catalog, simplequeue, and analyzer service up and running. See the verifying services section in the [General Troubleshooting Approach Guide]({{< ref "/docs/troubleshooting" >}}) for more information.
-
-### Logs
-
-If you run into issues with images failing analysis a good place to start inspecting is the analyzer logs (`/var/log/anchore/anchore-worker.log`)
-
-The analyzer is the only component that can set an image state to 'analysis_failed', so you should be able to see a record of what happened.
-
-## Unable to access private registry
-
-Anchore Engine will attempt to download images from any registry without requiring further configuration.
-However if your registry requires authentication then the registry and corresponding credentials will need to be defined.
-
-### The --insecure option
-
-Anchore Engine will only pull images from a TLS/SSL enabled registry. If the registry is protected with a self signed certificate or a certificated signed by an unknown certificate authority then the `--insecure` option can be passed which instructs the Anchore Engine not to validate the certificate.
-
-`anchore-cli registry add REGISTRY USERNAME PASSWORD --insecure`
-
-### The --skip-validate option
-
-Anchore Engine attempts to perform a credential validation upon registry addition, but there are cases where a credential can be valid but the validation routine can fail (in particular, credential validation methods are changing for public registries over time).  If you are unable to add a registry but believe that the credential you are providing is valid, or you wish to add a credential to anchore before it is in place in the registry, you can bypass the registry credential validation process using the `--skip-validate` option to the 'registry add' command.
-
-`anchore-cli registry add REGISTRY USERNAME PASSWORD --skip-validate`
-
-## Anchore Engine container keeps exiting
+<a name="8"></a>**Why does the Anchore Engine container keep exiting?**
 
 The first step here should be to inspect the logs for the exited container. For Docker, running `docker logs <exited container id> ` should return the reason the container exited.
 
@@ -171,3 +154,214 @@ volumes:
 ```
 
 **Note:** If you are following the quickstart guide, you should not need to make any modifications to the configuration files, they are designed to work out of the box.
+
+
+
+### Feeds
+
+<a name="9"></a>**Where does Anchore get its vulnerability data from?**
+
+Anchore Engine uses feeds from most popular operating systems vendors including Red Hat/Centos, Debian, Ubuntu, Alpine, Oracle, etc. For non-operating system packages, such as NPMs, Gems, etc, NVD is the primary source. Anchore Enterprise adds additional licensed, proprietary sources that provide extra information about library packages and other products. More information is available in the [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/).
+
+<a name="10"></a>**Why aren’t my feeds syncing?**
+
+The initial sync can take several hours depending on host specifications (memory/CPU), network bandwidth, and disk space.  Upon a fresh installation of Anchore Engine, the system will take some time to bootstrap. CVE data for Linux distributions such as Alpine, CentOS, Debian, Oracle, Red Hat and Ubuntu will be downloaded. The initial sync may take several hours, depending on the speed of your network connection. First, verify feeds aren’t syncing with:
+
+
+```
+	anchore-cli system feeds list
+```
+
+
+If certain feeds are showing ‘0’ records, you can look at the output of:
+
+
+```
+	anchore-cli event list
+```
+
+
+specifically focusing on the following events:
+
+
+```
+	Error
+	System.feeds.sync.group_started
+	System.feeds.sync.group_started
+	System.feeds.sync.group_completed,
+	System.feeds.sync.group_failed
+```
+
+
+You can find more details on an event with:
+
+
+```
+	anchore-cli event get <event_id>
+```
+
+
+For a deeper view of events, see [working with event logs](https://docs.anchore.com/current/docs/engine/usage/cli_usage/event/). 
+
+One of the most helpful tools in identifying why feeds may not be syncing is to view the logs for the policy-engine container.  There will be lines in the log indicating the merging of records from the feed into your local DB installation.  If there are errors stating the merge has been rolled back, look into memory utilization during the feed sync; an out of memory (OOM) error may occur during the sync and roll back the transaction. 
+
+
+<a name="11"></a>**How do I manually trigger a feed sync?**
+
+A [sync operation](https://docs.anchore.com/current/docs/using/cli_usage/feeds/feed_synchronization/#manually-initiating-feed-sync) can be manually initiated by running:
+
+
+```
+         anchore-cli system feeds sync command 
+```
+
+
+However, this is an operation that is not required under normal operation, only used for advanced troubleshooting and testing. 
+
+<a name="12"></a>**How often are feeds synced?**
+
+Feed data is synced by default every ~46 hours.  This is a configurable setting that can be updated to user specifications.  For more information, see our [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-synchronization-interval).
+
+<a name="13"></a>**How long should a feed sync take?**
+
+There is no exact time frame for the initial sync to complete as it depends heavily on environmental factors, such as the host’s memory/cpu allocation, disk space, and network bandwidth.  Generally, the initial sync should complete within 8 hours but may take longer.  Subsequent feed updates are much faster as only deltas are updated.
+
+<a name="14"></a>**Can I only enable certain feeds?**
+
+Yes. See the [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-settings). 
+
+
+
+### Integration
+
+<a name="15"></a>**What registries are supported?**
+
+Any registry which supports the Docker v2 API is supported, including Docker Hub, Quay, Harbor, Artifactory and all public cloud registries. 
+
+<a name="16"></a>**What CI/CD systems are supported?**
+
+Native Plugins are available for Jenkins, CircleCI, Codefresh and CodeReady. Other CI/CD integrations can be used via the anchore-cli tool.
+
+<a name="17"></a>**What notification systems are supported?**
+
+Anchore Engine provides a generic webhook service. Anchore Enterprise can send alerts to Jira, MS Teams, Github or email.
+
+<a name="18"></a>**How does anchore integrate with Kubernetes?**
+
+The Kubernetes Admission Controller (KAC) for Anchore is a piece of code which causes Kubernetes to request a scan of every image about to be deployed. Anchore can then scan, scan and warn, or scan and block according to policies. 
+
+<a name="9"></a>**How do I access content in my private registry?**
+
+Anchore Engine will attempt to download images from any registry without requiring further configuration.
+However if your registry requires authentication then the registry and corresponding credentials will need to be defined.
+
+* The --insecure option
+
+Anchore Engine will only pull images from a TLS/SSL enabled registry. If the registry is protected with a self signed certificate or a certificated signed by an unknown certificate authority then the `--insecure` option can be passed which instructs the Anchore Engine not to validate the certificate.
+
+`anchore-cli registry add REGISTRY USERNAME PASSWORD --insecure`
+
+* The --skip-validate option
+
+Anchore Engine attempts to perform a credential validation upon registry addition, but there are cases where a credential can be valid but the validation routine can fail (in particular, credential validation methods are changing for public registries over time).  If you are unable to add a registry but believe that the credential you are providing is valid, or you wish to add a credential to anchore before it is in place in the registry, you can bypass the registry credential validation process using the `--skip-validate` option to the 'registry add' command.
+
+`anchore-cli registry add REGISTRY USERNAME PASSWORD --skip-validate`
+
+
+### Scanning
+
+<a name="20"></a>**What packages does Anchore scanning support?**
+
+For operating systems: RPM, Deb, APK
+
+For Languages: Python (PIP), Ruby Gems, NPM, Java (jar, ear, war, hpi)
+
+<a name="21"></a>**Do I need to rescan images?**
+
+No! Anchore Engine maintains a complete inventory of every file, including its contents and metadata, so when a new vulnerability is found, it only needs to scan the database and not the original image. 
+
+<a name="22"></a>**How can I scan local images?**
+
+The Anchore Inline Scanner tool allows you to scan a local image on disk without needing the persistent web service from Anchore Engine available. You can also do the local scan and then pass the details to Anchore Engine after completion. More information is available in our [documentation](https://docs.anchore.com/current/docs/using/integration/ci_cd/inline_analysis/). 
+
+<a name="23"></a>**Can Anchore look inside a file and scan for contents?**
+
+Yes, regexps can be applied in policies rules to scan for arbitrary content.
+
+
+### CLI
+
+<a name="24"></a>**Why do I get an Unauthorized” error when using the CLI?**
+
+If you run into an "Unauthorized" error, verify you have configured the Anchore CLI correctly, as this error is most commonly seen when the Username, Password, or Service URL are improperly set.
+
+By default the Anchore CLI will try to connect to the Anchore Engine at http://localhost:8228/v1 with no authentication. The username, password and URL for the server can be passed to the Anchore CLI as command line arguments.
+
+
+```
+    --u   TEXT   Username     eg. admin (default)
+    --p   TEXT   Password     eg. foobar (default)
+    --url TEXT   Service URL  eg. http://localhost:8228/v1
+```
+
+
+Rather than passing these parameters for every call to the cli they can be stores as environment variables.
+
+
+```
+    ANCHORE_CLI_URL=http://myserver.example.com:8228/v1
+    ANCHORE_CLI_USER=admin
+    ANCHORE_CLI_PASS=foobar
+```
+
+
+**Note:** When passing the parameters through the command line, order matters. For example, 
+
+```
+	anchore-cli --url http://localhost:8228/v1 --u admin --p foobar system status
+```
+
+### Results
+
+<a name="25"></a>**Why am I getting false positives?**
+
+False positives are typically caused by:
+
+* Package names reused across package managers (e.g. a gem and npm package with same name). Many data sources, like NVD don’t provide sufficient specification of the ecosystem a package lives in and thus Anchore may match the right name against the wrong type. This is most commonly seen in non-os (non rpm, deb, apk) packages.
+
+* Distro package managers installing non-distro packages using the application package format and not updating the version number when backports are added. This can cause a match of the package against the application-package vulnerability data instead of the distro data.
+
+<a name="26"></a>**What can I do in response to a false positive?**
+
+The most immediate way to respond is to create a rule in the Anchore policy engine which [whitelists the package](https://docs.anchore.com/current/docs/using/ui_usage/policies/whitelists/).  \
+
+
+
+### Reports
+
+<a name="27"></a>**Can I generate reports using Anchore Engine?**
+
+Account wide reporting is only available in Anchore Enterprise. Anchore Engine allows you to generate information about a specific image. 
+
+
+### Monitoring
+
+<a name="28"></a>**How do I monitor my Anchore deployment?**
+
+Anchore recommends using Prometheus for gathering metrics. Both Anchore Enterprise and Engine expose metrics in the API of each service. Set “metrics.enabled” to true in the relevant config.yaml file.
+
+See: [https://docs.anchore.com/current/docs/monitoring/](https://docs.anchore.com/current/docs/monitoring/)
+
+
+### Support
+
+<a name="29"></a>**Where can I ask other questions?**
+
+Community Slack: [https://anchore.slack.com](https://anchore.slack.com)
+
+Github Issues: 
+
+*   Anchore Engine [https://github.com/anchore/anchore-engine/issues](https://github.com/anchore/anchore-engine/issues)
+*   Anchore CLI: [https://github.com/anchore/anchore-cli/issues/](https://github.com/anchore/anchore-cli/issues/)
+*   CI tools: https://github.com/anchore/ci-tools/
+
