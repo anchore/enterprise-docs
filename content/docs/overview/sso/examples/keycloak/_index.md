@@ -37,7 +37,7 @@ Some config choices and assumptions specifically for this example:
 
     ![Client Settings1](keycloak_sso_client_settings1.png)  
 
-    1. Name - "Anchore Enterprise". THis is only used to display a friendly name to Keycloak users in the KeyCloak UI. Can use any namy you like.
+    1. Name - "Anchore Enterprise". This is only used to display a friendly name to Keycloak users in the KeyCloak UI. Can use any name you like.
     1. Enabled - Select on
     1. Include Authn Statement - Select on
     1. Sign Documents - Select on
