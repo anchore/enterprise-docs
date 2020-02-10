@@ -49,10 +49,14 @@ to an external user, simply delete the user record in Anchore and have the user 
 ## Configuration Overview
 
 In order to use SAML SSO, the Anchore Enterprise deployment must:
+
 1. Have Oauth enabled. This is required so that Anchore can issue bearer tokens for subsequent API usage by the UI to the system APIs.
+
 1. Using hashed passwords is optional but highly recommended. See [User Credential Storage]({{< ref "/docs/engine/engine_installation/configuration/user_credential_storage" >}})
 for more information on configuring OAuth and hashed password storage.
+
 1. Be able to reach the IDP login URL from the user's browser
+
 1. Be able to reach the metadata XML endpoint in the IDP (if using url)
 
 Configuration of SAML SSO is done via API/UI operations but requires configuration both in your Identity Provider and in Anchore.
