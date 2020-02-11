@@ -5,6 +5,13 @@ weight: 3
 ---
 
 This document will walkthrough the installation of Anchore Enterprise on an Amazon EKS cluster and expose it on the public internet. 
+
+## Requirements
+
+A deployment of Anchore Enterprise will require at least 4GB of RAM (can be spread across multiple nodes), and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size). For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient. Additionally, we recommend at least a single vCPU core allocated per analyzer.
+
+In order to access the Anchore Enterprise, you will also require a valid license.yaml file that has been issued to you by Anchore.
+
 ## Prerequisites
 
 - A running Amazon EKS cluster with worker nodes launched. See [EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) for more information on this setup. 
