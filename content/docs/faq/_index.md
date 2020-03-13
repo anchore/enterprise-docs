@@ -80,12 +80,16 @@ weight: 2
 
 [How do I monitor my Anchore deployment?](#28)
 
+**Swagger**
+
+[How can I deploy an interactive Swagger UI?](#29)
+
 **Support**
 
-[Where can I ask other questions?](#29)
+[Where can I ask other questions?](#30)
 
 
-### 
+###
 
 ---
 
@@ -94,14 +98,14 @@ weight: 2
 
 <a name="1"></a>**What is the difference between Anchore Engine and the Inline Scanner?**
 
-Anchore Engine runs as a persistent, stateful web service that stores information about containers it has scanned in a database that can be queried and used for policy enforcement. The Anchore Inline Scanner uses much of the same code as Anchore Engine but is designed to be used ephemerally, on a desktop or as a plugin to CI/CD tools, where CVE results need to be generated but not persisted. 
+Anchore Engine runs as a persistent, stateful web service that stores information about containers it has scanned in a database that can be queried and used for policy enforcement. The Anchore Inline Scanner uses much of the same code as Anchore Engine but is designed to be used ephemerally, on a desktop or as a plugin to CI/CD tools, where CVE results need to be generated but not persisted.
 
 
 ### Open Source vs Enterprise
 
 <a name="2"></a>**What are the main differences between Anchore Engine and Anchore Enterprise?**
 
-Anchore Engine is an Apache v2-licensed open source project. Anchore Enterprise is a proprietary commercial product which adds additional functionality to Anchore Engine. Anchore Enterprise provides a GUI, enhanced vulnerability feed data, enterprise feed service (for running disconnected from the internet), enterprise reporting service (based on GraphQL) and integrations for popular workflow tools like Github, Jira and others, as well enterprise authentication systems like LDAP and SSO. 
+Anchore Engine is an Apache v2-licensed open source project. Anchore Enterprise is a proprietary commercial product which adds additional functionality to Anchore Engine. Anchore Enterprise provides a GUI, enhanced vulnerability feed data, enterprise feed service (for running disconnected from the internet), enterprise reporting service (based on GraphQL) and integrations for popular workflow tools like Github, Jira and others, as well enterprise authentication systems like LDAP and SSO.
 
 
 ### Environment
@@ -201,9 +205,9 @@ You can find more details on an event with:
 ```
 
 
-For a deeper view of events, see [working with event logs](https://docs.anchore.com/current/docs/engine/usage/cli_usage/event/). 
+For a deeper view of events, see [working with event logs](https://docs.anchore.com/current/docs/engine/usage/cli_usage/event/).
 
-One of the most helpful tools in identifying why feeds may not be syncing is to view the logs for the policy-engine container.  There will be lines in the log indicating the merging of records from the feed into your local DB installation.  If there are errors stating the merge has been rolled back, look into memory utilization during the feed sync; an out of memory (OOM) error may occur during the sync and roll back the transaction. 
+One of the most helpful tools in identifying why feeds may not be syncing is to view the logs for the policy-engine container.  There will be lines in the log indicating the merging of records from the feed into your local DB installation.  If there are errors stating the merge has been rolled back, look into memory utilization during the feed sync; an out of memory (OOM) error may occur during the sync and roll back the transaction.
 
 
 <a name="11"></a>**How do I manually trigger a feed sync?**
@@ -212,11 +216,11 @@ A [sync operation](https://docs.anchore.com/current/docs/using/cli_usage/feeds/f
 
 
 ```
-         anchore-cli system feeds sync command 
+         anchore-cli system feeds sync command
 ```
 
 
-However, this is an operation that is not required under normal operation, only used for advanced troubleshooting and testing. 
+However, this is an operation that is not required under normal operation, only used for advanced troubleshooting and testing.
 
 <a name="12"></a>**How often are feeds synced?**
 
@@ -228,7 +232,7 @@ There is no exact time frame for the initial sync to complete as it depends heav
 
 <a name="14"></a>**Can I only enable certain feeds?**
 
-Yes. See the [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-settings). 
+Yes. See the [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-settings).
 
 
 
@@ -236,7 +240,7 @@ Yes. See the [documentation](https://docs.anchore.com/current/docs/engine/usage/
 
 <a name="15"></a>**What registries are supported?**
 
-Any registry which supports the Docker v2 API is supported, including Docker Hub, Quay, Harbor, Artifactory and all public cloud registries. 
+Any registry which supports the Docker v2 API is supported, including Docker Hub, Quay, Harbor, Artifactory and all public cloud registries.
 
 <a name="16"></a>**What CI/CD systems are supported?**
 
@@ -248,7 +252,7 @@ Anchore Engine provides a generic webhook service. Anchore Enterprise can send a
 
 <a name="18"></a>**How does anchore integrate with Kubernetes?**
 
-The Kubernetes Admission Controller (KAC) for Anchore is a piece of code which causes Kubernetes to request a scan of every image about to be deployed. Anchore can then scan, scan and warn, or scan and block according to policies. 
+The Kubernetes Admission Controller (KAC) for Anchore is a piece of code which causes Kubernetes to request a scan of every image about to be deployed. Anchore can then scan, scan and warn, or scan and block according to policies.
 
 <a name="9"></a>**How do I access content in my private registry?**
 
@@ -278,11 +282,11 @@ For Languages: Python (PIP), Ruby Gems, NPM, Java (jar, ear, war, hpi)
 
 <a name="21"></a>**Do I need to rescan images?**
 
-No! Anchore Engine maintains a complete inventory of every file, including its contents and metadata, so when a new vulnerability is found, it only needs to scan the database and not the original image. 
+No! Anchore Engine maintains a complete inventory of every file, including its contents and metadata, so when a new vulnerability is found, it only needs to scan the database and not the original image.
 
 <a name="22"></a>**How can I scan local images?**
 
-The Anchore Inline Scanner tool allows you to scan a local image on disk without needing the persistent web service from Anchore Engine available. You can also do the local scan and then pass the details to Anchore Engine after completion. More information is available in our [documentation](https://docs.anchore.com/current/docs/using/integration/ci_cd/inline_analysis/). 
+The Anchore Inline Scanner tool allows you to scan a local image on disk without needing the persistent web service from Anchore Engine available. You can also do the local scan and then pass the details to Anchore Engine after completion. More information is available in our [documentation](https://docs.anchore.com/current/docs/using/integration/ci_cd/inline_analysis/).
 
 <a name="23"></a>**Can Anchore look inside a file and scan for contents?**
 
@@ -315,7 +319,7 @@ Rather than passing these parameters for every call to the cli they can be store
 ```
 
 
-**Note:** When passing the parameters through the command line, order matters. For example, 
+**Note:** When passing the parameters through the command line, order matters. For example,
 
 ```
 	anchore-cli --url http://localhost:8228/v1 --u admin --p foobar system status
@@ -341,7 +345,7 @@ The most immediate way to respond is to create a rule in the Anchore policy engi
 
 <a name="27"></a>**Can I generate reports using Anchore Engine?**
 
-Account wide reporting is only available in Anchore Enterprise. Anchore Engine allows you to generate information about a specific image. 
+Account wide reporting is only available in Anchore Enterprise. Anchore Engine allows you to generate information about a specific image.
 
 
 ### Monitoring
@@ -353,15 +357,96 @@ Anchore recommends using Prometheus for gathering metrics. Both Anchore Enterpri
 See: [https://docs.anchore.com/current/docs/monitoring/](https://docs.anchore.com/current/docs/monitoring/)
 
 
+### Swagger
+<a name="29"></a>**How can I deploy an interactive Swagger UI?**
+
+#### Docker-Compose
+To enable in a quickstart deployment (using docker-compose), simply uncomment the two service sections (the 'anchore-swagger-ui-nginx' and 'anchore-swagger-ui' services) at the end of the default docker-compose.yaml before starting up anchore, according to the regular [Quickstart Guide]({{< ref "/docs/engine/quickstart" >}}).  There is a configuration file for nginx that needs to be mounted in order for the nginx proxy to passthrough to the engine-api.  It can be copied from the anchore-engine Docker image with the following command:
+
+```
+# docker create --name ae docker.io/anchore/anchore-engine:latest
+# docker cp ae:/config/anchore-swaggerui-nginx.conf .
+# docker rm ae
+```
+
+Once enabled, you can then direct your browser at your server, port 8080, and start browsing and testing API calls.
+
+http://{servername}:8080/
+
+e.g.
+
+http://localhost:8080/
+
+#### Kubernetes via Helm
+To enable in an environment where Anchore was deployed via helm, use the following steps:
+
+- Create a values.yaml file for Swagger UI containing the following
+```yaml
+---
+## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
+##
+image:
+  repository: swaggerapi/swagger-ui
+  tag: latest
+  pullPolicy: IfNotPresent
+
+## Used to provide the location of the openapi.json file.
+## If jsonPath is empty the chart try to get a json file at the jsonUrl address.
+## The server fields have to use to add a custom server.
+swaggerui :
+  jsonPath : ""
+  jsonUrl : http://<engine-api-svc>/v1/swagger.json
+  server :
+    url: http://<engine-api-svc>/v1/
+```
+
+- Install Swagger UI via Helm
+```
+# helm install swagger -f swaggerui/values.yaml cetic/swaggerui
+```
+
+- Create an ingress file for Swagger UI containing the following
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  labels:
+    app: swagger-swaggerui
+    chart: anchore-engine-1.4.4
+    heritage: Helm
+    release: anchore
+  name: swagger-swaggerui
+  namespace: <your_anchore_namespace>
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: swagger-swaggerui
+          servicePort: 8080
+        path: /swagger(/|$)(.*)
+status:
+  loadBalancer:
+    ingress:
+    - ip: <your_alb_ip>                         
+```
+
+- Apply the changes to the ingress
+```
+# kubectl apply -f <your_swagger_ingress.yaml>
+```
+
 ### Support
 
-<a name="29"></a>**Where can I ask other questions?**
+<a name="30"></a>**Where can I ask other questions?**
 
 Community Slack: [https://anchore.slack.com](https://anchore.slack.com)
 
-Github Issues: 
+Github Issues:
 
 *   Anchore Engine [https://github.com/anchore/anchore-engine/issues](https://github.com/anchore/anchore-engine/issues)
 *   Anchore CLI: [https://github.com/anchore/anchore-cli/issues/](https://github.com/anchore/anchore-cli/issues/)
 *   CI tools: https://github.com/anchore/ci-tools/
-
