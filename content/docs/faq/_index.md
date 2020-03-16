@@ -396,7 +396,8 @@ ingress:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   path: /swagger(/|$)(.*)
-  hosts: []
+  hosts:
+    - ""
   tls: []
 
 ## Used to provide the location of the openapi.json file.
