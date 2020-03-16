@@ -390,6 +390,15 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  path: /swagger(/|$)(.*)
+  hosts: []
+  tls: []
+
 ## Used to provide the location of the openapi.json file.
 ## If jsonPath is empty the chart try to get a json file at the jsonUrl address.
 ## The server fields have to use to add a custom server.
@@ -402,42 +411,10 @@ swaggerui :
 
 - Install Swagger UI via Helm
 ```
+# helm repo add cetic https://cetic.github.io/helm-charts
 # helm install swagger -f swaggerui/values.yaml cetic/swaggerui
 ```
 
-- Create an ingress file for Swagger UI containing the following
-```yaml
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-  labels:
-    app: swagger-swaggerui
-    chart: anchore-engine-1.4.4
-    heritage: Helm
-    release: anchore
-  name: swagger-swaggerui
-  namespace: <your_anchore_namespace>
-spec:
-  rules:
-  - http:
-      paths:
-      - backend:
-          serviceName: swagger-swaggerui
-          servicePort: 8080
-        path: /swagger(/|$)(.*)
-status:
-  loadBalancer:
-    ingress:
-    - ip: <your_alb_ip>                         
-```
-
-- Apply the changes to the ingress
-```
-# kubectl apply -f <your_swagger_ingress.yaml>
-```
 
 ### Support
 
