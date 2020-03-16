@@ -220,7 +220,7 @@ However, this is an operation that is not required under normal operation, only 
 
 <a name="12"></a>**How often are feeds synced?**
 
-Feed data is synced by default every ~46 hours.  This is a configurable setting that can be updated to user specifications.  For more information, see our [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-synchronization-interval).
+Feed data is synced by default every ~6 hours.  This is a configurable setting that can be updated to user specifications.  For more information, see our [documentation](https://docs.anchore.com/current/docs/engine/usage/cli_usage/feeds/feed_configuration/#feed-synchronization-interval).
 
 <a name="13"></a>**How long should a feed sync take?**
 
