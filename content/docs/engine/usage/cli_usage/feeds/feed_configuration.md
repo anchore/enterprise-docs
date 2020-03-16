@@ -6,7 +6,7 @@ weight: 1
 
 ### Feed Synchronization Interval
 
-The default configuration for the Anchore Engine will download vulnerability data from Anchore's feed service every 21,600 seconds (46hours).
+The default configuration for the Anchore Engine will download vulnerability data from Anchore's feed service every 21,600 seconds (6hours).
 
 For most users the only configuration option that is typically updated is the feed synchronization interval - the time interval (in seconds) at which the feed sync is run.
 
