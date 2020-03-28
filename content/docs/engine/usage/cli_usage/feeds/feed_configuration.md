@@ -56,7 +56,7 @@ feeds:
 
 ### Controlling Which Feeds and Groups are Synced
 
-Note: The package and nvd data feeds are large, resulting in the initial sync taking some time time, and will use in excess of 2GB of memory.
+Note: The package and nvd data feeds are large, resulting in the initial sync taking some time time.
 
 During initial feed sync, you can always query the progress and status of the feed sync using the anchore-cli.
 
@@ -117,10 +117,29 @@ vulnerabilities        ubuntu:19.10           2020-03-27T20:41:20.828796        
 
 ### Using the Config File to Include/Exclude Feeds at System Bootstrap
 
+The most common way to set which feeds are synced is in the config.yaml for the policy engine. By default, 
+the _vulnerabilities_, _nvdv2_, and _github_ feeds are synced to provide good vulnerability matching support for a variety of linux distros
+and application package types. Normally it will not be necessary to modify that set.
 
+To disable a feed or enable a disabled feed, modify the config.yaml's _feeds_ section to:
+
+```
+feeds:
+  selective_sync: 
+    enabled: true
+    feeds:
+      vulnerabilities: true
+      nvdv2: true
+      github: true
+      packages: false
+```
+
+Those boolean values can be used to enable/disable the feeds. Note that changes will require a restart of the policy engine to take effect and settng
+a feed to 'false' will not remove any data or show in the API/CLI, it will simply skip updates during sync operations.
 
 
 ### Using the CLI to Configure Feeds
+
 
 #### Disabling an Entire Feed
 
@@ -371,3 +390,6 @@ vulnerabilities        centos:5               success        1347               
 ... 
 
 ```
+
+With these controls you can better customize the data set that anchore stores in the db. However, note that this should not normally be necessary
+and modifying feed groups & data has implication on the sets of distros and types of artifacts Anchore can match vulnerabilities against.
