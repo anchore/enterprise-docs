@@ -23,7 +23,7 @@ Sources and types of data are organized into *feeds* and *groups*.
 - Feed - A grouping of similar types of data
 - Feed Group - A namespace within each feed to allow more granular control of the sync process
 
-Each feed can be independently configured to synchorize or not depending on what data your deployment needs. See [configuration]({{< ref "/docs/engine/usage/cli_usage/feeds/feed_configuration">}}) for more details.
+Each feed can be independently configured to synchronize or not depending on what data your deployment needs. See [configuration]({{< ref "/docs/engine/usage/cli_usage/feeds/feed_configuration">}}) for more details.
 
 Anchore Engine uses security vulnerability and package data from a number of sources:
 
