@@ -65,10 +65,10 @@ Additional minor bug fixes, significant test framework improvements, and perform
 The upgrade from 0.6.1 to 0.7.0 involves some data migration to support the move from RHSA-based vulnerability reporting to CVE-based for RedHat-based image.
 The ancho.re feed service has already been updated to serve the new data which shows up in 0.6.1 and 0.7.0 systems as:
 
-* `vulnerabilities/rhel:5`
-* `vulnerabilities/rhel:6`
-* `vulnerabilities/rhel:7`
-* `vulnerabilities/rhel:8`
+* `rhel:5`
+* `rhel:6`
+* `rhel:7`
+* `rhel:8`
 
 During the upgrade process the system will automatically perform the following steps:
 1. Disabled the _centos:*_ vulnerability feed groups. This means they will no longer be synced with updates. You'll see this reflected in the output of `anchore-cli system feeds list` if you upgrade to the 0.7.0 version of anchore-cli.a
@@ -77,3 +77,7 @@ During the upgrade process the system will automatically perform the following s
 
 The logging during this process is verbose to give you plenty of insight into what the system is doing. Because it must re-scan all rpm packages, step #2 can take quite a while depending on your specific deployment and how many images you have
 analyzed that are based on centos or rhel.
+
+
+NOTE: Restoring RHSA-based matching is possible, but not recommended. See the [Reverting Back to RHSA Data]({{< ref "/docs/engine/releasenotes/0.7.0/data_matching_rollback">}})
+
