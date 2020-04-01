@@ -5,7 +5,7 @@ set -e
 site_prefix=${1}
 
 # The version to deploy, if available. If not, use the versions file
-this_version=${2}
+this_version=${2-master}
 
 
 if [[ -z ${this_version} ]]
