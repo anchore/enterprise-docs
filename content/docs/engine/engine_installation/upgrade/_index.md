@@ -96,9 +96,10 @@ If for any reason the automated upgrade fails, or you would like to perform the 
 
 - Install the desired anchore-engine container manually
 - Run the anchore-engine container but override the entrypoint to run an interactive shell instead of the default 'anchore-manager service start' entrypoint command
-- Manually execute the database upgrade command, using the appropriate db_connect string 
+- Manually execute the database upgrade command, using the appropriate db_connect string.  For example, if using Postgres, the db_connect string will look like `postgresql://$ANCHORE_DB_HOST/$ANCHORE_DB_NAME?user=$ANCHORE_DB_USER&password=$ANCHORE_DB_PASSWORD`
+
 ```
-# anchore-manager db --db-connect <db_connect_string> upgrade
+# anchore-manager db --db-connect "postgresql://$ANCHORE_DB_HOST/$ANCHORE_DB_NAME?user=$ANCHORE_DB_USER&password=$ANCHORE_DB_PASSWORD" upgrade
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB params: {"db_connect_args": {"timeout": 86400, "ssl": false}, "db_pool_size": 30, "db_pool_max_overflow": 100}
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB connection configured: True
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB attempting to connect...
