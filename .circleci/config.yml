@@ -63,7 +63,6 @@ workflows:
   default_workflow:
     jobs:
       - build: {}
-          #context: aws-prod
       - deploy:
           context: aws-prod
           requires:
