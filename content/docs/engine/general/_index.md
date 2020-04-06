@@ -18,8 +18,8 @@ Anchore takes a data-driven approach to analysis and policy enforcement. The sys
 1. **Fetch** the image content and extract it, but never execute it
 2. **Analyze** the image by running a set of Anchore analyzers over the image content to extract and classify as much metadata as possible
 3. **Save** the resulting analysis in the database for future use and audit
-5. **Evaluate** policies against the analysis result, including vulnerability matches on the artifacts discovered in the image
-Update to the latest external data used for policy evaluation and vulnerability matches (we call this external data sync a feed sync), and automatically update image analysis results against any new data found upstream.
+4. **Evaluate** policies against the analysis result, including vulnerability matches on the artifacts discovered in the image
+5. **Update** to the latest external data used for policy evaluation and vulnerability matches (we call this external data sync a feed sync), and automatically update image analysis results against any new data found upstream.
 6. **Notify** users of changes to policy evaluations and vulnerability matches
 7. **Repeat** 5 & 6 on intervals to ensure latest external data and updated image evaluations
 
