@@ -95,7 +95,7 @@ ANCHORE_CLI_PASS=foobar
 The password can be retrieved from kubernetes by accessing the secrets passed to the container.
 
 ```
-ANCHORE_CLI_PASS=$(kubectl get secret --namespace default anchore-demo-anchore-engine -o jsonpath="{.data.adminPassword}" | base64 --decode; echo)
+ANCHORE_CLI_PASS=$(kubectl get secret --namespace default anchore-demo-anchore-engine -o jsonpath="{.data.ANCHORE_ADMIN_PASSWORD}" | base64 --decode; echo)
 ```
 
 Note: The deployment name in this example, anchore-demo-anchore-engine, was retrieved from the output of the helm installation or helm status command.
