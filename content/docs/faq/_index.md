@@ -248,7 +248,7 @@ Anchore Engine attempts to perform a credential validation upon registry additio
 ### What packages does Anchore scanning support? {#20}
 For operating systems: RPM, Deb, APK
 
-For Languages: Python (PIP), Ruby Gems, NPM, Java (jar, ear, war, hpi)
+For Languages: Python (PIP), Ruby Gems, NPM, Java (jar, ear, war, hpi), .NET (NuGet)
 
 ### Do I need to rescan images? {#21}
 No! Anchore Engine maintains a complete inventory of every file, including its contents and metadata, so when a new vulnerability is found, it only needs to scan the database and not the original image.

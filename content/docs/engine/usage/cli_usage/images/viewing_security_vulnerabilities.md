@@ -16,8 +16,8 @@ The `INPUT_IMAGE` can be specified in one of the following formats:
 The `VULN_TYPE` currently supports:
 
 - os: Operating System Package CVEs
-- non-os: NPM, GEM, Java Archive (jar, war, ear) and Python PIP CVEs.
-- all: Combination report containing both 'os' and 'non-os' vulnerability records. 
+- non-os: NPM, GEM, .NET (NuGet), Java Archive (jar, war, ear) and Python PIP CVEs.
+- all: Combination report containing both 'os' and 'non-os' vulnerability records.
 
 The system has been designed to incorporate 3rd party feeds for other vulnerabilites.
 
