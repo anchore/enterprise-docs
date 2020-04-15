@@ -12,7 +12,7 @@ For most users the only configuration option that is typically updated is the fe
 
 ```policy_engine:
     .....
-    
+
     cycle_timers:
       ...
       feed_sync: 14400
@@ -26,7 +26,7 @@ The Anchore Engine will default to downloading feed data from Anchore's feed ser
 
 This service requires authentication and the system includes default credential for an anonymous user.
 
-The Anchore Engine will by default only synchronize vulnerability data such as CVE information. The Anchore Feed service also provide package data from NPM Package registry and Ruby Gems registry which can be used as part of policy checks which check Node and Ruby package names and versions, as well as non-os vulnerability data from National Vulnerability Data (NVD) which can be used to perform non-os package vulnerability scans.
+The Anchore Engine will by default only synchronize vulnerability data such as CVE information. The Anchore Feed service also provides package data from NPM Package registry, Ruby Gems registry, and Github Advisories which can be used as part of policy checks which check Node and Ruby package names and versions, as well as non-os vulnerability data from National Vulnerability Data (NVD) which can be used to perform non-os package vulnerability scans.
 
 By default the Anchore Engine will perform a selective sync enabling only the vulnerabilities feed. Setting the (selective_sync) enabled flag to false, or updating the other feed types to True will enable synchronization of the specified feed.
 
@@ -54,13 +54,13 @@ During initial feed sync, you can always query the progress and status of the fe
 
 ```
 anchore-cli system feeds list
-Feed                   Group                  LastSync                           RecordCount        
-nvd                    nvddb:2002             2018-06-08T12:10:08.933467Z        6745               
-nvd                    nvddb:2003             2018-06-08T12:10:06.822104Z        1546               
+Feed                   Group                  LastSync                           RecordCount
+nvd                    nvddb:2002             2018-06-08T12:10:08.933467Z        6745
+nvd                    nvddb:2003             2018-06-08T12:10:06.822104Z        1546
 ...
 ...
-vulnerabilities        alpine:3.3             2018-06-08T17:28:53.876964Z        457                
-vulnerabilities        alpine:3.4             2018-06-08T12:09:30.389172Z        594                
+vulnerabilities        alpine:3.3             2018-06-08T17:28:53.876964Z        457
+vulnerabilities        alpine:3.4             2018-06-08T12:09:30.389172Z        594
 ...
 ...
 ```
