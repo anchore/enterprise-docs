@@ -8,6 +8,8 @@ weight: 1
 
 In this section, you'll learn how to get up and running with a stand-alone Anchore Enterprise installation for trial, demonstration, and review with [Docker Compose](https://docs.docker.com/compose/install/). If you are specifically looking for a quickstart for Anchore Engine OSS alone, please jump to [Anchore Engine Quickstart]({{< ref "/docs/engine/quickstart" >}}).
 
+The quickstart docker-compose.yaml file is available [here](./docker-compose.yaml)
+
 **Note:** If your intent is to gain a deeper understanding of Anchore and its concepts, we recommend navigating to the [Overview]({{< ref "/docs/overview" >}}) section prior to conducting an [installation]({{< ref "/docs/installation" >}}) of Anchore Enterprise.
 
 ## Requirements
@@ -18,80 +20,46 @@ The following instructions assume you are using a system running Docker v1.12 or
 * In order to access the Anchore Enterprise, you will also require a valid `license.yaml` file that has been issued to you by Anchore.  If you do not have a license yet, visit this [page](https://info.anchore.com/contact) for instructions on how to request one.
 
 
-### Step 1: Setup installation location
+### Step 1: Ensure you can authenticate to DockerHub to pull the images
 
-Create a directory in which to store your configuration files and license file.
-```
-mkdir ~/aevolume
-```
-
-### Step 2: Copy configuration files
-
-Download the latest Anchore Enterprise container image, which contains the necessary `docker-compose.yaml` and configuration files that will be used for the deployment.   In order to be able to download the container, you'll need to login to docker (if you are not logged in already) using the dockerhub account that you provided to Anchore when you requested your license.
+You'll need authenticated access to the `anchore/enterprise` and `anchore/enterprise-ui` repositories on DockerHub. Anchore support should have granted your DockerHub user access when you recewived your license.
 
 ```
 # docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 Username: <your_dockerhub_account>
 Password: <your_dockerhub_password>
-
-# docker pull docker.io/anchore/enterprise:latest
 ```
 
-Next, copy the included docker-compose.yaml to the ~/aevolume/ directory.
+### Step 2: Download compose, copy license and start.
 
+ Now, ensure the license.yaml file you got from Anchore Sales/Support is in the directory where you want to run the containers from, then download the compose file and start it.
 ```
-# docker create --name ae docker.io/anchore/enterprise:latest
-# docker cp ae:/docker-compose.yaml ~/aevolume/docker-compose.yaml
-# docker rm ae
-```
-
-Finally, copy the license.yaml file that was provided to you into the ~/aevolume/ directory.
-
-```
-# cp /path/to/your/license.yaml ~/aevolume/license.yaml
-```
-
-Once these steps are complete, your ~/aevolume/ workspace should now look like this:
-
-```
-# ls ~/aevolume
-docker-compose.yaml
-license.yaml
-```
-
-### Step 3: Download and run the containers
-
-Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.  
-NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart 
-
-```
-# cd ~/aevolume
-# docker-compose pull
+# cp <path/to/your/license.yaml> ./license.yaml
+# curl https://docs.anchore.com/current/docs/quickstart/docker-compose.yaml > docker-compose.yaml
 # docker-compose up -d
 ```
 
-### Step 4: Verify service availability
+### Step 3: Verify service availability
 
 After a few moments (depending on system speed), your Anchore Engine, Anchore Enterprise, and Anchore UI services should be up and running, ready to use.  You can verify the containers are running with docker-compose:
 
 ```
-# cd ~/aevolume
 # docker-compose ps
-                Name                               Command               State           Ports         
+                Name                               Command                        State           Ports         
 -------------------------------------------------------------------------------------------------------
-aevolume_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp              
-aevolume_anchore-gems-db_1              docker-entrypoint.sh postgres    Up      5432/tcp              
-aevolume_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
-aevolume_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
-aevolume_enterprise-feeds_1             /docker-entrypoint.sh anch ...   Up      0.0.0.0:8448->8228/tcp
-aevolume_enterprise-rbac-authorizer_1   /docker-entrypoint.sh anch ...   Up      8089/tcp, 8228/tcp    
-aevolume_enterprise-rbac-manager_1      /docker-entrypoint.sh anch ...   Up      0.0.0.0:8229->8228/tcp
-aevolume_enterprise-ui-redis_1          docker-entrypoint.sh redis ...   Up      6379/tcp              
-aevolume_enterprise-ui_1                /bin/sh -c node /home/node ...   Up      0.0.0.0:3000->3000/tcp
+anchorequickstart_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp              
+anchorequickstart_anchore-gems-db_1              docker-entrypoint.sh postgres    Up      5432/tcp              
+anchorequickstart_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp              
+anchorequickstart_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
+anchorequickstart_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
+anchorequickstart_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp              
+anchorequickstart_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
+anchorequickstart_enterprise-feeds_1             /docker-entrypoint.sh anch ...   Up      0.0.0.0:8448->8228/tcp
+anchorequickstart_enterprise-rbac-authorizer_1   /docker-entrypoint.sh anch ...   Up      8089/tcp, 8228/tcp    
+anchorequickstart_enterprise-rbac-manager_1      /docker-entrypoint.sh anch ...   Up      0.0.0.0:8229->8228/tcp
+anchorequickstart_enterprise-ui-redis_1          docker-entrypoint.sh redis ...   Up      6379/tcp              
+anchorequickstart_enterprise-ui_1                /bin/sh -c node /home/node ...   Up      0.0.0.0:3000->3000/tcp
 ```
 
 You can run a command to get the status of the Anchore Engine services:
@@ -99,7 +67,6 @@ You can run a command to get the status of the Anchore Engine services:
 
 
 ```
-# cd ~/aevolume
 # docker-compose exec engine-api anchore-cli system status
 Service policy_engine (anchore-quickstart, http://engine-policy-engine:8228): up
 Service rbac_authorizer (anchore-quickstart, http://enterprise-rbac-authorizer:8228): up
@@ -116,7 +83,6 @@ Engine Code Version: 0.3.0-dev
 **Note:** The first time you run Anchore Enterprise, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
 
 ```
-# cd ~/aevolume
 # docker-compose exec engine-api anchore-cli system feeds list
 Feed                   Group                  LastSync                           RecordCount        
 vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457                
@@ -151,12 +117,11 @@ vulnerabilities        ubuntu:18.04           None                              
 
 As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Enterprise it will be ready immediately.
 
-### Step 5: Start using Anchore
+### Step 4: Start using Anchore
 
 To get started, you can add a few images to Anchore Engine using the CLI. Once this is done, you can also run an additional CLI command to monitor the analysis state of the added images, waiting until the images move into an 'analyzed' state.
 
 ```
-# cd ~/aevolume
 # docker-compose exec engine-api anchore-cli image add docker.io/library/alpine:latest
 ...
 ...

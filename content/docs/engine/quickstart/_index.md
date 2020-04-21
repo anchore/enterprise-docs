@@ -8,6 +8,8 @@ weight: 1
 
 In this section, you'll learn how to get up and running with a stand-alone Anchore Engine installation for trial, demonstration and review with [Docker Compose](https://docs.docker.com/compose/install/).
 
+The quickstart docker-compose.yaml file is available [here](./docker-compose.yaml)
+
 ## Requirements
 
 The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.
@@ -15,70 +17,32 @@ The following instructions assume you are using a system running Docker v1.12 or
 * A stand-alone installation will requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (basic Linux distro images, database images, etc), between 5GB and 10GB of disk space should be sufficient.
 
 
-### Step 1: Setup installation location
-
-Create a directory in which to store your configuration files.
-```
-mkdir ~/aevolume
-cd ~/aevolume
-```
-
-### Step 2: Copy configuration files
-
-Download the latest Anchore Engine container image, which contains the necessary `docker-compose.yaml` and configuration files that the deployment requires.
-```
-# docker pull docker.io/anchore/anchore-engine:latest
-```
-
-Next, copy the included docker-compose.yaml to the ~/aevolume/ directory.
+### Step 1: Download the docker-compose.yaml file and start.
 
 ```
-# docker create --name ae docker.io/anchore/anchore-engine:latest
-# docker cp ae:/docker-compose.yaml ~/aevolume/docker-compose.yaml
-# docker rm ae
-```
-
-Once these steps are complete, your ~/aevolume/ workspace should now look like this:
-
-```
-# cd ~/aevolume
-# find .
-.
-./docker-compose.yaml
-```
-
-### Step 3: Download and run the containers
-
-Download the containers listed in the `docker-compose.yaml`, and run the entire setup using the docker-compose CLI.
-NOTE: by default, all services (including a bundled DB instance) will be transient, and data will be lost if you shut down/restart
-
-```
-# cd ~/aevolume
-# docker-compose pull
+# curl https://docs.anchore.com/current/docs/engine/quickstart/docker-compose.yaml > docker-compose.yaml
 # docker-compose up -d
 ```
 
-### Step 4: Verify service availability
+### Step 2: Verify service availability
 
 After a few moments (depending on system speed), your Anchore Engine services should be up and running, ready to use.  You can verify the containers are running with docker-compose:
 
 ```
-# cd ~/aevolume
 # docker-compose ps
-                Name                               Command               State           Ports
+                Name                               Command                        State           Ports
 -------------------------------------------------------------------------------------------------------
-aevolume_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp
-aevolume_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp
-aevolume_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
-aevolume_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
-aevolume_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp
-aevolume_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
+anchorequickstart_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp
+anchorequickstart_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp
+anchorequickstart_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
+anchorequickstart_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
+anchorequickstart_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp
+anchorequickstart_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp
 ```
 
 You can run a command to get the status of the Anchore Engine services:
 
 ```
-# cd ~/aevolume
 # docker-compose exec engine-api anchore-cli system status
 Service policy_engine (anchore-quickstart, http://engine-policy-engine:8228): up
 Service simplequeue (anchore-quickstart, http://engine-simpleq:8228): up
@@ -93,7 +57,6 @@ Engine Code Version: 0.4.0
 **Note:** The first time you run Anchore Engine, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
 
 ```
-# cd ~/aevolume
 # docker-compose exec engine-api anchore-cli system feeds list
 Feed                   Group                  LastSync                           RecordCount
 vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457
@@ -143,7 +106,7 @@ Feed sync: Success.
 
 ```
 
-### Step 5: Begin using Anchore
+### Step 3: Begin using Anchore
 
 Start using the anchore-engine service to analyze images - a short example follows which demonstrates a basic workflow of adding a container image for analysis, waiting for the analysis to complete, then running content reports, vulnerability scans and policy evaluations against the analyzed image.
 
