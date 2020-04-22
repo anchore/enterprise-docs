@@ -22,7 +22,7 @@ The following instructions assume you are using a system running Docker v1.12 or
 
 ### Step 1: Ensure you can authenticate to DockerHub to pull the images
 
-You'll need authenticated access to the `anchore/enterprise` and `anchore/enterprise-ui` repositories on DockerHub. Anchore support should have granted your DockerHub user access when you recewived your license.
+You'll need authenticated access to the `anchore/enterprise` and `anchore/enterprise-ui` repositories on DockerHub. Anchore support should have granted your DockerHub user access when you received your license.
 
 ```
 # docker login
