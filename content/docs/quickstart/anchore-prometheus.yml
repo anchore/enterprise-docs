@@ -1,0 +1,70 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: []
+    scheme: http
+    timeout: 10s
+scrape_configs:
+- job_name: anchore-api
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - engine-api:8228
+  basic_auth:
+    username: admin
+    password: foobar
+
+- job_name: anchore-catalog
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - engine-catalog:8228
+  basic_auth:
+    username: admin
+    password: foobar
+
+- job_name: anchore-simplequeue
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - engine-simpleq:8228
+  basic_auth:
+    username: admin
+    password: foobar
+
+- job_name: anchore-analyzer
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - engine-analyzer:8228
+  basic_auth:
+    username: admin
+    password: foobar
+
+- job_name: anchore-policy-engine
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - engine-policy-engine:8228
+  basic_auth:
+    username: admin
+    password: foobar

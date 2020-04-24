@@ -18,7 +18,7 @@ services:
   api:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - db
+    - anchore-db
     - catalog
     volumes:
     - ./license.yaml:/license.yaml:ro
@@ -31,7 +31,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=api
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_AUTHZ_HANDLER=external
     - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
@@ -45,7 +45,7 @@ services:
   catalog:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - db
+    - anchore-db
     volumes:
     - ./license.yaml:/license.yaml:ro
     #- ./config-engine.yaml:/config/config.yaml:z
@@ -57,7 +57,7 @@ services:
     - 8228
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=catalog
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_LOG_LEVEL=INFO
@@ -66,10 +66,10 @@ services:
     #- ANCHORE_OAUTH_ENABLED=true
     #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
-  simpleq:
+  queue:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - db
+    - anchore-db
     - catalog
     volumes:
     - ./license.yaml:/license.yaml:ro
@@ -81,8 +81,8 @@ services:
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=simpleq
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_ENDPOINT_HOSTNAME=queue
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_LOG_LEVEL=INFO
@@ -93,7 +93,7 @@ services:
   policy-engine:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - db
+    - anchore-db
     - catalog
     volumes:
     - ./license.yaml:/license.yaml:ro
@@ -106,7 +106,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=policy-engine
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_LOG_LEVEL=INFO
@@ -121,7 +121,7 @@ services:
   analyzer:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - db
+    - anchore-db
     - catalog
     expose:
     - 8228
@@ -131,7 +131,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=analyzer
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_LOG_LEVEL=INFO
@@ -143,7 +143,7 @@ services:
     - anchore-scratch:/analysis_scratch
     #- ./config-engine.yaml:/config/config.yaml:z
     command: ["anchore-enterprise-manager", "service", "start",  "analyzer"]
-  db:
+  anchore-db:
     image: "postgres:9"
     volumes:
     - anchore-db-volume:/var/lib/postgresql/data
@@ -161,7 +161,7 @@ services:
     - ./license.yaml:/license.yaml:ro
     #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
-    - db
+    - anchore-db
     - catalog
     expose:
     - 8089
@@ -171,7 +171,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=rbac-authorizer
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_LOG_LEVEL=INFO
@@ -185,7 +185,7 @@ services:
     - ./license.yaml:/license.yaml:ro
     #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
-    - db
+    - anchore-db
     - catalog
     ports:
     - "8229:8228"
@@ -195,7 +195,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=rbac-manager
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_AUTHZ_HANDLER=external
     - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
@@ -210,7 +210,7 @@ services:
     volumes:
     - ./license.yaml:/license.yaml:ro
     depends_on:
-    - db
+    - anchore-db
     - catalog
     ports:
     - "8558:8228"
@@ -220,7 +220,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=reports
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_AUTHZ_HANDLER=external
@@ -235,7 +235,7 @@ services:
     volumes:
     - ./license.yaml:/license.yaml:ro
     depends_on:
-    - db
+    - anchore-db
     - catalog
     ports:
     - "8668:8228"
@@ -245,7 +245,7 @@ services:
         max-size: 100m
     environment:
     - ANCHORE_ENDPOINT_HOSTNAME=notifications
-    - ANCHORE_DB_HOST=db
+    - ANCHORE_DB_HOST=anchore-db
     - ANCHORE_DB_PASSWORD=mysecretpassword
     - ANCHORE_ENABLE_METRICS=false
     - ANCHORE_AUTHZ_HANDLER=external
@@ -272,7 +272,7 @@ services:
     depends_on:
     - api
     - ui-redis
-    - db
+    - anchore-db
     ports:
     - "3000:3000"
     logging:
@@ -283,15 +283,16 @@ services:
     - ANCHORE_ENGINE_URI=http://api:8228/v1
     - ANCHORE_RBAC_URI=http://rbac-manager:8228/v1
     - ANCHORE_REDIS_URI=redis://ui-redis:6379
-    - ANCHORE_APPDB_URI=postgres://postgres:mysecretpassword@db:5432/postgres
+    - ANCHORE_APPDB_URI=postgres://postgres:mysecretpassword@anchore-db:5432/postgres
     - ANCHORE_REPORTS_URI=http://reports:8228/v1
     - ANCHORE_POLICY_HUB_URI=https://hub.anchore.io
+    - ANCHORE_NOTIFICATIONS_URI=http://notifications:8228/v1
 
-# Uncomment this sectionto add an on-prem feed service to this deployment. This will incur first-time feed sync delay, but is included for completeness / review of enterprise service deployment options
+# Uncomment this section to add an on-prem feed service to this deployment. This will incur first-time feed sync delay, but is included for completeness / review of enterprise service deployment options
 #  enterprise-feeds-db:
 #    image: "postgres:9"
 #    volumes:
-#    - feeds-db-volume:/var/lib/postgresql/data
+#    - enterprise-feeds-db-volume:/var/lib/postgresql/data
 #    environment:
 #    - POSTGRES_PASSWORD=mysecretpassword
 #    expose:
@@ -307,7 +308,7 @@ services:
 #    - ./license.yaml:/license.yaml:ro
 #    #- ./config-enterprise.yaml:/config/config.yaml:z
 #    depends_on:
-#    - feeds-db
+#    - enterprise-feeds-db
 #    ports:
 #    - "8448:8228"
 #    logging:
@@ -316,17 +317,17 @@ services:
 #        max-size: 100m
 #    environment:
 #    - ANCHORE_ENDPOINT_HOSTNAME=feeds
-#    - ANCHORE_DB_HOST=feeds-db
+#    - ANCHORE_DB_HOST=enterprise-feeds-db
 #    - ANCHORE_DB_PASSWORD=mysecretpassword
 #    - ANCHORE_ENABLE_METRICS=false
 #    - ANCHORE_LOG_LEVEL=INFO
 #    # Uncomment the following to enable Microsoft msrc driver. Follow https://portal.msrc.microsoft.com/en-us/developer to generate an API key
 #    #- ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_ENABLED=true
-#    #- ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=api-key
+#    #- ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=${ANCHORE_MSRC_KEY}
 #    # Uncomment ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN for github driver.
 #    # Generate token with https://github.com/settings/tokens/new?scopes=user,public_repo,repo,repo_deployment,repo:status,read:repo_hook,read:org,read:public_key,read:gpg_key
 #    # and assign the value to environment variable
-#    #- ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN=github_token
+#    #- ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN=${ANCHORE_GITHUB_KEY}
 #    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
 #    #- ANCHORE_OAUTH_ENABLED=true
 #    #- ANCHORE_AUTH_SECRET=supersharedsecret
