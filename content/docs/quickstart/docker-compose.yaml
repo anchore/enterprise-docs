@@ -5,7 +5,6 @@ volumes:
   anchore-db-volume:
     # Set this to 'true' to use an external volume. In which case, it must be created manually with "docker volume create anchore-db-volume"
     external: false
-  anchore-scratch: {}
   feeds-workspace-volume:
     # Set this to 'true' to use an external volume. In which case, it must be created manually with "docker volume create feeds-workspace-volume"
     external: false
@@ -140,7 +139,7 @@ services:
 #      - ANCHORE_AUTH_SECRET=supersharedsecret
     volumes:
       - ./license.yaml:/license.yaml:ro
-      - anchore-scratch:/analysis_scratch
+      - /analysis_scratch
     #- ./config-engine.yaml:/config/config.yaml:z
     command: ["anchore-enterprise-manager", "service", "start",  "analyzer"]
   anchore-db:
