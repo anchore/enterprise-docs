@@ -18,139 +18,139 @@ services:
   api:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-engine.yaml:/config/config.yaml:z
     ports:
-    - "8228:8228"
+      - "8228:8228"
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=api
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_AUTHZ_HANDLER=external
-    - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=api
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_AUTHZ_HANDLER=external
+      - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "apiext"]
   # Catalog is the primary persistence and state manager of the system
   catalog:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - anchore-db
+      - anchore-db
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-engine.yaml:/config/config.yaml:z
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     expose:
-    - 8228
+      - 8228
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=catalog
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    - ANCHORE_CATALOG_NOTIFICATION_INTERVAL_SEC=0
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=catalog
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      - ANCHORE_CATALOG_NOTIFICATION_INTERVAL_SEC=0
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
   queue:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-engine.yaml:/config/config.yaml:z
     expose:
-    - 8228
+      - 8228
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=queue
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=queue
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "simplequeue"]
   policy-engine:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-engine.yaml:/config/config.yaml:z
     expose:
-    - 8228
+      - 8228
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=policy-engine
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment the ANCHORE_FEEDS_* environment variables (and uncomment the feeds db and service sections at the end of this file) to use the on-prem feed service
-    #- ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
-    #- ANCHORE_FEEDS_CLIENT_URL=null
-    #- ANCHORE_FEEDS_TOKEN_URL=null
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=policy-engine
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment the ANCHORE_FEEDS_* environment variables (and uncomment the feeds db and service sections at the end of this file) to use the on-prem feed service
+#      - ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
+#      - ANCHORE_FEEDS_CLIENT_URL=null
+#      - ANCHORE_FEEDS_TOKEN_URL=null
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "policy_engine"]
   analyzer:
     image: docker.io/anchore/enterprise:v2.3.0
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     expose:
-    - 8228
+      - 8228
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=analyzer
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=analyzer
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     volumes:
-    - ./license.yaml:/license.yaml:ro
-    - anchore-scratch:/analysis_scratch
+      - ./license.yaml:/license.yaml:ro
+      - anchore-scratch:/analysis_scratch
     #- ./config-engine.yaml:/config/config.yaml:z
     command: ["anchore-enterprise-manager", "service", "start",  "analyzer"]
   anchore-db:
     image: "postgres:9"
     volumes:
-    - anchore-db-volume:/var/lib/postgresql/data
+      - anchore-db-volume:/var/lib/postgresql/data
     environment:
-    - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=mysecretpassword
     expose:
-    - 5432
+      - 5432
     logging:
       driver: "json-file"
       options:
@@ -158,108 +158,108 @@ services:
   rbac-authorizer:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     expose:
-    - 8089
+      - 8089
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=rbac-authorizer
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=rbac-authorizer
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_authorizer"]
   rbac-manager:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     ports:
-    - "8229:8228"
+      - "8229:8228"
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=rbac-manager
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_AUTHZ_HANDLER=external
-    - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=rbac-manager
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_AUTHZ_HANDLER=external
+      - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_manager"]
   reports:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     ports:
-    - "8558:8228"
+      - "8558:8228"
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=reports
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_AUTHZ_HANDLER=external
-    - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
-    - ANCHORE_LOG_LEVEL=INFO
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=reports
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_AUTHZ_HANDLER=external
+      - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "reports"]
   notifications:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     depends_on:
-    - anchore-db
-    - catalog
+      - anchore-db
+      - catalog
     ports:
-    - "8668:8228"
+      - "8668:8228"
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENDPOINT_HOSTNAME=notifications
-    - ANCHORE_DB_HOST=anchore-db
-    - ANCHORE_DB_PASSWORD=mysecretpassword
-    - ANCHORE_ENABLE_METRICS=false
-    - ANCHORE_AUTHZ_HANDLER=external
-    - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
-    - ANCHORE_LOG_LEVEL=INFO
-    - ANCHORE_ENTERPRISE_UI_URL=http://localhost:3000
-    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-    #- ANCHORE_OAUTH_ENABLED=true
-    #- ANCHORE_AUTH_SECRET=supersharedsecret
+      - ANCHORE_ENDPOINT_HOSTNAME=notifications
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_AUTHZ_HANDLER=external
+      - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
+      - ANCHORE_LOG_LEVEL=INFO
+      - ANCHORE_ENTERPRISE_UI_URL=http://localhost:3000
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "notifications"]
   ui-redis:
     image: "docker.io/library/redis:4"
     expose:
-    - 6379
+      - 6379
     logging:
       driver: "json-file"
       options:
@@ -267,36 +267,36 @@ services:
   ui:
     image: docker.io/anchore/enterprise-ui:v2.3.0
     volumes:
-    - ./license.yaml:/license.yaml:ro
+      - ./license.yaml:/license.yaml:ro
     #- ./config-ui.yaml:/config/config-ui.yaml:z
     depends_on:
-    - api
-    - ui-redis
-    - anchore-db
+      - api
+      - ui-redis
+      - anchore-db
     ports:
-    - "3000:3000"
+      - "3000:3000"
     logging:
       driver: "json-file"
       options:
         max-size: 100m
     environment:
-    - ANCHORE_ENGINE_URI=http://api:8228/v1
-    - ANCHORE_RBAC_URI=http://rbac-manager:8228/v1
-    - ANCHORE_REDIS_URI=redis://ui-redis:6379
-    - ANCHORE_APPDB_URI=postgres://postgres:mysecretpassword@anchore-db:5432/postgres
-    - ANCHORE_REPORTS_URI=http://reports:8228/v1
-    - ANCHORE_POLICY_HUB_URI=https://hub.anchore.io
-    - ANCHORE_NOTIFICATIONS_URI=http://notifications:8228/v1
+      - ANCHORE_ENGINE_URI=http://api:8228/v1
+      - ANCHORE_RBAC_URI=http://rbac-manager:8228/v1
+      - ANCHORE_REDIS_URI=redis://ui-redis:6379
+      - ANCHORE_APPDB_URI=postgres://postgres:mysecretpassword@anchore-db:5432/postgres
+      - ANCHORE_REPORTS_URI=http://reports:8228/v1
+      - ANCHORE_POLICY_HUB_URI=https://hub.anchore.io
+      - ANCHORE_NOTIFICATIONS_URI=http://notifications:8228/v1
 
-# Uncomment this section to add an on-prem feed service to this deployment. This will incur first-time feed sync delay, but is included for completeness / review of enterprise service deployment options
+  # Uncomment this section to add an on-prem feed service to this deployment. This will incur first-time feed sync delay, but is included for completeness / review of enterprise service deployment options
 #  enterprise-feeds-db:
 #    image: "postgres:9"
 #    volumes:
-#    - enterprise-feeds-db-volume:/var/lib/postgresql/data
+#      - enterprise-feeds-db-volume:/var/lib/postgresql/data
 #    environment:
-#    - POSTGRES_PASSWORD=mysecretpassword
+#      - POSTGRES_PASSWORD=mysecretpassword
 #    expose:
-#    - 5432
+#      - 5432
 #    logging:
 #      driver: "json-file"
 #      options:
@@ -304,68 +304,68 @@ services:
 #  feeds:
 #    image: docker.io/anchore/enterprise:v2.3.0
 #    volumes:
-#    - feeds-workspace-volume:/workspace
-#    - ./license.yaml:/license.yaml:ro
+#      - feeds-workspace-volume:/workspace
+#      - ./license.yaml:/license.yaml:ro
 #    #- ./config-enterprise.yaml:/config/config.yaml:z
 #    depends_on:
-#    - enterprise-feeds-db
+#      - enterprise-feeds-db
 #    ports:
-#    - "8448:8228"
+#      - "8448:8228"
 #    logging:
 #      driver: "json-file"
 #      options:
 #        max-size: 100m
 #    environment:
-#    - ANCHORE_ENDPOINT_HOSTNAME=feeds
-#    - ANCHORE_DB_HOST=enterprise-feeds-db
-#    - ANCHORE_DB_PASSWORD=mysecretpassword
-#    - ANCHORE_ENABLE_METRICS=false
-#    - ANCHORE_LOG_LEVEL=INFO
-#    # Uncomment the following to enable Microsoft msrc driver. Follow https://portal.msrc.microsoft.com/en-us/developer to generate an API key
-#    #- ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_ENABLED=true
-#    #- ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=${ANCHORE_MSRC_KEY}
-#    # Uncomment ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN for github driver.
-#    # Generate token with https://github.com/settings/tokens/new?scopes=user,public_repo,repo,repo_deployment,repo:status,read:repo_hook,read:org,read:public_key,read:gpg_key
-#    # and assign the value to environment variable
-#    #- ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN=${ANCHORE_GITHUB_KEY}
-#    # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#    #- ANCHORE_OAUTH_ENABLED=true
-#    #- ANCHORE_AUTH_SECRET=supersharedsecret
+#      - ANCHORE_ENDPOINT_HOSTNAME=feeds
+#      - ANCHORE_DB_HOST=enterprise-feeds-db
+#      - ANCHORE_DB_PASSWORD=mysecretpassword
+#      - ANCHORE_ENABLE_METRICS=false
+#      - ANCHORE_LOG_LEVEL=INFO
+#      # Uncomment the following to enable Microsoft msrc driver. Follow https://portal.msrc.microsoft.com/en-us/developer to generate an API key
+#      - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_ENABLED=true
+#      - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=${ANCHORE_MSRC_KEY}
+#      # Uncomment ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN for github driver.
+#      # Generate token with https://github.com/settings/tokens/new?scopes=user,public_repo,repo,repo_deployment,repo:status,read:repo_hook,read:org,read:public_key,read:gpg_key
+#      # and assign the value to environment variable
+#      - ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN=${ANCHORE_GITHUB_KEY}
+#      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+#      - ANCHORE_OAUTH_ENABLED=true
+#      - ANCHORE_AUTH_SECRET=supersharedsecret
 #    command: ["anchore-enterprise-manager", "service", "start",  "feeds"]
-
-# Uncomment this sectionto add a prometheus instance to gather metrics. This is mostly for quickstart to demonstrate prometheus metrics exported
+#
+#  # Uncomment this sectionto add a prometheus instance to gather metrics. This is mostly for quickstart to demonstrate prometheus metrics exported
 #  prometheus:
-#      image: docker.io/prom/prometheus:latest
-#      depends_on:
-#       - api
-#      volumes:
-#       - ./anchore-prometheus.yml:/etc/prometheus/prometheus.yml:z
-#      logging:
-#       driver: "json-file"
-#       options:
+#    image: docker.io/prom/prometheus:latest
+#    depends_on:
+#      - api
+#    volumes:
+#      - ./anchore-prometheus.yml:/etc/prometheus/prometheus.yml:z
+#    logging:
+#      driver: "json-file"
+#      options:
 #        max-size: 100m
-#      ports:
-#       - "9090:9090"
-
-# Uncomment this section to run a swagger UI service, for inspecting and interacting with the anchore engine API via a browser (http://localhost:8080 by default, change if needed in both sections below)
+#    ports:
+#      - "9090:9090"
+#
+#  # Uncomment this section to run a swagger UI service, for inspecting and interacting with the anchore engine API via a browser (http://localhost:8080 by default, change if needed in both sections below)
 #  swagger-ui-nginx:
 #    image: docker.io/nginx:latest
 #    depends_on:
-#     - api
-#     - swagger-ui
+#      - api
+#      - swagger-ui
 #    ports:
-#     - "8080:8080"
+#      - "8080:8080"
 #    volumes:
-#     - ./anchore-swaggerui-nginx.conf:/etc/nginx/nginx.conf:z
+#      - ./anchore-swaggerui-nginx.conf:/etc/nginx/nginx.conf:z
 #    logging:
-#     driver: "json-file"
-#     options:
-#      max-size: 100m
+#      driver: "json-file"
+#      options:
+#        max-size: 100m
 #  swagger-ui:
 #    image: docker.io/swaggerapi/swagger-ui
 #    environment:
 #      - URL=http://localhost:8080/v1/swagger.json
 #    logging:
-#     driver: "json-file"
-#     options:
-#      max-size: 100m
+#      driver: "json-file"
+#      options:
+#        max-size: 100m
