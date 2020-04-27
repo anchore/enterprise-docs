@@ -12,7 +12,10 @@ To enable windows support in the quickstart install docker-compose.yaml file you
 
 1. Enable the feeds service to run. Uncomment the feeds service and enterprise-feeds-db services in docker-compose.yaml
 
-    The following also includes the GitHub advisories feed for NuGet/.NET support and for parity with the hosted feed service.
+   The following also includes the GitHub advisories feed for NuGet/.NET support and for parity with the hosted feed service.
+
+   Note that you will need to obtain and provide access tokens for MS and GitHub vulnerability feed configuration.  See the comments inline for instructions on how to obtain these tokens.
+
 
     ```
     services:
@@ -81,9 +84,13 @@ To enable windows support in the quickstart install docker-compose.yaml file you
 
 1. Start/Restart the deployment: `docker-compose up -d`
 
-1. Wait for vulnerability data to sync:
-`docker-compose exec api anchore-cli system feeds list` should show 'msrc' group data syncing as rows are populated.
-Verify with `anchore-cli event list` should show a feed sync complete event for the 'microsoft' feed.
+1. Wait for vulnerability data to sync.  Now that your installation includes a local feed service, you must first wait for the local feed service to populate, and then for your Anchore Enterprise policy engine to synchronize its feeds with the new local service.  This can take several hours for the initial sync, depending on network and local resource speeds.  Eventually, executing the following command:
+
+```
+# docker-compose exec api anchore-cli system feeds list
+```
+
+will show 'msrc' group data entries. In addition, you caqn verify with `anchore-cli event list` to show a feed sync complete event for the 'microsoft' feed.
 
 1. Scan windows images! Either via the UI, or CLI analyze windows-based images
 

@@ -46,99 +46,145 @@ After a few moments (depending on system speed), your Anchore Engine, Anchore En
 
 ```
 # docker-compose ps
-                Name                               Command                        State           Ports         
+             Name                           Command                  State               Ports         
 -------------------------------------------------------------------------------------------------------
-anchorequickstart_anchore-db_1                   docker-entrypoint.sh postgres    Up      5432/tcp              
-anchorequickstart_anchore-gems-db_1              docker-entrypoint.sh postgres    Up      5432/tcp              
-anchorequickstart_engine-analyzer_1              /docker-entrypoint.sh anch ...   Up      8228/tcp              
-anchorequickstart_engine-api_1                   /docker-entrypoint.sh anch ...   Up      0.0.0.0:8228->8228/tcp
-anchorequickstart_engine-catalog_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
-anchorequickstart_engine-policy-engine_1         /docker-entrypoint.sh anch ...   Up      8228/tcp              
-anchorequickstart_engine-simpleq_1               /docker-entrypoint.sh anch ...   Up      8228/tcp              
-anchorequickstart_enterprise-feeds_1             /docker-entrypoint.sh anch ...   Up      0.0.0.0:8448->8228/tcp
-anchorequickstart_enterprise-rbac-authorizer_1   /docker-entrypoint.sh anch ...   Up      8089/tcp, 8228/tcp    
-anchorequickstart_enterprise-rbac-manager_1      /docker-entrypoint.sh anch ...   Up      0.0.0.0:8229->8228/tcp
-anchorequickstart_enterprise-ui-redis_1          docker-entrypoint.sh redis ...   Up      6379/tcp              
-anchorequickstart_enterprise-ui_1                /bin/sh -c node /home/node ...   Up      0.0.0.0:3000->3000/tcp
+anchorequickstart_analyzer_1          /docker-entrypoint.sh anch ...   Up (healthy)   8228/tcp              
+anchorequickstart_anchore-db_1        docker-entrypoint.sh postgres    Up             5432/tcp              
+anchorequickstart_api_1               /docker-entrypoint.sh anch ...   Up (healthy)   0.0.0.0:8228->8228/tcp
+anchorequickstart_catalog_1           /docker-entrypoint.sh anch ...   Up (healthy)   8228/tcp              
+anchorequickstart_notifications_1     /docker-entrypoint.sh anch ...   Up (healthy)   0.0.0.0:8668->8228/tcp
+anchorequickstart_policy-engine_1     /docker-entrypoint.sh anch ...   Up (healthy)   8228/tcp              
+anchorequickstart_queue_1             /docker-entrypoint.sh anch ...   Up (healthy)   8228/tcp              
+anchorequickstart_rbac-authorizer_1   /docker-entrypoint.sh anch ...   Up (healthy)   8089/tcp, 8228/tcp    
+anchorequickstart_rbac-manager_1      /docker-entrypoint.sh anch ...   Up (healthy)   0.0.0.0:8229->8228/tcp
+anchorequickstart_reports_1           /docker-entrypoint.sh anch ...   Up (healthy)   0.0.0.0:8558->8228/tcp
+anchorequickstart_ui-redis_1          docker-entrypoint.sh redis ...   Up             6379/tcp              
+anchorequickstart_ui_1                /docker-entrypoint.sh node ...   Up             0.0.0.0:3000->3000/tcp
 ```
 
 You can run a command to get the status of the Anchore Engine services:
 
-
-
 ```
-# docker-compose exec engine-api anchore-cli system status
-Service policy_engine (anchore-quickstart, http://engine-policy-engine:8228): up
-Service rbac_authorizer (anchore-quickstart, http://enterprise-rbac-authorizer:8228): up
-Service rbac_manager (anchore-quickstart, http://enterprise-rbac-manager:8228): up
-Service simplequeue (anchore-quickstart, http://engine-simpleq:8228): up
-Service catalog (anchore-quickstart, http://engine-catalog:8228): up
-Service analyzer (anchore-quickstart, http://engine-analyzer:8228): up
-Service apiext (anchore-quickstart, http://engine-api:8228): up
+# docker-compose exec api anchore-cli system status
+Service rbac_manager (anchore-quickstart, http://rbac-manager:8228): up
+Service apiext (anchore-quickstart, http://api:8228): up
+Service analyzer (anchore-quickstart, http://analyzer:8228): up
+Service simplequeue (anchore-quickstart, http://queue:8228): up
+Service catalog (anchore-quickstart, http://catalog:8228): up
+Service reports (anchore-quickstart, http://reports:8228): up
+Service notifications (anchore-quickstart, http://notifications:8228): up
+Service rbac_authorizer (anchore-quickstart, http://rbac-authorizer:8228): up
+Service policy_engine (anchore-quickstart, http://policy-engine:8228): up
 
-Engine DB Version: 0.0.8
-Engine Code Version: 0.3.0-dev
+Engine DB Version: 0.0.4
+Engine Code Version: 2.3.0
+
 ```
 
 **Note:** The first time you run Anchore Enterprise, it will take some time (10+ minutes, depending on network speed) for the vulnerability data to get synced into the engine.  For the best experience, wait until the core vulnerability data feeds have completed before proceeding.  You can check the status of your feed sync using the CLI:
 
 ```
-# docker-compose exec engine-api anchore-cli system feeds list
-Feed                   Group                  LastSync                           RecordCount        
-vulnerabilities        alpine:3.3             2018-06-27T17:13:53.509309Z        457                
-vulnerabilities        alpine:3.4             2018-06-27T17:13:59.103245Z        594                
-vulnerabilities        alpine:3.5             2018-06-27T17:14:05.000942Z        649                
-vulnerabilities        alpine:3.6             2018-06-27T17:14:10.606606Z        632                
-vulnerabilities        alpine:3.7             2018-06-27T17:14:17.673851Z        767                
-vulnerabilities        centos:5               2018-06-27T17:14:46.616051Z        1270               
-vulnerabilities        centos:6               2018-06-27T17:15:18.600668Z        1266               
-vulnerabilities        centos:7               2018-06-27T17:15:41.468527Z        657                
-vulnerabilities        debian:10              2018-06-27T17:18:16.960078Z        17494              
-vulnerabilities        debian:7               2018-06-27T17:21:20.058941Z        20455              
-vulnerabilities        debian:8               None                               0                  
-vulnerabilities        debian:9               None                               0                  
-vulnerabilities        debian:unstable        None                               0                  
-vulnerabilities        ol:5                   None                               0                  
-vulnerabilities        ol:6                   None                               0                  
-vulnerabilities        ol:7                   None                               0                  
-vulnerabilities        ubuntu:12.04           None                               0                  
-vulnerabilities        ubuntu:12.10           None                               0                  
-vulnerabilities        ubuntu:13.04           None                               0                  
-vulnerabilities        ubuntu:14.04           None                               0                  
-vulnerabilities        ubuntu:14.10           None                               0                  
-vulnerabilities        ubuntu:15.04           None                               0                  
-vulnerabilities        ubuntu:15.10           None                               0                  
-vulnerabilities        ubuntu:16.04           None                               0                  
-vulnerabilities        ubuntu:16.10           None                               0                  
-vulnerabilities        ubuntu:17.04           None                               0                  
-vulnerabilities        ubuntu:17.10           None                               0                  
-vulnerabilities        ubuntu:18.04           None                               0                  
+# docker-compose exec api anchore-cli system feeds list
+Feed                   Group                  LastSync                          RecordCount        
+github                 github:composer        pending                           None               
+github                 github:gem             pending                           None               
+github                 github:java            pending                           None               
+github                 github:npm             pending                           None               
+github                 github:nuget           pending                           None               
+github                 github:python          pending                           None               
+nvdv2                  nvdv2:cves             pending                           None               
+vulnerabilities        alpine:3.10            2020-04-27T19:49:45.186409        1725               
+vulnerabilities        alpine:3.11            2020-04-27T19:49:59.993730        1904               
+vulnerabilities        alpine:3.3             2020-04-27T19:50:16.213013        457                
+vulnerabilities        alpine:3.4             2020-04-27T19:50:20.128136        681                
+vulnerabilities        alpine:3.5             2020-04-27T19:50:25.876762        875                
+vulnerabilities        alpine:3.6             2020-04-27T19:50:33.361682        1051               
+vulnerabilities        alpine:3.7             2020-04-27T19:50:42.354798        1395               
+vulnerabilities        alpine:3.8             2020-04-27T19:50:54.311199        1486               
+vulnerabilities        alpine:3.9             2020-04-27T19:51:07.340326        1558               
+vulnerabilities        amzn:2                 2020-04-27T19:51:20.726861        327                
+vulnerabilities        centos:5               2020-04-27T19:51:31.586422        1347               
+vulnerabilities        centos:6               2020-04-27T19:51:57.345700        1403               
+vulnerabilities        centos:7               2020-04-27T19:52:26.350592        1063               
+vulnerabilities        centos:8               2020-04-27T19:52:59.187517        215                
+vulnerabilities        debian:10              2020-04-27T19:53:08.194067        22580              
+vulnerabilities        debian:11              2020-04-27T19:56:03.833415        19681              
+vulnerabilities        debian:7               2020-04-27T19:58:44.907852        20455              
+vulnerabilities        debian:8               pending                           12500              
+vulnerabilities        debian:9               pending                           None               
+vulnerabilities        debian:unstable        pending                           None               
+vulnerabilities        ol:5                   pending                           None               
+vulnerabilities        ol:6                   pending                           None               
+vulnerabilities        ol:7                   pending                           None               
+vulnerabilities        ol:8                   pending                           None               
+vulnerabilities        rhel:5                 pending                           None               
+vulnerabilities        rhel:6                 pending                           None               
+vulnerabilities        rhel:7                 pending                           None               
+vulnerabilities        rhel:8                 pending                           None               
+vulnerabilities        ubuntu:12.04           pending                           None               
+vulnerabilities        ubuntu:12.10           pending                           None               
+vulnerabilities        ubuntu:13.04           pending                           None               
+vulnerabilities        ubuntu:14.04           pending                           None               
+vulnerabilities        ubuntu:14.10           pending                           None               
+vulnerabilities        ubuntu:15.04           pending                           None               
+vulnerabilities        ubuntu:15.10           pending                           None               
+vulnerabilities        ubuntu:16.04           pending                           None               
+vulnerabilities        ubuntu:16.10           pending                           None               
+vulnerabilities        ubuntu:17.04           pending                           None               
+vulnerabilities        ubuntu:17.10           pending                           None               
+vulnerabilities        ubuntu:18.04           pending                           None               
+vulnerabilities        ubuntu:18.10           pending                           None               
+vulnerabilities        ubuntu:19.04           pending                           None               
+vulnerabilities        ubuntu:19.10           pending                           None               
+vulnerabilities        ubuntu:20.04           pending                           None
+
 ```
 
-As soon as you see RecordCount values > 0 for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Enterprise it will be ready immediately.
+As soon as you see RecordCount values set for all vulnerability groups, the system is fully populated and ready to present vulnerability results.   Note that feed syncs are incremental, so the next time you start up Anchore Enterprise it will be ready immediately.  The CLI tool includes a useful utility that will block until the feeds have completed a successful sync:
+
+```
+# docker-compose exec api anchore-cli system wait
+Starting checks to wait for anchore-engine to be available timeout=-1.0 interval=5.0
+API availability: Checking anchore-engine URL (http://localhost:8228)...
+API availability: Success.
+Service availability: Checking for service set (catalog,apiext,policy_engine,simplequeue,analyzer)...
+Service availability: Success.
+Feed sync: Checking sync completion for feed set (vulnerabilities)...
+Feed sync: Checking sync completion for feed set (vulnerabilities)...
+...
+...
+Feed sync: Success.
+
+```
+
 
 ### Step 4: Start using Anchore
 
 To get started, you can add a few images to Anchore Engine using the CLI. Once this is done, you can also run an additional CLI command to monitor the analysis state of the added images, waiting until the images move into an 'analyzed' state.
 
 ```
-# docker-compose exec engine-api anchore-cli image add docker.io/library/alpine:latest
+# docker-compose exec api anchore-cli image add docker.io/library/alpine:latest
 ...
 ...
 
-# docker-compose exec engine-api anchore-cli image add docker.io/library/nginx:latest
+# docker-compose exec api anchore-cli image add docker.io/library/nginx:latest
 ...
 ...
 
-# docker-compose exec engine-api anchore-cli image list
-Full Tag                               Image ID                                                                Analysis Status        
-docker.io/library/alpine:latest        3fd9065eaf02feaf94d68376da52541925650b81698c53c6824d92ff63f98353        analyzed               
-docker.io/library/nginx:latest         5699ececb21caf07b92cbda9daa1e965407e3793a72000ecbf6b8e8595a0824a        analyzing
+# docker-compose exec api anchore-cli image list
+Full Tag                               Image Digest                                                                   Analysis Status        
+docker.io/library/alpine:latest        sha256:39eda93d15866957feaee28f8fc5adb545276a64147445c64992ef69804dbf01        analyzed               
+docker.io/library/nginx:latest         sha256:cccef6d6bdea671c394956e24b0d0c44cd82dbe83f543a47fdc790fadea48422        analyzing              
 
-# docker-compose exec engine-api anchore-cli image list
-Full Tag                               Image ID                                                                Analysis Status        
-docker.io/library/alpine:latest        3fd9065eaf02feaf94d68376da52541925650b81698c53c6824d92ff63f98353        analyzed               
-docker.io/library/nginx:latest         5699ececb21caf07b92cbda9daa1e965407e3793a72000ecbf6b8e8595a0824a        analyzed                       
+# docker-compose exec api anchore-cli image wait docker.io/library/nginx:latest
+...
+...
+
+# docker-compose exec api anchore-cli image list
+Full Tag                               Image Digest                                                                   Analysis Status        
+docker.io/library/alpine:latest        sha256:39eda93d15866957feaee28f8fc5adb545276a64147445c64992ef69804dbf01        analyzed               
+docker.io/library/nginx:latest         sha256:cccef6d6bdea671c394956e24b0d0c44cd82dbe83f543a47fdc790fadea48422        analyzed               
+
 ```
 
 
