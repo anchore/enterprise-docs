@@ -148,6 +148,13 @@ Enter the username _admin_ and password _foobar_ to log in.  There, you will be 
 
 **Note:** This document is intended to serve as a quickstart guide. Before moving further with Anchore Enterprise, it is highly recommended that you enhance your learning by reading the [Overview]({{< ref "/docs/overview" >}}) sections to gain a deeper understanding of fundamentals, concepts, and proper usage. 
 
+### Enabling Windows Image Support
+
+To enable scanning of Windows images you'll have to configure more of the system to deploy a feed service and setup the proper drivers to collect vulnerability data for Windows.0
+
+
+See: [Enabling Windows]({{< ref "/docs/quickstart/enabling_windows" >}})
+
 ### Next Steps
 
 Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise Architecture, Anchore Concepts and Anchore Usage.

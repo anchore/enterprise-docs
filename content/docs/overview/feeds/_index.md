@@ -11,7 +11,7 @@ Anchore maintains a public and free feed service at https://ancho.re/v1/service/
 - Vulnerability data from 3rd party licensed feeds
 - Run Anchore Enterprise in Air-Gapped mode
 - Examine updates to vulnerability dataset (for audit trail) with advanced APIs
-- Granular control and configuration over feed data due to On-Premises installation. Configure   how often the data from external sources is synced, enable/disable individual drivers         responsible for processing normalized data.
+- Granular control and configuration over feed data due to On-Premises installation. Configure how often the data from external sources is synced, enable/disable individual drivers responsible for processing normalized data.
 
 ### Design Overview
 
@@ -36,7 +36,8 @@ All drivers except for the package drivers are enabled by default. The service h
 | Driver | Feed Type | External Data Source |
 | :------ | :----------- | :---------- |
 | alpine | vulnerabilities | https://github.com/alpinelinux/alpine-secdb/archive/master.tar.gz |
-| centos | vulnerabilities | https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml.bz2 |
+| rhel | vulnerabilities | https://access.redhat.com/hydra/rest/securitydata/cve.json |
+| centos (deprecated) | vulnerabilities | https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml.bz2 |
 | debian | vulnerabilities | https://security-tracker.debian.org/tracker/data/json https://salsa.debian.org/security-tracker-team/security-tracker/raw/master/data/DSA/list |
 | oracle | vulnerabilities | https://linux.oracle.com/security/oval/com.oracle.elsa-all.xml.bz2 |
 | ubuntu | vulnerabilities | https://launchpad.net/ubuntu-cve-tracker |
@@ -47,6 +48,7 @@ All drivers except for the package drivers are enabled by default. The service h
 | nvd (deprecated) | nvd (deprecated) | https://nvd.nist.gov/vuln/data-feeds |
 | nvdv2 | nvdv2 | https://nvd.nist.gov/feeds/json/cve/1.0/ |
 | third-party | third-party | https://data.anchore-enterprise.com |
+| msrc | microsoft | https://api.msrc.microsoft.com/ |
 
 ### Database
 
