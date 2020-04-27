@@ -6,17 +6,17 @@ weight: 4
 
 
 As of Enterprise 2.3.0, Anchore can analyze and provide vulnerability matches for Windows images. Anchore downloads, unpacks, and analyzes the windows image contents in a similar
-way it does linux-based images, providing OS information as well as discovered application packages like npms, gems, python, NuGet, and java archives.
+way, it does Linux-based images, providing OS information as well as discovered application packages like npms, gems, python, NuGet, and java archives.
 
 Vulnerabilities for Windows images are matched against the detected OS version and KBs detected installed in the image. These are matched using data from the Microsoft Security Research Center (MSRC) data API.
 
 ### Requirements
 
-Analyzing windows images is supported out-of-the-box with no configuration changes, but in order to get vulnerability results, your deployment must:
+Analyzing windows images is supported out-of-the-box with no configuration changes, but to get vulnerability results, your deployment must:
 
 1. Deploy an on-premises feed service
 1. Have the _microsoft_ driver enabled in the feed service
-1. The driver must have an api key configured for accessing Microsoft's MSRC vulnerability data API
+1. The driver must have an API key configured for accessing Microsoft's MSRC vulnerability data API
 1. The policy engine must have the _microsoft_ feed enabled to be synced from the feed service
 
 ### Configuring Microsoft Feeds
@@ -39,7 +39,7 @@ Getting an API Key
 1. Visit: https://portal.msrc.microsoft.com/en-us/developer
 1. Create an account or sign-in with GitHub
 1. Once logged-in, click 'Create New Key'
-1. You should now see a screen with title "Microsoft Security Update API". Direclty below that is "API Key", click "Show" and copy that value into your configuration file. Example:
+1. You should now see a screen with the title "Microsoft Security Update API". Directly below that is "API Key", click "Show" and copy that value into your configuration file. Example:
 
 ![Microsoft Security Update API](MsrcApiKeySelect.png)
 
@@ -48,8 +48,8 @@ Getting an API Key
 
 Once the feed service is configured to run the driver and fetch data from Microsoft, the policy engine must also be configured to pull that data from the feed service.
 
-Ensure that your policy engine is using the on-premisis feed service by checking the _url_ field in the _feeds_ configuration at the top level of the config.yaml on the policy engine(s).
-This is typically configured for you in a Helm chart deployment, but for quickstarts with Docker Compose you'll have to uncomment some lines to enable the feed service and configure the policy engine to use it. See the [Quickstart]({{< ref "/docs/quickstart/enabling_windows" >}}) for details.
+Ensure that your policy engine is using the on-premises feed service by checking the _url_ field in the _feeds_ configuration at the top level of the config.yaml on the policy engine(s).
+This is typically configured for you in a Helm chart deployment, but for quickstarts with Docker Compose, you'll have to uncomment some lines to enable the feed service and configure the policy engine to use it. See the [Quickstart]({{< ref "/docs/quickstart/enabling_windows" >}}) for details.
 
 
 ```
@@ -68,7 +68,7 @@ feeds:
 
 ## Supported Windows Base Image Versions
 
-The following are the MSRC Product IDs that Anchore can detect and provide vulnerability information for. These provide the basis for the main variants of base
+The following are the MSRC Product IDs that Anchore can detect and provide vulnerability information for. These provide the basis for the main variants of the base
 Windows containers: _Windows_, _ServerCore_, _NanoSerer_, and _IoTCore_
 
 
@@ -111,7 +111,7 @@ Windows containers: _Windows_, _ServerCore_, _NanoSerer_, and _IoTCore_
 
 ### Windows OS Packages
 
-Just as linux images are scanned for packages such as RPMs, DPKG, and APK, Windows images are scanned for the installed components and Knowlege Base patches (KBs). When listing OS content on a Windows image, the results returned are KB identifiers that are numeric. Both the name and version will
+Just as Linux images are scanned for packages such as RPMs, DPKG, and APK, Windows images are scanned for the installed components and Knowlege Base patches (KBs). When listing OS content on a Windows image, the results returned are KB identifiers that are numeric. Both the name and version will
 be identical and are the KB IDs.
 
 
