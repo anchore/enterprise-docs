@@ -21,7 +21,7 @@ services:
       - catalog
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-engine.yaml:/config/config.yaml:z
+      #- ./config-engine.yaml:/config/config.yaml:z
     ports:
       - "8228:8228"
     logging:
@@ -37,8 +37,8 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "apiext"]
   # Catalog is the primary persistence and state manager of the system
   catalog:
@@ -47,7 +47,7 @@ services:
       - anchore-db
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-engine.yaml:/config/config.yaml:z
+      #- ./config-engine.yaml:/config/config.yaml:z
     logging:
       driver: "json-file"
       options:
@@ -62,8 +62,8 @@ services:
       - ANCHORE_LOG_LEVEL=INFO
       - ANCHORE_CATALOG_NOTIFICATION_INTERVAL_SEC=0
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
   queue:
     image: docker.io/anchore/enterprise:v2.3.0
@@ -72,7 +72,7 @@ services:
       - catalog
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-engine.yaml:/config/config.yaml:z
+      #- ./config-engine.yaml:/config/config.yaml:z
     expose:
       - 8228
     logging:
@@ -86,8 +86,8 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "simplequeue"]
   policy-engine:
     image: docker.io/anchore/enterprise:v2.3.0
@@ -96,7 +96,7 @@ services:
       - catalog
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-engine.yaml:/config/config.yaml:z
+      #- ./config-engine.yaml:/config/config.yaml:z
     expose:
       - 8228
     logging:
@@ -110,12 +110,12 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment the ANCHORE_FEEDS_* environment variables (and uncomment the feeds db and service sections at the end of this file) to use the on-prem feed service
-#      - ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
-#      - ANCHORE_FEEDS_CLIENT_URL=null
-#      - ANCHORE_FEEDS_TOKEN_URL=null
+      #- ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
+      #- ANCHORE_FEEDS_CLIENT_URL=null
+      #- ANCHORE_FEEDS_TOKEN_URL=null
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "policy_engine"]
   analyzer:
     image: docker.io/anchore/enterprise:v2.3.0
@@ -135,12 +135,12 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     volumes:
       - ./license.yaml:/license.yaml:ro
       - /analysis_scratch
-    #- ./config-engine.yaml:/config/config.yaml:z
+      #- ./config-engine.yaml:/config/config.yaml:z
     command: ["anchore-enterprise-manager", "service", "start",  "analyzer"]
   anchore-db:
     image: "postgres:9"
@@ -158,7 +158,7 @@ services:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-enterprise.yaml:/config/config.yaml:z
+      #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
       - anchore-db
       - catalog
@@ -175,14 +175,14 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_authorizer"]
   rbac-manager:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-enterprise.yaml:/config/config.yaml:z
+      #- ./config-enterprise.yaml:/config/config.yaml:z
     depends_on:
       - anchore-db
       - catalog
@@ -201,13 +201,14 @@ services:
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_manager"]
   reports:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
       - ./license.yaml:/license.yaml:ro
+      #- ./config-enterprise.yaml:/config/config.yaml:z      
     depends_on:
       - anchore-db
       - catalog
@@ -226,13 +227,14 @@ services:
       - ANCHORE_EXTERNAL_AUTHZ_ENDPOINT=http://rbac-authorizer:8228
       - ANCHORE_LOG_LEVEL=INFO
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "reports"]
   notifications:
     image: docker.io/anchore/enterprise:v2.3.0
     volumes:
       - ./license.yaml:/license.yaml:ro
+      #- ./config-enterprise.yaml:/config/config.yaml:z      
     depends_on:
       - anchore-db
       - catalog
@@ -252,8 +254,8 @@ services:
       - ANCHORE_LOG_LEVEL=INFO
       - ANCHORE_ENTERPRISE_UI_URL=http://localhost:3000
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "notifications"]
   ui-redis:
     image: "docker.io/library/redis:4"
@@ -267,7 +269,7 @@ services:
     image: docker.io/anchore/enterprise-ui:v2.3.0
     volumes:
       - ./license.yaml:/license.yaml:ro
-    #- ./config-ui.yaml:/config/config-ui.yaml:z
+      #- ./config-ui.yaml:/config/config-ui.yaml:z
     depends_on:
       - api
       - ui-redis
@@ -305,7 +307,7 @@ services:
 #    volumes:
 #      - feeds-workspace-volume:/workspace
 #      - ./license.yaml:/license.yaml:ro
-#    #- ./config-enterprise.yaml:/config/config.yaml:z
+#      #- ./config-enterprise.yaml:/config/config.yaml:z
 #    depends_on:
 #      - enterprise-feeds-db
 #    ports:
@@ -328,8 +330,8 @@ services:
 #      # and assign the value to environment variable
 #      - ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN=${ANCHORE_GITHUB_KEY}
 #      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-#      - ANCHORE_OAUTH_ENABLED=true
-#      - ANCHORE_AUTH_SECRET=supersharedsecret
+#      #- ANCHORE_OAUTH_ENABLED=true
+#      #- ANCHORE_AUTH_SECRET=supersharedsecret
 #    command: ["anchore-enterprise-manager", "service", "start",  "feeds"]
 #
 #  # Uncomment this sectionto add a prometheus instance to gather metrics. This is mostly for quickstart to demonstrate prometheus metrics exported
