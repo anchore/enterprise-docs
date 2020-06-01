@@ -303,7 +303,7 @@ Now that you have Anchore Enterprise running, you can begin to learn more about 
 1. Download the nginx configuration into the same directory as the docker-compose.yaml file, with name _anchore-swaggerui-nginx.conf_
 
     ```
-    curl https://docs.anchore.com/current/docs/quickstart/anchore-swaggerui-nginx.conf > anchore-swaggerui-nginx.conf
+    curl https://docs.anchore.com/current/docs/engine/quickstart/anchore-swaggerui-nginx.conf > anchore-swaggerui-nginx.conf
     docker-compose up -d
     ```
 
