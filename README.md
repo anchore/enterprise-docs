@@ -2,7 +2,7 @@
 
 This is the repository for the Anchore Enterprise Documentation site.
 
-## Filing Bugs/Issues: 
+## Filing Bugs/Issues:
 
 See [Issues](https://github.com/anchore/enterprise-docs/issues)
 
@@ -22,7 +22,10 @@ commits with 'Signed-of-by X' with `git commit -s`.
 
 1. Clone the forked repo locally, with submodules to ensure the theme is available:
  `git clone --recurse-submodules https://github.com/<your_repo>`
- 
+
+  If you cloned already, then update the submodules with:
+  `git submodule update --init --recursive`
+
 1. Run hugo for local debugging/dev:
 `cd enterprise-docs ; hugo server`
 

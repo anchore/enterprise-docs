@@ -48,7 +48,9 @@ In this example we will deploy the database, and a single pod of every Open Sour
 
 The installation can be completed with a single command:
 
-`$ helm install anchore-demo stable/anchore-engine`
+```
+$ helm install anchore-demo stable/anchore-engine
+```
 
 The Helm installation should complete in a matter of seconds after which time it will output details of the deployed resources showing the secrets, configMaps, volumes, services, deployments and pods that have been created.
 
@@ -79,7 +81,9 @@ When the engine is started for the first time it will perform a full synchroniza
 
 The Anchore Engine exposes a REST API however the easiest way to interact with the Anchore Engine is through the Anchore CLI which can be installed using Python PiP.
 
-`$ pip install anchorecli`
+```
+$ pip install anchorecli
+```
 
 Documentation for installing the CLI can be found in following document.
 
@@ -88,14 +92,14 @@ The Anchore CLI can be configured using command line options, environment variab
 In this example we will use environment variables.
 
 ```
-ANCHORE_CLI_USER=admin
-ANCHORE_CLI_PASS=foobar
+export ANCHORE_CLI_USER=admin
+export ANCHORE_CLI_PASS=foobar
 ```
 
 The password can be retrieved from kubernetes by accessing the secrets passed to the container.
 
 ```
-ANCHORE_CLI_PASS=$(kubectl get secret --namespace default anchore-demo-anchore-engine -o jsonpath="{.data.adminPassword}" | base64 --decode; echo)
+export ANCHORE_CLI_PASS=$(kubectl get secret --namespace default anchore-demo-anchore-engine -o jsonpath="{.data.ANCHORE_ADMIN_PASSWORD}" | base64 --decode; echo)
 ```
 
 Note: The deployment name in this example, anchore-demo-anchore-engine, was retrieved from the output of the helm installation or helm status command.
@@ -103,7 +107,7 @@ Note: The deployment name in this example, anchore-demo-anchore-engine, was retr
 The helm installation or status command will also show the Anchore Engine URL, which is accessible from within the kubernetes cluster. For example:
 
 ```
-ANCHORE_CLI_URL=http://anchore-demo-anchore-engine.default.svc.cluster.local:8228/v1/
+export ANCHORE_CLI_URL=http://anchore-demo-anchore-engine.default.svc.cluster.local:8228/v1/
 ```
 
 To access the Anchore Engine API, get the name of the API service and then use port forwarding to make the API accessible through your localhost.
@@ -112,12 +116,14 @@ To access the Anchore Engine API, get the name of the API service and then use p
 $ kubectl get service
 NAME                         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
 anchore-anchore-engine-api   ClusterIP   10.0.12.49   <none>        8228/TCP   33h
-
+```
+```
 $ kubectl port-forward svc/anchore-demo-anchore-engine-api 8228:8228
 ```
 
 In this example the Anchore URL should be set to:
 
-`ANCHORE_CLI_URL=http://localhost:8228/v1`
-
+```
+export ANCHORE_CLI_URL=http://localhost:8228/v1
+```
 Now you can use the Anchore CLI to analyze and report on images.

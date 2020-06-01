@@ -7,11 +7,11 @@ weight: 3
 This document will walkthrough the installation of Anchore Enterprise on a Google Kubernetes Engine (GKE) cluster and expose it on the public internet.
 ## Prerequisites
 
-- A running GKE cluster with worker nodes launched. See [GKE Documentation](https://cloud.google.com/kubernetes-engine/docs/) for more information on this setup. 
-- [Helm](https://helm.sh/) client and server installed and configured with your GKE cluster.
-- [Anchore CLI](https://docs.anchore.com/current/docs/installation/anchore_cli/) installed on local host. 
+- A running GKE cluster with worker nodes launched. See [GKE Documentation](https://cloud.google.com/kubernetes-engine/docs/) for more information on this setup.
+- [Helm](https://helm.sh/) client installed on local host.
+- [Anchore CLI](https://docs.anchore.com/current/docs/installation/anchore_cli/) installed on local host.
 
-Once you have a GKE cluster up and running with worker nodes launched, you can verity via the followiing command. 
+Once you have a GKE cluster up and running with worker nodes launched, you can verity via the followiing command.
 
 ```
 $ kubectl get nodes
@@ -29,7 +29,7 @@ Anchore maintains a [Helm chart](https://github.com/helm/charts/tree/master/stab
 - PostgreSQL (9.6.2)
 - Redis (4)
 
-To make the necessary configurations to the Helm chart, create a custom `anchore_values.yaml` file and reference it during installation. There are many options for configuration with Anchore, this document is intended to cover the minimum required changes to successfully install Anchore Enterprise on Google Kubernetes Engine. 
+To make the necessary configurations to the Helm chart, create a custom `anchore_values.yaml` file and reference it during installation. There are many options for configuration with Anchore, this document is intended to cover the minimum required changes to successfully install Anchore Enterprise on Google Kubernetes Engine.
 
 **Note:** For this installation, a GKE ingress controller will be used. You can read more about Kubernetes Ingress with a GKE Ingress Controller [here](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
 
@@ -144,7 +144,7 @@ Default backend:  default-http-backend:80 (10.8.2.6:8080)
 Rules:
   Host  Path  Backends
   ----  ----  --------
-  *     
+  *
         /v1/*   anchore-enterprise-anchore-engine-api:8228 (<none>)
         /*      anchore-enterprise-anchore-engine-enterprise-ui:80 (<none>)
 Annotations:
@@ -181,8 +181,8 @@ Service analyzer (anchore-enterprise-anchore-engine-analyzer-75679f559b-tnpkv, h
 Service simplequeue (anchore-enterprise-anchore-engine-simplequeue-77468954f5-48h5g, http://anchore-enterprise-anchore-engine-simplequeue:8083): up
 Service policy_engine (anchore-enterprise-anchore-engine-policy-79cff7dcbd-ptjvh, http://anchore-enterprise-anchore-engine-policy:8087): up
 
-Engine DB Version: 0.0.11
-Engine Code Version: 0.5.0
+Engine DB Version: 0.0.13
+Engine Code Version: 0.7.1
 ```
 
 #### Anchore Feeds
@@ -193,6 +193,6 @@ It can take some time to fetch all of the vulnerability feeds from the upstream 
 $ anchore-cli --url http://34.96.64.148/v1/ --u admin --p foobar system feeds list
 ```
 
-**Note:** It is not uncommon for the above command to return a: `[]` as the initial feed sync occurs. 
+**Note:** It is not uncommon for the above command to return a: `[]` as the initial feed sync occurs.
 
-Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage](/docs/using) section of our documentation for more information.
+Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage]({{< ref "/docs/using" >}}) section of our documentation for more information.

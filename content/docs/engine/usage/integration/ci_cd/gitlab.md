@@ -122,7 +122,8 @@ anchore_scan:
     - anchore-cli --json image content ${ANCHORE_SCAN_IMAGE} gem > image-gem.json
     - anchore-cli --json image content ${ANCHORE_SCAN_IMAGE} python > image-python.json
     - anchore-cli --json image content ${ANCHORE_SCAN_IMAGE} java > image-java.json
-    - anchore-cli --json image vuln ${ANCHORE_SCAN_IMAGE} os > image-vulnerabilities.json
+    - anchore-cli --json image content ${ANCHORE_SCAN_IMAGE} nuget > image-nuget.json
+    - anchore-cli --json image vuln ${ANCHORE_SCAN_IMAGE} all > image-vulnerabilities.json
     - anchore-cli --json image get ${ANCHORE_SCAN_IMAGE} > image-details.json
     - anchore-cli --json evaluate check ${ANCHORE_SCAN_IMAGE} --detail > image-policy.json || true
     - if [ "${ANCHORE_FAIL_ON_POLICY}" == "true" ] ; then anchore-cli evaluate check ${ANCHORE_SCAN_IMAGE}  ; fi 
@@ -133,6 +134,7 @@ anchore_scan:
     - image-details.json
     - image-vulnerabilities.json
     - image-java.json
+    - image-nuget.json    
     - image-python.json
     - image-gem.json
     - image-npm.json

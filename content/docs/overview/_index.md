@@ -18,7 +18,7 @@ weight: 3
 
 - On-premises UI for visualization, policy editing, report generation, and user management
 - RBAC support for the APIs
-- Proprietary vulnerability data feeds to significantly enhance vulnerability detection in application packages and libraries (e.g. python, ruby gems, nodejs packages, java jars...)
+- Proprietary vulnerability data feeds to significantly enhance vulnerability detection in application packages and libraries (e.g. python, ruby gems, nodejs packages, java jars, .NET NuGet packages...)
 - Fully On-Premises Vulnerability Feed Service providing vulnerability and package metadata
     - Full data provenance from vendor sources (RedHat, Debian, etc) into the analysis engine
     - Enables Air-Gapped deployments

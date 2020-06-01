@@ -17,7 +17,7 @@ As part of image analysis the Anchore Engine will:
     - Digest of every file (SHA1, SHA256 and MD5)
     - File attributes (size, owner, permissions, etc)
     - Operating System package manifest
-    - Software library package manifest  (NPM, GEM, Java, Python)
+    - Software library package manifest  (NPM, GEM, Java, Python, NuGet)
     - Scan for secret materials (api keys, private keys, etc
     
 Following the analysis the extracted layers and downloaded layer tar files are deleted.

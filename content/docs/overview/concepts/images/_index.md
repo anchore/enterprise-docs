@@ -10,7 +10,7 @@ The Anchore Engine can run one or more analyzer services to scale out processing
 
 ![alt text](AnalyzingImages.png)
 
-During analysis every package, software library and file are inspected and this data is stored in the Anchore Database. 
+During analysis every package, software library and file are inspected and this data is stored in the Anchore Database.
 
 The Anchore Engine includes a number of analyzer modules that extract data from the image including:
 
@@ -22,9 +22,10 @@ The Anchore Engine includes a number of analyzer modules that extract data from 
 - Node.JS NPMs
 - Java Archives
 - Python Packages
+- .NET NuGet Packages
 - File content
 
-Once a tag has been added to the Anchore Engine the repository will be monitored for updates to that tag. 
+Once a tag has been added to the Anchore Engine the repository will be monitored for updates to that tag.
 
 Any updated images will be downloaded and analyzed.
 

@@ -23,6 +23,7 @@ the CONTENT_TYPE can be one of the following types:
 - gem: Ruby GEMs
 - java: Java Archives
 - python: Python Artifacts
+- nuget: .NET NuGet Artifacts
 
 For example: `anchore-cli image content debian:latest files`
 

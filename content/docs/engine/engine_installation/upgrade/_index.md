@@ -6,7 +6,7 @@ weight: 6
 
 The anchore-engine is distributed as a [Docker Image](https://hub.docker.com/r/anchore/anchore-engine), which is comprised of smaller micro-services that can be deployed in a single container or scaled out to handle load.
 
-The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example **latest** and **v0.6.0**.
+The latest version of the anchore-engine image will be tagged with both the latest tag and a version number. For example **latest** and **v0.7.1**.
 
 To retrieve the version of a running anchore-engine the system status command can be run.
 
@@ -16,11 +16,11 @@ To retrieve the version of a running anchore-engine the system status command ca
 ...
 ...
 
-Engine DB Version: 0.0.11
-Engine Code Version: 0.5.2
+Engine DB Version: 0.0.13
+Engine Code Version: 0.7.0
 ```
 
-In this example the anchore-engine is version 0.5.2 and the database schema is version 0.0.11.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
+In this example the anchore-engine is version 0.7.0 and the database schema is version 0.0.13.  In cases where the database schema is changed between releases of the anchore-engine, the engine will upgrade the database schema at launch.
 
 ### Pre-upgrade Procedure
 
@@ -39,7 +39,6 @@ For the latest upgrade instructions using the Helm chart, please refer to the of
 
 1. Stop all running instances of the Anchore Engine
 ```
-# cd ~/aevolume
 # docker-compose down
 ```
 
@@ -50,24 +49,17 @@ For the latest upgrade instructions using the Helm chart, please refer to the of
 
 3. Pull the desired version of anchore-engine container image
 ```
-# docker pull docker.io/anchore/anchore-engine:v0.5.0
+# docker pull docker.io/anchore/anchore-engine:v0.7.1
 ```
 
-4. Extract the latest docker-compose.yaml
+4. Download the latest docker-compose.yaml
 ```
-# docker create --name ae docker.io/anchore/anchore-engine:v0.5.0
-# docker cp ae:/docker-compose.yaml ./docker-compose.yaml
-# docker rm ae
+# curl https://docs.anchore.com/current/docs/engine/quickstart/docker-compose.yaml
 ```
 
 5. Review the latest docker-compose.yaml and merge any edits/changes from your original docker-compose.yaml.backup to the latest docker-compose.yaml
 
-6. Download the new configured version of the anchore-engine
-```
-# docker-compose pull
-```
-
-7. Restart the Anchore Engine containers
+6. Restart the Anchore Engine containers
 ```
 # docker-compose up -d
 ```
@@ -86,8 +78,8 @@ Once completed, you can review the new state of your engine to verify the new ve
 ...
 ...
 
-Engine DB Version: 0.0.11
-Engine Code Version: 0.5.0
+Engine DB Version: 0.0.13
+Engine Code Version: 0.7.1
 ```
 
 ### Advanced / Manual Upgrade Procedure
@@ -96,9 +88,10 @@ If for any reason the automated upgrade fails, or you would like to perform the 
 
 - Install the desired anchore-engine container manually
 - Run the anchore-engine container but override the entrypoint to run an interactive shell instead of the default 'anchore-manager service start' entrypoint command
-- Manually execute the database upgrade command, using the appropriate db_connect string 
+- Manually execute the database upgrade command, using the appropriate db_connect string.  For example, if using Postgres, the db_connect string will look like `postgresql://$ANCHORE_DB_HOST/$ANCHORE_DB_NAME?user=$ANCHORE_DB_USER&password=$ANCHORE_DB_PASSWORD`
+
 ```
-# anchore-manager db --db-connect <db_connect_string> upgrade
+# anchore-manager db --db-connect "postgresql://$ANCHORE_DB_HOST/$ANCHORE_DB_NAME?user=$ANCHORE_DB_USER&password=$ANCHORE_DB_PASSWORD" upgrade
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB params: {"db_connect_args": {"timeout": 86400, "ssl": false}, "db_pool_size": 30, "db_pool_max_overflow": 100}
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB connection configured: True
 [MainThread] [anchore_manager.cli.utils/connect_database()] [INFO] DB attempting to connect...

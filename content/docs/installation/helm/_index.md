@@ -33,17 +33,22 @@ permission to the private docker repositories that contain the enterprise images
 
 To use this Helm chart with the enterprise services enabled, perform these steps.
 
+*Note: It's best to quote user supplied strings in case there are any special characters. For example, the username, password, and email supplied in Step 2 below might contain symbols, dots, underscores, etc.*
+
 1. Create a kubernetes secret containing your license file.
 
-    `kubectl create secret generic anchore-enterprise-license --from-file=license.yaml=<PATH/TO/LICENSE.YAML>`
+    `kubectl create secret generic anchore-enterprise-license --from-file='license.yaml=<PATH/TO/LICENSE.YAML>'`
 
 1. Create a kubernetes secret containing dockerhub credentials with access to the private anchore enterprise repositories.
 
-    `kubectl create secret docker-registry anchore-enterprise-pullcreds --docker-server=docker.io --docker-username=<DOCKERHUB_USER> --docker-password=<DOCKERHUB_PASSWORD> --docker-email=<EMAIL_ADDRESS>`
+    `kubectl create secret docker-registry anchore-enterprise-pullcreds --docker-server='docker.io' --docker-username='<DOCKERHUB_USER>' --docker-password='<DOCKERHUB_PASSWORD>' --docker-email='<EMAIL_ADDRESS>'`
 
-1. Install the helm chart using a custom anchore_values.yaml file (see examples below)
+1. Install the helm chart using a custom anchore_values.yaml file (see examples below). Note that <release_name> is a name that you choose.
 
-    `helm install --name <release_name> -f /path/to/anchore_values.yaml stable/anchore-engine`
+    #### Helm v3 installation
+    `helm repo add stable https://kubernetes-charts.storage.googleapis.com`
+
+    `helm install <release_name> -f anchore_values.yaml stable/anchore-engine`
 
 #### Example anchore_values.yaml file for installing Anchore Enterprise
 *Note: This installs with chart managed PostgreSQL & Redis databases. This is not a production ready config.*
@@ -70,6 +75,15 @@ To use this Helm chart with the enterprise services enabled, perform these steps
   anchore-ui-redis:
     password: <PASSWORD>
   ```
+
+### Upgrading from a previous Helm deployment
+A Helm post-upgrade hook job has been added starting with Chart version 1.6.0 - this job will shut down all previously running Anchore services and perform the Anchore DB upgrade process using a kubernetes job. 
+The upgrade will only be considered successful when this job completes successfully. Performing an update after v1.6.0 will cause the Helm client to block until the upgrade job completes and the new Anchore service pods are started.
+
+```
+helm repo update
+helm upgrade <release_name> stable/anchore-engine -f anchore_values.yaml
+```
 
 ### Next Steps
 

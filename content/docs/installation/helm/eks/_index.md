@@ -15,7 +15,7 @@ In order to access the Anchore Enterprise, you will also require a valid license
 ## Prerequisites
 
 - A running Amazon EKS cluster with worker nodes launched. See [EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) for more information on this setup. 
-- [Helm](https://helm.sh/) client and server installed and configured with your EKS cluster.
+- [Helm](https://helm.sh/) client installed on local host.
 - [Anchore CLI](https://docs.anchore.com/current/docs/installation/anchore_cli/) installed on local host. 
 
 Once you have an EKS cluster up and running with worker nodes launched, you can verity via the followiing command. 
@@ -235,4 +235,4 @@ $ anchore-cli --url http://xxxxxx-default-anchoreen-xxxx-xxxxxxxxxx.us-east-1.el
 
 **Note:** It is not uncommon for the above command to return a: `[]` as the initial feed sync occurs. 
 
-Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage](/docs/using) section of our documentation for more information.
+Once the vulnerability feed sync is complete, Anchore can begin to return vulnerability results on analyzed images. Please continue to the [Usage]({{< ref "/docs/using" >}}) section of our documentation for more information.

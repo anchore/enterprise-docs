@@ -13,7 +13,7 @@ The only requirements to run the inline_scan script with the 'analyze' operation
 
 To run the script on your workstation, use the following command syntax.
 
-`curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- analyze -u <USER> -p <PASS> -r <URL> [ OPTIONS ] <FULL_IMAGE_TAG>`
+`curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- analyze -u <USER> -p <PASS> -r <URL> [ OPTIONS ] <FULL_IMAGE_TAG>`
 
 ### Inline Analysis Options
 ```
@@ -42,7 +42,7 @@ Note that in this scenario, the image has never been pushed to any container ima
 ```
 # docker build -t localbuild/example-image:latest -f Dockerfile .
 
-# curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -f ./Dockerfile -g localbuild/example-image:latest
+# curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -f ./Dockerfile -g localbuild/example-image:latest
 ```
 
 Alternatively, we can specify a digest and image ID, instead of asking the analyzer to generate one randomly:
@@ -54,7 +54,7 @@ Alternatively, we can specify a digest and image ID, instead of asking the analy
 ...get the full image ID of the image, in this case 363f10f9...
 ...get the image digest from the local image if available, in this case sha256:d212a12aa....
 
-# curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -f ./Dockerfile -i 363f10f920d05943659ffa0b9ac9a98582bd71841b58c0a50fd596d6285404b2 -d sha256:d212a12aa728ccb4baf06fcc83dc77392d90018d13c9b40717cf455e09aeeef3 localbuild/example-image:latest
+# curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -f ./Dockerfile -i 363f10f920d05943659ffa0b9ac9a98582bd71841b58c0a50fd596d6285404b2 -d sha256:d212a12aa728ccb4baf06fcc83dc77392d90018d13c9b40717cf455e09aeeef3 localbuild/example-image:latest
 
 # anchore-cli image get localbuild/example-image:latest
 Image Digest: sha256:d212a12aa728ccb4baf06fcc83dc77392d90018d13c9b40717cf455e09aeeef3
@@ -73,7 +73,7 @@ Here we show an example of an image (docker.io/alpine:latest) that is available 
 
 # skopeo inspect --raw docker://docker.io/alpine@sha256:acd3ca9941a85e8ed16515bfc5328e4e2f8c128caa72959a58a127b7801ee01f > alpine_manifest.json
 
-# curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -P -m ./alpine_manifest.json docker.io/alpine:latest
+# curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- analyze -u <USER> -p <PASS> -r <URL> -P -m ./alpine_manifest.json docker.io/alpine:latest
 
 # anchore-cli image get docker.io/alpine:latest
 Image Digest: sha256:acd3ca9941a85e8ed16515bfc5328e4e2f8c128caa72959a58a127b7801ee01f
