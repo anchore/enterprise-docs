@@ -323,7 +323,7 @@ False positives are typically caused by:
 * Distro package managers installing non-distro packages using the application package format and not updating the version number when backports are added. This can cause a match of the package against the application-package vulnerability data instead of the distro data.
 
 ### What can I do in response to a false positive? {#27}
-The most immediate way to respond is to create a rule in the Anchore policy engine which [whitelists the package](https://docs.anchore.com/current/docs/using/ui_usage/policies/whitelists/).  \
+The most immediate way to respond is to create a rule in the Anchore policy engine which [whitelists the package](https://docs.anchore.com/current/docs/using/ui_usage/policies/whitelists/).
 
 ## Reports
 ### Can I generate reports using Anchore Engine? {#28}

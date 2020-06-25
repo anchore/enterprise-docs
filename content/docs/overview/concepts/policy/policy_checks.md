@@ -97,6 +97,8 @@ CVE/Vulnerability checks.
 | package | Triggers if a found vulnerability in an image meets the comparison criteria. | vendor_cvss_v3_exploitability_score | Vendor CVSS v3 exploitability sub score to compare against. | None |
 | package | Triggers if a found vulnerability in an image meets the comparison criteria. | vendor_cvss_v3_impact_score_comparison | The type of comparison to perform for vendor specified CVSS v3 impact sub score evaluation. | > |
 | package | Triggers if a found vulnerability in an image meets the comparison criteria. | vendor_cvss_v3_impact_score | Vendor CVSS v3 impact sub score to compare against. | None |
+| blacklist | Triggers if any of a list of specified vulnerabilities has been detected in the image. | vulnerability_ids | List of vulnerability IDs, will cause the trigger to fire if any are detected. | CVE-2019-1234 |
+| blacklist | Triggers if any of a list of specified vulnerabilities has been detected in the image. | vulnerability_ids | If set to True, discard matches against this vulnerability if vendor has marked as will not fix in the vulnerability record. | True | 
 | stale_feed_data | Triggers if the CVE data is older than the window specified by the parameter MAXAGE (unit is number of days). | max_days_since_sync | Fire the trigger if the last sync was more than this number of days ago. | 10 |
 | vulnerability_data_unavailable | Triggers if vulnerability data is unavailable for the image's distro. | | | |
 
