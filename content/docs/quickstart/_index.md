@@ -25,7 +25,7 @@ In this section, you'll learn how to get up and running with a stand-alone Ancho
 The following instructions assume you are using a system running Docker v1.12 or higher, and a version of Docker Compose that supports at least v2 of the docker-compose configuration format.
 
 * A stand-alone installation requires at least 4GB of RAM, and enough disk space available to support the largest container images you intend to analyze (we recommend 3x largest container image size).  For small images/testing (like basic Linux distro images or database images), between 5GB and 10GB of disk space should be sufficient.
-* To access the Anchore Enterprise, you need a valid `license.yaml` file that has been issued to you by Anchore.  If you do not have a license yet, visit this [page](https://info.anchore.com/contact) for instructions on how to request one.
+* To access the Anchore Enterprise, you need a valid `license.yaml` file that has been issued to you by Anchore.  If you do not have a license yet, visit this [page](https://info.anchore.com/contact) for instructions on how to request one. Please include your DockerHub userID so we can give you permissions to download the containers.
 
 
 ### Step 1: Ensure you can authenticate to DockerHub to pull the images
