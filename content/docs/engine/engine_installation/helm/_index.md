@@ -50,7 +50,7 @@ The installation can be completed with the following commands:
 
 ```
 $ helm repo add anchore https://charts.anchore.io
-$ helm install anchore-demo anchore/anchore-engine
+$ helm install --name anchore-demo anchore/anchore-engine
 ```
 
 The Helm installation should complete in a matter of seconds after which time it will output details of the deployed resources showing the secrets, configMaps, volumes, services, deployments and pods that have been created.
