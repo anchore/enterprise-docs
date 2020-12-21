@@ -32,7 +32,6 @@ containerscan:anchorescan:
   variables:
     ANCHORE_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
   script:
-    - anchore-cli --u "${ANCHORE_CLI_USER}" --p "${ANCHORE_CLI_PASS}" --url "${ANCHORE_CLI_URL}" registry add "${CI_REGISTRY}" "${CI_REGISTRY_USER}" "${REGISTRY_TOKEN}"
     - anchore-gitlab-scan > gl-container-scanning-report.json
   artifacts:
     reports:
