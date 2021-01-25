@@ -42,9 +42,9 @@ Some of the feed drivers will require additional configuration steps, like retri
 
 #### Github Driver
 
-The Github driver requires to generate a Personal Access Token (PAT) which is associated with a Github Account. To generate this token, the user will be required to log in to Github and use the following url: [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)
+The Github driver requires to generate a Personal Access Token (PAT) which is associated with a Github Account. To generate this token, the user will be required to log in to Github and use the following url: [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new?scopes=user,public_repo,repo,repo_deployment,repo:status,read:repo_hook,read:org,read:public_key,read:gpg_key)
 
-There are no special permissions needed for the token, so there is no need to select any scopes. A note may be added as a reminder for what the token is being used. At the bottom of the tokens page, click the *Generate token* button which will show a new page displaying the generated token. Make sure you copy that token and use it to configure the Github driver, the token will only be seen once in the Github interface.
+The token requires full access to the `repo` and `user` scopes. Additionally, it requires read permissions in `admin:org`, `admin:public_key`, `admin:repo_hook`, and `admin:gpg_key` scopes. A note may be added as a reminder for what the token is being used. At the bottom of the tokens page, click the *Generate token* button which will show a new page displaying the generated token. Make sure you copy that token and use it to configure the Github driver, the token will only be seen once in the Github interface.
 
 Use the new token in _config.yaml_ in the `feeds` section: for all components of the deployment:
 
