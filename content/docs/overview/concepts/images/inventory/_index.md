@@ -151,3 +151,19 @@ The key configurations are in the `kai.anchore` section. Kai must be able to res
 Note: the Anchore API Password can be provided via a kubernetes secret, or injected into the environment of the `kai` container
 * For injecting the environment variable, see: `inject_secrets_via_env`
 * For providing your own secret for the Anchore API Password, see: `kai.existing_secret`. `kai` creates it's own secret based on your values.yaml file for key `kai.anchore.password`, but the `kai.existingSecret` key allows you to create your own secret and provide it in the values file.
+
+# Image Time-To-Live
+As part of reporting images in your runtime environment, Anchore maintains an active record of that set of images based on when the Image has been last reported by `kai`.
+
+If `kai` does not find an image that was previously in the inventory, it waits for a configurable TTL to expire before removing that image:
+
+```yaml
+services:
+  catalog:
+    runtime_inventory:
+      image_ttl_days: 120
+```
+
+By default a runtime inventory image's TTL is set to 120 days. That means, that if `kai` hasn't seen your image in it's configured contexts for more than 4 months, it will be removed from the active working inventory image set (no longer returned from `GET /v1/enterprise/inventories`)
+
+Image TTL can be disabled, if you only want `/v1/enterprise/inventories` to return a recent set of active images, just set the value of `runtime_inventory.image_ttl_days` to `-1`. If set to `-1`, then the `/v1/enterprise/inventories` API will always show the latest inventory reported by `kai`.
