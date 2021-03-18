@@ -4,4 +4,4 @@ linkTitle: "Docker Compose"
 weight: 1
 ---
 
-For using Docker Compose for installation, see the see the [Enterprise Quickstart Guide]({{< ref "/docs/quickstart" >}}).
+For using Docker Compose for installation, see the [Enterprise Quickstart Guide]({{< ref "/docs/quickstart" >}}).

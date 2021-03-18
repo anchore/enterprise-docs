@@ -15,7 +15,7 @@ volumes:
 services:
   # The primary API endpoint service
   api:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     depends_on:
       - anchore-db
       - catalog
@@ -42,7 +42,7 @@ services:
     command: ["anchore-enterprise-manager", "service", "start",  "apiext"]
   # Catalog is the primary persistence and state manager of the system
   catalog:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     depends_on:
       - anchore-db
     volumes:
@@ -67,7 +67,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
   queue:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     depends_on:
       - anchore-db
       - catalog
@@ -91,7 +91,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "simplequeue"]
   policy-engine:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     depends_on:
       - anchore-db
       - catalog
@@ -121,7 +121,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "policy_engine"]
   analyzer:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     depends_on:
       - anchore-db
       - catalog
@@ -160,7 +160,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
   rbac-authorizer:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -184,7 +184,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_authorizer"]
   rbac-manager:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -210,7 +210,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_manager"]
   reports:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -236,7 +236,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "reports"]
   notifications:
-    image: docker.io/anchore/enterprise:v3.0.0
+    image: docker.io/anchore/enterprise:v3.0.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -273,7 +273,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "redis-cli PING"]
   ui:
-    image: docker.io/anchore/enterprise-ui:v3.0.0
+    image: docker.io/anchore/enterprise-ui:v3.0.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-ui.yaml:/config/config-ui.yaml:z
@@ -312,7 +312,7 @@ services:
 #    healthcheck:
 #      test: ["CMD-SHELL", "pg_isready -U postgres"]
 #  feeds:
-#    image: docker.io/anchore/enterprise:v3.0.0
+#    image: docker.io/anchore/enterprise:v3.0.1
 #    volumes:
 #      - feeds-workspace-volume:/workspace
 #      - ./license.yaml:/license.yaml:ro
