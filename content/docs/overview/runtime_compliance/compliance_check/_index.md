@@ -11,7 +11,12 @@ within a Kubernetes Cluster. REM contains functionality to perform package manag
 of OpenSCAP, retrieval of generated results files, and upload capabilities to the compliance API. There is also a provided
 local data-store if upload functionality is disabled or unavailable.
 
-
+* [Installation](#installation)
+    * [MacOS](#macos)
+    * [Debian](#debian)
+    * [RPM](#rpm)
+    * [Tar](#tar)
+    * [Windows](#windows)
 * [Usage](#usage)
     * [Completion](#completion)
 * [Configuration](#configuration)
@@ -23,6 +28,64 @@ local data-store if upload functionality is disabled or unavailable.
 * [Database Utilities](#database-subcommand)
 * [Contributing](#developing-rem)
 
+### Installation
+REM releases are uploaded to a public AWS S3 bucket.
+
+To install REM, you can use either the [AWS CLI](https://aws.amazon.com/cli/) or cURL to retrieve both the binary and the default configuration for REM.
+
+Retrieving the default configuration file is the same regardless of which operating system you're using:
+
+```shell script
+curl -o rem.yaml https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem.yaml
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem.yaml rem.yaml
+```
+
+#### macOS
+
+```shell script
+curl -o rem.dmg https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem_0.1.9_darwin_amd64.dmg
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem_0.1.9_darwin_amd64.dmg rem.dmg
+```
+
+#### Debian
+
+```shell script
+curl -o rem.deb https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem_0.1.9_linux_amd64.deb
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem_0.1.9_linux_amd64.deb rem.deb
+```
+
+#### RPM
+
+```shell script
+curl -o rem.rpm https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem_0.1.9_linux_amd64.rpm
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem_0.1.9_linux_amd64.rpm rem.rpm
+```
+
+#### Linux Tar
+
+```shell script
+curl -o rem.tar.gz https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem_0.1.9_linux_amd64.tar.gz
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem_0.1.9_linux_amd64.tar.gz rem.tar.gz
+```
+
+#### Windows
+
+```shell script
+curl -o rem.zip https://anchore-rem-releases.s3-us-west-2.amazonaws.com/v0.1.9/rem_0.1.9_windows_amd64.zip
+```
+```shell script
+aws s3 cp s3://anchore-rem-releases/v0.1.9/rem_0.1.9_windows_amd64.zip rem.zip
+```
 
 ### Usage:
 
