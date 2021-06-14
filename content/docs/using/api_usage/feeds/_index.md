@@ -21,7 +21,7 @@ Examples of feeds:
 - nvd - NIST National Vulnerability Database records (CVEs)
 
 
-***Note:*** If the [tech preview Grype vulnerability scanner]({{< ref "/docs/grype/_index" >}}) is enabled, the grype feed
+***Note:*** If the [tech preview Grype vulnerability scanner]({{< ref "/docs/grype/_index.md" >}}) is enabled, the grype feed
 will be the only feed synced. This feed replaces the other feeds and contains the groups records enabled for your
 Anchore Enterprise instance.
 
