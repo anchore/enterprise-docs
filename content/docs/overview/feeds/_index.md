@@ -24,6 +24,16 @@ Anchore Enterprise Feeds has three high level components:
 * Database -- Stores the current state of the normalized data for serving via api
 * API -- Serves the data to clients, supporting update-only fetches.
 
+### Grype
+Anchore Enterprise 3.1 includes a limited-functionality tech preview of an integration with [Grype](https://github.com/anchore/grype) for vulnerability
+scanning. This integration will replace the legacy vulnerability scanner in a future version of Anchore Engine, but is provided here in a preview capacity
+so users can try it out.
+
+***Note:*** This tech preview is not intended for use in production environments. It should be installed in sandbox environments, and is strictly provided
+here so users can get start to use it and get a sense for the functionality. It may not include all the functionality of the legacy scanner. Please report
+any issues found with it on the anchore-engine Github repo (include link).
+
+
 #### Drivers
 
 A driver downloads raw data from an external source and normalizes it. Each driver outputs normalized data for one of the four feed types - (os) vulnerabilities, packages, nvd or third party feeds

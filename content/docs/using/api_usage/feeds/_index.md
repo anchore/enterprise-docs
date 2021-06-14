@@ -20,6 +20,11 @@ Examples of feeds:
 - packages - Metadata and manifests for upstream application packages, such as npmjs.org and rubygems.org
 - nvd - NIST National Vulnerability Database records (CVEs)
 
+
+***Note:*** If the [tech preview Grype vulnerability scanner]({{< ref "/docs/grype/_index" >}}) is enabled, the grype feed
+will be the only feed synced. This feed replaces the other feeds and contains the groups records enabled for your
+Anchore Enterprise instance.
+
 Following examples highlight the routes exposed by the service for querying feed data:
 
 * List the available feeds:
