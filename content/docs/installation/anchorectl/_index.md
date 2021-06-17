@@ -16,46 +16,46 @@ Installation of AnchoreCTL (from a release) happens a few different ways, depend
 
 #### macOS
 ```shell script
-curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl_0.1.0_darwin_amd64.dmg
+curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl_0.1.1_darwin_amd64.dmg
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl_0.1.0_darwin_amd64.dmg anchorectl.dmg
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl_0.1.1_darwin_amd64.dmg anchorectl.dmg
 ```
 
 #### Debian
 
 ```shell script
-curl -o anchorectl.deb https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl_0.1.0_linux_amd64.deb
+curl -o anchorectl.deb https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl_0.1.1_linux_amd64.deb
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl_0.1.0_linux_amd64.deb anchorectl.deb
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl_0.1.1_linux_amd64.deb anchorectl.deb
 ```
 
 #### RPM
 
 ```shell script
-curl -o anchorectl.rpm https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl_0.1.0_linux_amd64.rpm
+curl -o anchorectl.rpm https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl_0.1.1_linux_amd64.rpm
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl_0.1.0_linux_amd64.rpm anchorectl.rpm
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl_0.1.1_linux_amd64.rpm anchorectl.rpm
 ```
 
 #### Linux Tar
 
 ```shell script
-curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl_0.1.0_linux_amd64.tar.gz
+curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl_0.1.1_linux_amd64.tar.gz
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl_0.1.0_linux_amd64.tar.gz anchorectl.tar.gz
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl_0.1.1_linux_amd64.tar.gz anchorectl.tar.gz
 ```
 
 #### Windows
 
 ```shell script
-curl -o anchorectl.zip https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl_0.1.0_windows_amd64.zip
+curl -o anchorectl.zip https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl_0.1.1_windows_amd64.zip
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl_0.1.0_windows_amd64.zip anchorectl.zip
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl_0.1.1_windows_amd64.zip anchorectl.zip
 ```
 
 
@@ -70,10 +70,10 @@ AnchoreCTL can be configured via a config file at the following locations, with 
 
 To get a release-matched version of this configuration file, you can retrieve it as follows:
 ```shell script
-curl -o anchorectl.yaml https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.0/anchorectl.yaml
+curl -o anchorectl.yaml https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.1/anchorectl.yaml
 ```
 ```shell script
-aws s3 cp s3://anchorectl-releases/v0.1.0/anchorectl.yaml anchorectl.yaml
+aws s3 cp s3://anchorectl-releases/v0.1.1/anchorectl.yaml anchorectl.yaml
 ```
 Note that it has detailed comments above each configuration value so you know what each does.
 
