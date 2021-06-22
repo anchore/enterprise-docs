@@ -30,8 +30,8 @@ scanning. This integration will replace the legacy vulnerability scanner in a fu
 so users can try it out.
 
 ***Note:*** This tech preview is not intended for use in production environments. It should be installed in sandbox environments, and is strictly provided
-here so users can get start to use it and get a sense for the functionality. It may not include all the functionality of the legacy scanner. Please report
-any issues found with it on the anchore-engine Github repo (include link).
+here to give users an early, hands-on preview of the feature. It may not include all the functionality of the legacy scanner. Please report any issues
+found with it to Anchore Support.
 
 
 #### Drivers

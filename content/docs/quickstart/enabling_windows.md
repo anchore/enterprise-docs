@@ -64,6 +64,8 @@ To enable windows support in the quickstart install docker-compose.yaml file you
 
     ```
 
+***Note:*** Windows image analysis is not yet available for the tech preview Grype vulnerability scanner. It will be added in a future release.
+
 1. Configure the policy engine to use the deployed feed service instead of the hosted feed service, and enable the microsoft feed by uncommenting the ANCHORE_FEEDS_MICROSOFT_ENABLED variable
 
     Ensure the following environment variables are set in the docker-compose.yaml file:

@@ -19,6 +19,8 @@ Analyzing windows images is supported out-of-the-box with no configuration chang
 1. The driver must have an API key configured for accessing Microsoft's MSRC vulnerability data API
 1. The policy engine must have the _microsoft_ feed enabled to be synced from the feed service
 
+***Note:*** Windows image analysis is not yet available for the tech preview Grype vulnerability scanner. It will be added in a future release.
+
 ### Configuring Microsoft Feeds
 
 In the feed service configuration, enable the _msrc_ driver and provide an api_key.
